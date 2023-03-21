@@ -12,11 +12,19 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 ## Update
 
-- See [changelog](./CHANGELOG.md)
+See [changelog](./CHANGELOG.md)
 
 ## Set up
 
 Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Finally, enter a code that will activate the extension on your moodle page and enter the langage of the quiz.
+
+## Inject the code into the moodle
+
+You just need to enter on the keyboard the <b>code</b> you have set into the extension.
+
+## Remove injection
+
+Type back the <b>code</b> on the keyboard and the code will be removed from the current page.
 
 ## Test
 
