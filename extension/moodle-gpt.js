@@ -126,14 +126,14 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
   async function reply(hiddenButton, form, query) {
     if (config.cursor) hiddenButton.style.cursor = "wait";
 
-    const question = normalizeText(
-      form.textContent.replace("Texte de la question", "")
-    );
+    form.querySelector(".accesshide")?.remove();
+
+    const question = normalizeText(form.textContent);
     const inputList = form.querySelectorAll(query);
     const response = await getChatGPTResponse(
-      `Give a short response as possible for this question, reply in this langage "${config.langage}", only show the result: 
+      `Give a short response as possible for this question, reply in this langage "${config.langage}" and only show the result: 
       ${question} 
-      (if you have to choose between multiple results only show the corrects one)`
+      (If you have to choose between multiple results only show the corrects one and do not change the initial text)`
     );
 
     if (config.logs) {
