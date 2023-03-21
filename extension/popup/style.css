@@ -1,0 +1,89 @@
+@font-face {
+  font-family: Segeo UI;
+  src: url(../../fonts/Segoe\ UI.ttf);
+}
+
+:root {
+  --bg-color: #121212;
+  --color: #fff;
+  --btn-color: #7f39fb;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Segeo UI", sans-serif;
+  color: var(--color);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem;
+  gap: 0.4rem;
+  text-align: center;
+  width: 20rem;
+}
+
+img {
+  width: 5rem;
+  margin-top: 1rem;
+}
+
+h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.line .textLabel {
+  width: 5rem;
+  text-transform: uppercase;
+}
+
+.line input[type="text"],
+.line input[type="password"] {
+  flex: 1 1;
+  border: thin solid var(--color);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.2rem;
+  outline-color: transparent;
+  background-color: transparent;
+}
+
+.line input[type="checkbox"] {
+  accent-color: var(--btn-color);
+  margin-right: 0.3rem;
+}
+
+.save {
+  border: none;
+  background-color: var(--btn-color);
+  margin-top: 1.5rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#message {
+  display: none;
+  margin-top: 1rem;
+}

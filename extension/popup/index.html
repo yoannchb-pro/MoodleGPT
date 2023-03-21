@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoodleGPT</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+    <link rel="icon" type="image/png" href="../icon.png" />
+  </head>
+  <body>
+    <main>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.flaticon.com/free-icons/mortarboard"
+        title="Mortarboard icons created by itim2101 - Flaticon"
+        ><img src="../icon.png" alt="icon"
+      /></a>
+      <h1>MoodleGPT</h1>
+      <div class="line">
+        <label for="apiKey" class="textLabel">Api Key</label>
+        <input id="apiKey" type="password" />
+      </div>
+      <div class="line">
+        <label for="code" class="textLabel">Code</label>
+        <input id="code" type="text" />
+      </div>
+      <div class="line">
+        <label for="langage" class="textLabel">Langage</label>
+        <input id="langage" type="text" />
+      </div>
+      <div class="line" style="margin-top: 1rem">
+        <input id="typing" type="checkbox" checked />
+        <label for="typing">Typing effect</label>
+      </div>
+      <div class="line" style="margin-bottom: 1rem">
+        <input id="mouseover" type="checkbox" />
+        <label for="mouseover">Mouseover effect</label>
+      </div>
+      <div class="line">
+        <input id="logs" type="checkbox" />
+        <label for="logs">Console logs</label>
+      </div>
+      <div class="line">
+        <input id="title" type="checkbox" checked />
+        <label for="title">Title indication</label>
+      </div>
+      <div class="line">
+        <input id="cursor" type="checkbox" checked />
+        <label for="cursor">Cursor indication</label>
+      </div>
+      <p id="message"></p>
+      <div class="line">
+        <button class="save">Save</button>
+      </div>
+    </main>
+  </body>
+</html>
