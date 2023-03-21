@@ -65,7 +65,13 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
    * @param {*} text
    */
   function normalizeText(text) {
-    return text.replace(/\n+/g, "\n").replace(/\s+/g, " ").toLowerCase().trim();
+    return text
+      .replace(/\n+/g, "\n")
+      .replace(/[ \t]+/g, " ")
+      .toLowerCase()
+      .trim()
+      .replace(/^[a-z\d]\.\s/gi, "")
+      .replace(/\n[a-z\d]\.\s/gi, "\n");
   }
 
   /**
@@ -180,7 +186,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
         const options = inputList[j].querySelectorAll("option");
 
         for (const option of options) {
-          const content = option.textContent.toLocaleLowerCase().trim();
+          const content = normalizeText(option.textContent);
           const valide = correct[j].includes(content);
 
           //if it's a put in order
@@ -232,9 +238,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
     //if it's a radio button or checkbox
     for (const input of inputList) {
       const content = normalizeText(input.parentNode.textContent);
-      const valide = response
-        .replace(/^[a-z\d]\.\s/gi, "")
-        .includes(content.replace(/^[a-z\d]\.\s/gi, ""));
+      const valide = response.includes(content);
       if (config.logs) Logs.responseTry(content, valide);
       if (valide) {
         if (config.mouseover) {
