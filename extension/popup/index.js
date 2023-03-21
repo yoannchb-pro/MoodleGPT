@@ -20,7 +20,7 @@ saveBtn.addEventListener("click", function () {
     (selector) => document.querySelector("#" + selector).checked
   );
 
-  if (!apiKey || !code || !langage) {
+  if (!apiKey || !code) {
     showMessage("Please comple all the form");
     return;
   }
@@ -56,8 +56,5 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
     inputsCheckbox.forEach(
       (key) => (document.querySelector("#" + key).checked = config[key] || "")
     );
-  } else {
-    //set default config
-    document.querySelector("#langage").value = navigator.language;
   }
 });

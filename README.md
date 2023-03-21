@@ -36,12 +36,15 @@ To test the code, you can run the index.js file located in the <b>"test"</b> fol
 <img src="./assets/popup.png" alt="Popup"  height="300">
 </p>
 
+- <b>Api key\*</b>: the openai api key.
+- <b>Code\*</b>: code that you will need to inject/remove the code.
+- <b>Langage</b>: the langage you want chatgpt reply (if it's not set it will take the question langage).
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
-- <b>Title indication</b>: Show some informations into the title to know for example if the code have been injected.
+- <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
 - <b>Console logs</b>: show logs into the console.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
-- <b>Typing effect</b>: create a typing effect for text.
+- <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
   <br/> ![Typing](./assets/typing.gif)
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)

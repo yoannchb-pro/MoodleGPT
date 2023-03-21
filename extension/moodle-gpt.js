@@ -6,8 +6,8 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
   //listening to the keys to inject moodleGPT
   const pressedKeys = [];
   const listeners = [];
-  document.body.addEventListener("keypress", function (e) {
-    pressedKeys.push(e.key);
+  document.body.addEventListener("keydown", function (event) {
+    pressedKeys.push(event.key);
     if (pressedKeys.length > config.code.length) pressedKeys.shift();
     if (pressedKeys.join("") === config.code) {
       pressedKeys.length = 0;
@@ -70,8 +70,8 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
       .replace(/[ \t]+/g, " ")
       .toLowerCase()
       .trim()
-      .replace(/^[a-z\d]\.\s/gi, "")
-      .replace(/\n[a-z\d]\.\s/gi, "\n");
+      .replace(/^[a-z\d]\.\s/gi, "") //a. text, b. text, c. text, 1. text, 2. text, 3.text
+      .replace(/\n[a-z\d]\.\s/gi, "\n"); //a. text, b. text, c. text, 1. text, 2. text, 3.text
   }
 
   /**
@@ -136,14 +136,19 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
 
     const question = normalizeText(form.textContent);
     const inputList = form.querySelectorAll(query);
-    const response = await getChatGPTResponse(
-      `Give a short response as possible for this question, reply in this langage "${config.langage}" and only show the result: 
+
+    const finalQuestion = `Give a short response as possible for this question, reply in ${
+      config.langage && config.langage !== ""
+        ? 'this langage "' + config.langage + '"'
+        : "the following question langage"
+    } and only show the result: 
       ${question} 
-      (If you have to choose between multiple results only show the corrects one and do not change the initial text)`
-    );
+      (If you have to choose between multiple results only show the corrects one and seprate responses with new line)`;
+
+    const response = await getChatGPTResponse(finalQuestion);
 
     if (config.logs) {
-      Logs.question(question);
+      Logs.question(finalQuestion);
       Logs.response(response);
     }
 
@@ -162,12 +167,13 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
       inputList[0].tagName === "TEXTAREA"
     ) {
       if (config.typing) {
-        for (let i = 0; i < response.length; ++i) {
-          setTimeout(
-            () => (inputList[0].value = response.slice(0, i + 1)),
-            i * 50
-          );
-        }
+        let index = 0;
+        inputList[0].addEventListener("keydown", function (event) {
+          if (event.key === "Backspace") index = response.length + 1;
+          if (index > response.length) return;
+          event.preventDefault();
+          inputList[0].value = response.slice(0, ++index);
+        });
       } else {
         inputList[0].value = response;
       }
