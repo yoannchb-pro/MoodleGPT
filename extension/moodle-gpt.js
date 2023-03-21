@@ -65,7 +65,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
    * @param {*} text
    */
   function normalizeText(text) {
-    return text.replace(/\n+/gi, "\n").toLowerCase().trim();
+    return text.replace(/\n+/g, "\n").replace(/\s+/g, " ").toLowerCase().trim();
   }
 
   /**
