@@ -8,7 +8,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
   const listeners = [];
   document.body.addEventListener("keypress", function (e) {
     pressedKeys.push(e.key);
-    if (pressedKeys.length > config.code) pressedKeys.shift();
+    if (pressedKeys.length > config.code.length) pressedKeys.shift();
     if (pressedKeys.join("") === config.code) {
       pressedKeys.length = 0;
       setUpMoodleGpt();
