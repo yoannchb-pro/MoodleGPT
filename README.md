@@ -24,14 +24,20 @@ To test the code, you can run the index.js file located in the <b>"test"</b> fol
 
 ## Options
 
-![Popup](./assets/popup.png)
+<p align="center">
+<img src="./assets/popup.png" alt="Popup"  height="300">
+</p>
 
-- Title indication: Show some informations into the title to know for example if the code have been injected. ![Injected](./assets/title-injected.png)
-- Console logs: show logs into the console. ![Logs](./assets/logs.png)
-- Cursor indication: show a pointer cursor and a hourglass to know when the request is finished.
-- Typing effect: create a typing effect for text. ![Typing](./assets/typing.gif)
-
-- Mouseover effect: you will need to hover (or click for select) the question response to complete it automaticaly. ![Mouseover](./assets/mouseover.gif) ![Mouseover2](./assets/mouseover2.gif)
+- <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
+- <b>Title indication</b>: Show some informations into the title to know for example if the code have been injected.
+  <br/> ![Injected](./assets/title-injected.png)
+- <b>Console logs</b>: show logs into the console.
+  <br/><img src="./assets/logs.png" alt="Logs" width="250">
+- <b>Typing effect</b>: create a typing effect for text.
+  <br/> ![Typing](./assets/typing.gif)
+- <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
+  <br/> ![Mouseover](./assets/mouseover.gif)
+  <br/> ![Mouseover2](./assets/mouseover2.gif)
 
 ## Examples
 
@@ -65,6 +71,6 @@ To test the code, you can run the index.js file located in the <b>"test"</b> fol
 
 ## If it can't complete the question, the answer will be copied to your clipboard
 
-To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 5 seconds.
+To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds.
 
 ![Clipboard](./assets/clipboard.gif)
