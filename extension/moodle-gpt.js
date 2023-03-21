@@ -144,7 +144,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
         : "the following question langage"
     } and only show the result: 
       ${question} 
-      (If you have to choose between multiple results only show the corrects one and separate them with new line)`;
+      (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
 
     const response = await getChatGPTResponse(finalQuestion);
 
