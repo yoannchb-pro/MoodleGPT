@@ -26,10 +26,6 @@ You just need to enter on the keyboard the <b>code</b> you have set into the ext
 
 Type back the <b>code</b> on the keyboard and the code will be removed from the current page.
 
-## Test
-
-To test the code, you can run the index.js file located in the <b>"test"</b> folder.
-
 ## Options
 
 <p align="center">
@@ -39,9 +35,11 @@ To test the code, you can run the index.js file located in the <b>"test"</b> fol
 - <b>Api key\*</b>: the openai api key.
 - <b>Code\*</b>: code that you will need to inject/remove the code.
 - <b>Langage</b>: the langage you want chatgpt reply (if it's not set it will take the question langage).
+- <b>GPT Model</b>: the gpt model you want to use (by default it's "gpt-3.5-turbo").
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
+- <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 - <b>Console logs</b>: show logs into the console.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
@@ -85,3 +83,7 @@ To test the code, you can run the index.js file located in the <b>"test"</b> fol
 To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds.
 
 ![Clipboard](./assets/clipboard.gif)
+
+## Test
+
+To test the code, you can run the index.js file located in the <b>"test"</b> folder.

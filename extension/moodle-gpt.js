@@ -34,7 +34,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
       for (const listener of listeners) {
         if (config.cursor) listener.element.style.cursor = "initial";
         listener.element.removeEventListener("click", listener.fn, {
-          once: true,
+          once: !config.infinite,
         });
       }
       if (config.title) titleIndications("Removed");
@@ -54,7 +54,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
       if (config.cursor) hiddenButton.style.cursor = "pointer";
       const fn = reply.bind(null, hiddenButton, form, query);
       listeners.push({ element: hiddenButton, fn });
-      hiddenButton.addEventListener("click", fn, { once: true });
+      hiddenButton.addEventListener("click", fn, { once: !config.infinite });
     }
 
     if (config.title) titleIndications("Injected");
@@ -87,7 +87,8 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
         Authorization: `Bearer ${config.apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model:
+          config.model && config.model !== "" ? config.model : "gpt-3.5-turbo",
         messages: [{ role: "user", content: question }],
         temperature: 0.8,
         top_p: 1.0,
@@ -105,7 +106,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
    */
   class Logs {
     static question(text) {
-      const css = "color: blue";
+      const css = "color: cyan";
       console.log("%c[QUESTION]: %s", css, text);
     }
 
@@ -143,7 +144,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
         : "the following question langage"
     } and only show the result: 
       ${question} 
-      (If you have to choose between multiple results only show the corrects one and seprate responses with new line)`;
+      (If you have to choose between multiple results only show the corrects one and separate them with new line)`;
 
     const response = await getChatGPTResponse(finalQuestion);
 
@@ -152,7 +153,8 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
       Logs.response(response);
     }
 
-    if (config.cursor) hiddenButton.style.cursor = "initial";
+    if (config.cursor)
+      hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
 
     //if we dont find the input we copy into the clipboard
     if (inputList.length === 0) {

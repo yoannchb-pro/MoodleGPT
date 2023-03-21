@@ -19,42 +19,63 @@
         ><img src="../icon.png" alt="icon"
       /></a>
       <h1>MoodleGPT</h1>
-      <div class="line">
+      <div class="line center">
         <label for="apiKey" class="textLabel">Api Key*</label>
         <input id="apiKey" type="password" />
       </div>
-      <div class="line">
+      <div class="line center">
         <label for="code" class="textLabel">Code*</label>
         <input id="code" type="text" />
       </div>
-      <div class="line">
+      <div class="line center">
         <label for="langage" class="textLabel">Langage</label>
         <input id="langage" type="text" />
       </div>
-      <div class="line" style="margin-top: 1rem">
-        <input id="typing" type="checkbox" />
-        <label for="typing">Typing effect</label>
+      <div class="line center">
+        <label for="model" class="textLabel">GPT Model</label>
+        <input id="model" type="text" />
       </div>
-      <div class="line" style="margin-bottom: 1rem">
-        <input id="mouseover" type="checkbox" />
-        <label for="mouseover">Mouseover effect</label>
+      <div class="line center" style="margin-top: 1rem">
+        <div class="col">
+          <div class="line">
+            <input id="typing" type="checkbox" />
+            <label for="typing">Typing effect</label>
+          </div>
+          <div class="line">
+            <input id="mouseover" type="checkbox" />
+            <label for="mouseover">Mouseover effect</label>
+          </div>
+          <div class="line">
+            <input id="infinite" type="checkbox" />
+            <label for="infinite">Infinite try</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="line">
+            <input id="logs" type="checkbox" />
+            <label for="logs">Console logs</label>
+          </div>
+          <div class="line">
+            <input id="title" type="checkbox" />
+            <label for="title">Title indication</label>
+          </div>
+          <div class="line">
+            <input id="cursor" type="checkbox" checked />
+            <label for="cursor">Cursor indication</label>
+          </div>
+        </div>
       </div>
-      <div class="line">
-        <input id="logs" type="checkbox" />
-        <label for="logs">Console logs</label>
-      </div>
-      <div class="line">
-        <input id="title" type="checkbox" checked />
-        <label for="title">Title indication</label>
-      </div>
-      <div class="line">
-        <input id="cursor" type="checkbox" checked />
-        <label for="cursor">Cursor indication</label>
-      </div>
-      <p id="message"></p>
-      <div class="line">
+      <p id="message">Message</p>
+      <div class="line center">
         <button class="save">Save</button>
       </div>
+      <a
+        href="https://github.com/yoannchb-pro/MoodleGPT"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        See the documentation
+      </a>
     </main>
   </body>
 </html>

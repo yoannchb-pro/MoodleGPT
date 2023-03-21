@@ -1,8 +1,15 @@
 const saveBtn = document.querySelector(".save");
 const message = document.querySelector("#message");
 
-const inputsText = ["apiKey", "code", "langage"];
-const inputsCheckbox = ["logs", "title", "cursor", "typing", "mouseover"];
+const inputsText = ["apiKey", "code", "langage", "model"];
+const inputsCheckbox = [
+  "logs",
+  "title",
+  "cursor",
+  "typing",
+  "mouseover",
+  "infinite",
+];
 
 function showMessage(messageTxt, valide) {
   message.style.color = valide ? "limegreen" : "red";
@@ -13,10 +20,10 @@ function showMessage(messageTxt, valide) {
 
 //save the configuration
 saveBtn.addEventListener("click", function () {
-  const [apiKey, code, langage] = inputsText.map((selector) =>
+  const [apiKey, code, langage, model] = inputsText.map((selector) =>
     document.querySelector("#" + selector).value.trim()
   );
-  const [logs, title, cursor, typing, mouseover] = inputsCheckbox.map(
+  const [logs, title, cursor, typing, mouseover, infinite] = inputsCheckbox.map(
     (selector) => document.querySelector("#" + selector).checked
   );
 
@@ -35,11 +42,13 @@ saveBtn.addEventListener("click", function () {
       apiKey,
       code,
       langage,
+      model,
       logs,
       title,
       cursor,
       typing,
       mouseover,
+      infinite,
     },
   });
 
