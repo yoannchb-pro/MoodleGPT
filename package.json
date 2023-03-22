@@ -1,0 +1,33 @@
+{
+  "name": "moodle-gpt",
+  "version": "1.0.0",
+  "description": "This extension allows you to hide CHAT-GPT in a Moodle quiz.",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoannchb-pro/MoodleGPT.git"
+  },
+  "keywords": [
+    "solve",
+    "moodle",
+    "extension-chrome",
+    "quiz-solutions",
+    "chatgpt"
+  ],
+  "author": "yoannchb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoannchb-pro/MoodleGPT/issues"
+  },
+  "homepage": "https://github.com/yoannchb-pro/MoodleGPT#readme",
+  "devDependencies": {
+    "rollup": "^3.20.0",
+    "rollup-plugin-ts": "^3.2.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.224"
+  }
+}
