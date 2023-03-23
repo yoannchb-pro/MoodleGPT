@@ -14,6 +14,10 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 See [changelog](./CHANGELOG.md)
 
+## MoodleGPT don't complete my quiz
+
+If MoodleGPT cannot complete one of your moodle quiz please provide the html code of the page. It will help us to add it in the futur version of MoodleGPT !
+
 ## Set up
 
 Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Finally, enter a code that will activate the extension on your moodle page and enter the langage of the quiz.
