@@ -250,6 +250,40 @@
   }
 
   /**
+   * Handle number input
+   * @param config
+   * @param inputList
+   * @param response
+   * @returns
+   */
+  function handleNumber(config, inputList, response) {
+      var _a, _b;
+      const input = inputList[0];
+      if (inputList.length !== 1 || input.type !== "number")
+          return false;
+      const number = (_b = (_a = response.match(/\d+([,\.]\d+)?/gi)) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.replace(",", ".");
+      if (!number)
+          return false;
+      if (config.typing) {
+          let index = 0;
+          input.addEventListener("keydown", function (event) {
+              if (event.key === "Backspace")
+                  index = number.length + 1;
+              if (index > number.length)
+                  return;
+              event.preventDefault();
+              if (number.slice(index, index + 1) === ".")
+                  ++index;
+              input.value = number.slice(0, ++index);
+          });
+      }
+      else {
+          input.value = number;
+      }
+      return true;
+  }
+
+  /**
    * Reply to the question
    * @param config
    * @param hiddenButton
@@ -272,7 +306,12 @@
           }
           if (config.cursor)
               hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
-          const handlers = [handleTextbox, handleSelect, handleRadioAndCheckbox];
+          const handlers = [
+              handleTextbox,
+              handleNumber,
+              handleSelect,
+              handleRadioAndCheckbox,
+          ];
           for (const handler of handlers) {
               if (handler(config, inputList, response))
                   return;
@@ -317,7 +356,7 @@
           return;
       }
       //injection
-      const inputQuery = ["checkbox", "radio", "text"]
+      const inputQuery = ["checkbox", "radio", "text", "number"]
           .map((e) => `input[type="${e}"]`)
           .join(",");
       const query = inputQuery + ", textarea, select";

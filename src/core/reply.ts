@@ -6,6 +6,7 @@ import handleRadioAndCheckbox from "./questions/radio-checkbox";
 import handleSelect from "./questions/select";
 import handleTextbox from "./questions/textbox";
 import handleClipboard from "./questions/clipboard";
+import handleNumber from "./questions/number";
 
 /**
  * Reply to the question
@@ -38,7 +39,12 @@ async function reply(
   if (config.cursor)
     hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
 
-  const handlers = [handleTextbox, handleSelect, handleRadioAndCheckbox];
+  const handlers = [
+    handleTextbox,
+    handleNumber,
+    handleSelect,
+    handleRadioAndCheckbox,
+  ];
 
   for (const handler of handlers) {
     if (handler(config, inputList, response)) return;

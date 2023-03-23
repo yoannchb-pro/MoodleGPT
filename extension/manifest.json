@@ -18,7 +18,11 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*/mod/quiz/*", "http://localhost:*/*"],
+      "matches": [
+        "*://*/mod/quiz/*",
+        "http://localhost:*/*",
+        "http://127.0.0.1:*/*"
+      ],
       "js": ["moodle-gpt.js"],
       "run_at": "document_end"
     }

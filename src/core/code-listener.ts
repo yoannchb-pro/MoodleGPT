@@ -41,7 +41,7 @@ function setUpMoodleGpt(config: Config) {
   }
 
   //injection
-  const inputQuery = ["checkbox", "radio", "text"]
+  const inputQuery = ["checkbox", "radio", "text", "number"]
     .map((e) => `input[type="${e}"]`)
     .join(",");
   const query = inputQuery + ", textarea, select";
@@ -49,6 +49,7 @@ function setUpMoodleGpt(config: Config) {
 
   for (const form of forms) {
     const hiddenButton: HTMLElement = form.querySelector(".qtext");
+
     if (config.cursor) hiddenButton.style.cursor = "pointer";
     const fn = reply.bind(null, config, hiddenButton, form, query);
     listeners.push({ element: hiddenButton, fn });

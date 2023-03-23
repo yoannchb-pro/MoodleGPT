@@ -16,7 +16,7 @@ See [changelog](./CHANGELOG.md)
 
 ## MoodleGPT don't complete my quiz ?
 
-If MoodleGPT cannot complete one of your moodle quiz please provide the html code of the page. It will help us to add it in the futur version of MoodleGPT !
+If MoodleGPT cannot complete one of your moodle quiz please provide the html code of the page. It will help us to add it in the futur version of MoodleGPT ! Check the [TODO](./TODO.md) to see what is comming in the futur version.
 
 ## Set up
 
@@ -77,6 +77,10 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 ### True or false
 
 ![True-false](./assets/true-false.gif)
+
+### Number
+
+![Number](./assets/number.gif)
 
 ### Text
 
