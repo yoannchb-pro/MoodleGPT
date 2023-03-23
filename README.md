@@ -14,7 +14,7 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 See [changelog](./CHANGELOG.md)
 
-## MoodleGPT don't complete my quiz
+## MoodleGPT don't complete my quiz ?
 
 If MoodleGPT cannot complete one of your moodle quiz please provide the html code of the page. It will help us to add it in the futur version of MoodleGPT !
 
