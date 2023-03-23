@@ -86,4 +86,4 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 ## Test
 
-To test the code, you can run the index.html file located in the <b>"test"</b> folder.
+To test the code, you can run the index.html file located in the <b>"test"</b> folder with a local server on localhost.
