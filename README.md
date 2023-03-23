@@ -43,14 +43,27 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
-- <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 - <b>Console logs</b>: show logs into the console.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
+- <b>Request timeout</b>: If the request is too long it will be abort after 10seconds.
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
   <br/> ![Typing](./assets/typing.gif)
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
+- <b>Table formatting</b>: Format table from the question to make it more readable for CHAT-GPT.
+
+```
+--------------------------------
+|        |name |birthDate |cars|
+--------------------------------
+|Person 1|Yvick|15/08/1999|yes |
+--------------------------------
+|Person 2|Yann |19/01/2000|no  |
+--------------------------------
+```
+
+- <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 
 ## Examples
 

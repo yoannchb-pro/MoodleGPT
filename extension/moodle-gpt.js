@@ -77,12 +77,15 @@
    */
   function getChatGPTResponse(config, question) {
       return __awaiter(this, void 0, void 0, function* () {
+          const controller = new AbortController();
+          const timeoutControler = setTimeout(() => controller.abort(), 10000);
           const req = yield fetch("https://api.openai.com/v1/chat/completions", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
                   Authorization: `Bearer ${config.apiKey}`,
               },
+              signal: config.timeout ? controller.signal : null,
               body: JSON.stringify({
                   model: config.model && config.model !== "" ? config.model : "gpt-3.5-turbo",
                   messages: [{ role: "user", content: question }],
@@ -92,10 +95,39 @@
                   stop: null,
               }),
           });
+          clearTimeout(timeoutControler);
           const rep = yield req.json();
           const response = rep.choices[0].message.content;
           return normalizeText(response);
       });
+  }
+
+  /**
+   * Convert table to representating string table
+   * @param table
+   * @returns
+   */
+  function htmlTableToString(table) {
+      const tab = [];
+      const lines = Array.from(table.querySelectorAll("tr"));
+      const maxColumnsLength = [];
+      lines.map((line) => {
+          const cells = Array.from(line.querySelectorAll("td, th"));
+          const cellsContent = cells.map((cell, index) => {
+              var _a;
+              const content = (_a = cell.textContent) === null || _a === void 0 ? void 0 : _a.trim();
+              maxColumnsLength[index] = Math.max(maxColumnsLength[index] || 0, content.length || 0);
+              return content;
+          });
+          tab.push(cellsContent);
+      });
+      const lineSeparationSize = maxColumnsLength.reduce((a, b) => a + b) + tab[0].length + 1;
+      const lineSeparation = "\n" + Array(lineSeparationSize).fill("-").join("") + "\n";
+      const mappedTab = tab.map((line) => {
+          const mappedLine = line.map((content, index) => content.padEnd(maxColumnsLength[index], "\u00A0"));
+          return "|" + mappedLine.join("|") + "|";
+      });
+      return lineSeparation + mappedTab.join(lineSeparation) + lineSeparation;
   }
 
   /**
@@ -104,9 +136,17 @@
    * @param question
    * @returns
    */
-  function normalizeQuestion(langage, question) {
-      const finalQuestion = `Give a short response as possible for this question, reply in ${langage && langage !== ""
-        ? 'this langage "' + langage + '"'
+  function normalizeQuestion(config, questionContainer) {
+      let question = questionContainer.textContent;
+      if (config.table) {
+          //make table more readable for chat-gpt
+          const tables = questionContainer.querySelectorAll("table");
+          for (const table of tables) {
+              question = question.replace(table.textContent, htmlTableToString(table));
+          }
+      }
+      const finalQuestion = `Give a short response as possible for this question, reply in ${config.langage && config.langage !== ""
+        ? 'this langage "' + config.langage + '"'
         : "the following question langage"} and only show the result: 
       ${question} 
       (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
@@ -297,15 +337,21 @@
           if (config.cursor)
               hiddenButton.style.cursor = "wait";
           (_a = form.querySelector(".accesshide")) === null || _a === void 0 ? void 0 : _a.remove();
-          const question = normalizeQuestion(config.langage, form.textContent);
+          const question = normalizeQuestion(config, form);
           const inputList = form.querySelectorAll(query);
-          const response = yield getChatGPTResponse(config, question);
+          const response = yield getChatGPTResponse(config, question).catch((error) => ({
+              error,
+          }));
+          if (config.cursor)
+              hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
+          if (typeof response === "object" && "error" in response) {
+              console.error(response.error);
+              return;
+          }
           if (config.logs) {
               Logs.question(question);
               Logs.response(response);
           }
-          if (config.cursor)
-              hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
           const handlers = [
               handleTextbox,
               handleNumber,

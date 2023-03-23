@@ -26,18 +26,27 @@ async function reply(
 
   form.querySelector(".accesshide")?.remove();
 
-  const question = normalizeQuestion(config.langage, form.textContent);
+  const question = normalizeQuestion(config, form);
   const inputList: NodeListOf<HTMLElement> = form.querySelectorAll(query);
 
-  const response = await getChatGPTResponse(config, question);
+  const response = await getChatGPTResponse(config, question).catch(
+    (error) => ({
+      error,
+    })
+  );
+
+  if (config.cursor)
+    hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
+
+  if (typeof response === "object" && "error" in response) {
+    console.error(response.error);
+    return;
+  }
 
   if (config.logs) {
     Logs.question(question);
     Logs.response(response);
   }
-
-  if (config.cursor)
-    hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
 
   const handlers = [
     handleTextbox,

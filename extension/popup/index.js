@@ -9,6 +9,8 @@ const inputsCheckbox = [
   "typing",
   "mouseover",
   "infinite",
+  "table",
+  "timeout",
 ];
 
 function showMessage(messageTxt, valide) {
@@ -23,9 +25,10 @@ saveBtn.addEventListener("click", function () {
   const [apiKey, code, langage, model] = inputsText.map((selector) =>
     document.querySelector("#" + selector).value.trim()
   );
-  const [logs, title, cursor, typing, mouseover, infinite] = inputsCheckbox.map(
-    (selector) => document.querySelector("#" + selector).checked
-  );
+  const [logs, title, cursor, typing, mouseover, infinite, table, timeout] =
+    inputsCheckbox.map(
+      (selector) => document.querySelector("#" + selector).checked
+    );
 
   if (!apiKey || !code) {
     showMessage("Please comple all the form");
@@ -49,6 +52,8 @@ saveBtn.addEventListener("click", function () {
       typing,
       mouseover,
       infinite,
+      table,
+      timeout,
     },
   });
 

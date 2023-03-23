@@ -9,6 +9,8 @@ type Config = {
   cursor?: boolean;
   logs?: boolean;
   title?: boolean;
+  table?: boolean;
+  timeout?: boolean;
 };
 
 export default Config;

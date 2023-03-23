@@ -1,5 +1,6 @@
 import Config from "../types/config";
 import normalizeText from "../utils/normalize-text";
+import htmlTableToString from "../utils/html-table-to-string";
 
 /**
  * Normalize the question and add sub informations
@@ -7,10 +8,20 @@ import normalizeText from "../utils/normalize-text";
  * @param question
  * @returns
  */
-function normalizeQuestion(langage: Config["langage"], question: string) {
+function normalizeQuestion(config: Config, questionContainer: HTMLElement) {
+  let question = questionContainer.textContent;
+
+  if (config.table) {
+    //make table more readable for chat-gpt
+    const tables = questionContainer.querySelectorAll("table");
+    for (const table of tables) {
+      question = question.replace(table.textContent, htmlTableToString(table));
+    }
+  }
+
   const finalQuestion = `Give a short response as possible for this question, reply in ${
-    langage && langage !== ""
-      ? 'this langage "' + langage + '"'
+    config.langage && config.langage !== ""
+      ? 'this langage "' + config.langage + '"'
       : "the following question langage"
   } and only show the result: 
       ${question} 
