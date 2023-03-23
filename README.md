@@ -51,7 +51,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
-- <b>Table formatting</b>: Format table from the question to make it more readable for CHAT-GPT.
+- <b>Table formatting</b>: Format table from the question to make it more readable for CHAT-GPT but cost most tokens (so if the question is too large it will make an error). Example of formatted table:
 
 ```
 --------------------------------
@@ -65,7 +65,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 
 - <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 
-## Examples
+## Supported questions type
 
 ### Select
 
@@ -107,4 +107,4 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 ## Test
 
-To test the code, you can run the index.html file located in the <b>"test"</b> folder with a local server on localhost.
+To test the code, you can run the index.html file located in the <b>"test"</b> folder with a local server on localhost. Or a better solution is to install moodle locally.
