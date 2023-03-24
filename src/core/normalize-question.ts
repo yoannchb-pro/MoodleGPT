@@ -16,7 +16,10 @@ function normalizeQuestion(config: Config, questionContainer: HTMLElement) {
     const tables: NodeListOf<HTMLTableElement> =
       questionContainer.querySelectorAll(".qtext table");
     for (const table of tables) {
-      question = question.replace(table.textContent, htmlTableToString(table));
+      question = question.replace(
+        table.textContent,
+        "\n" + htmlTableToString(table) + "\n"
+      );
     }
   }
 

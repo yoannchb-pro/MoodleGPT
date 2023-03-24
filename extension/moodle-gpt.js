@@ -121,14 +121,15 @@
           });
           tab.push(cellsContent);
       });
-      const lineSeparationSize = maxColumnsLength.reduce((a, b) => a + b) + tab[0].length + 1;
+      const lineSeparationSize = maxColumnsLength.reduce((a, b) => a + b) + tab[0].length * 3 + 1;
       const lineSeparation = "\n" + Array(lineSeparationSize).fill("-").join("") + "\n";
       const mappedTab = tab.map((line) => {
           const mappedLine = line.map((content, index) => content.padEnd(maxColumnsLength[index], "\u00A0") //for no matching with \s
           );
-          return "|" + mappedLine.join("|") + "|";
+          return "| " + mappedLine.join(" | ") + " |";
       });
-      return lineSeparation + mappedTab.join(lineSeparation) + lineSeparation;
+      const head = mappedTab.shift();
+      return head + lineSeparation + mappedTab.join("\n");
   }
 
   /**
@@ -143,7 +144,7 @@
           //make table more readable for chat-gpt
           const tables = questionContainer.querySelectorAll(".qtext table");
           for (const table of tables) {
-              question = question.replace(table.textContent, htmlTableToString(table));
+              question = question.replace(table.textContent, "\n" + htmlTableToString(table) + "\n");
           }
       }
       const finalQuestion = `Give a short response as possible for this question, reply in ${config.langage && config.langage !== ""

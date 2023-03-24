@@ -54,13 +54,10 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Table formatting</b>: Format table from the question to make it more readable for CHAT-GPT but cost most tokens (so if the question is too large it will make an error). Example of formatted table:
 
 ```
---------------------------------
-|        |name |birthDate |cars|
---------------------------------
-|Person 1|Yvick|15/08/1999|yes |
---------------------------------
-|Person 2|Yann |19/01/2000|no  |
---------------------------------
+| id       | name | birthDate | cars |
+--------------------------------------
+| Person 1 | Yvick| 15/08/1999 | yes |
+| Person 2 | Yann | 19/01/2000 | no  |
 ```
 
 - <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).

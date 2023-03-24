@@ -21,7 +21,7 @@ function htmlTableToString(table: HTMLTableElement) {
   });
 
   const lineSeparationSize =
-    maxColumnsLength.reduce((a, b) => a + b) + tab[0].length + 1;
+    maxColumnsLength.reduce((a, b) => a + b) + tab[0].length * 3 + 1;
   const lineSeparation =
     "\n" + Array(lineSeparationSize).fill("-").join("") + "\n";
 
@@ -29,10 +29,10 @@ function htmlTableToString(table: HTMLTableElement) {
     const mappedLine = line.map(
       (content, index) => content.padEnd(maxColumnsLength[index], "\u00A0") //for no matching with \s
     );
-    return "|" + mappedLine.join("|") + "|";
+    return "| " + mappedLine.join(" | ") + " |";
   });
-
-  return lineSeparation + mappedTab.join(lineSeparation) + lineSeparation;
+  const head = mappedTab.shift();
+  return head + lineSeparation + mappedTab.join("\n");
 }
 
 export default htmlTableToString;
