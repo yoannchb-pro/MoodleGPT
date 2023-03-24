@@ -20,6 +20,15 @@ function handleContentEditable(
       if (index > response.length) return;
       event.preventDefault();
       input.textContent = response.slice(0, ++index);
+
+      //put the cursor at the end
+      input.focus();
+      const range = document.createRange();
+      range.selectNodeContents(input);
+      range.collapse(false);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
     });
   } else {
     input.textContent = response;
