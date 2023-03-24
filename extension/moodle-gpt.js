@@ -124,7 +124,8 @@
       const lineSeparationSize = maxColumnsLength.reduce((a, b) => a + b) + tab[0].length + 1;
       const lineSeparation = "\n" + Array(lineSeparationSize).fill("-").join("") + "\n";
       const mappedTab = tab.map((line) => {
-          const mappedLine = line.map((content, index) => content.padEnd(maxColumnsLength[index], "\u00A0"));
+          const mappedLine = line.map((content, index) => content.padEnd(maxColumnsLength[index], "\u00A0") //for no matching with \s
+          );
           return "|" + mappedLine.join("|") + "|";
       });
       return lineSeparation + mappedTab.join(lineSeparation) + lineSeparation;
@@ -323,6 +324,28 @@
       return true;
   }
 
+  function handleContentEditable(config, inputList, response) {
+      const input = inputList[0];
+      if (inputList.length !== 1 ||
+          input.getAttribute("contenteditable") !== "true")
+          return false;
+      if (config.typing) {
+          let index = 0;
+          input.addEventListener("keydown", function (event) {
+              if (event.key === "Backspace")
+                  index = response.length + 1;
+              if (index > response.length)
+                  return;
+              event.preventDefault();
+              input.textContent = response.slice(0, ++index);
+          });
+      }
+      else {
+          input.textContent = response;
+      }
+      return true;
+  }
+
   /**
    * Reply to the question
    * @param config
@@ -353,6 +376,7 @@
               Logs.response(response);
           }
           const handlers = [
+              handleContentEditable,
               handleTextbox,
               handleNumber,
               handleSelect,
@@ -405,7 +429,7 @@
       const inputQuery = ["checkbox", "radio", "text", "number"]
           .map((e) => `input[type="${e}"]`)
           .join(",");
-      const query = inputQuery + ", textarea, select";
+      const query = inputQuery + ", textarea, select, [contenteditable]";
       const forms = Array.from(document.querySelectorAll(".formulation"));
       for (const form of forms) {
           const hiddenButton = form.querySelector(".qtext");

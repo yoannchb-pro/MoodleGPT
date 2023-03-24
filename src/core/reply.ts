@@ -7,6 +7,7 @@ import handleSelect from "./questions/select";
 import handleTextbox from "./questions/textbox";
 import handleClipboard from "./questions/clipboard";
 import handleNumber from "./questions/number";
+import handleContentEditable from "./questions/contenteditable";
 
 /**
  * Reply to the question
@@ -49,6 +50,7 @@ async function reply(
   }
 
   const handlers = [
+    handleContentEditable,
     handleTextbox,
     handleNumber,
     handleSelect,

@@ -44,7 +44,7 @@ function setUpMoodleGpt(config: Config) {
   const inputQuery = ["checkbox", "radio", "text", "number"]
     .map((e) => `input[type="${e}"]`)
     .join(",");
-  const query = inputQuery + ", textarea, select";
+  const query = inputQuery + ", textarea, select, [contenteditable]";
   const forms = Array.from(document.querySelectorAll(".formulation"));
 
   for (const form of forms) {
