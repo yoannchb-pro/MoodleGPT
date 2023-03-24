@@ -13,7 +13,8 @@ function normalizeQuestion(config: Config, questionContainer: HTMLElement) {
 
   if (config.table) {
     //make table more readable for chat-gpt
-    const tables = questionContainer.querySelectorAll("table");
+    const tables: NodeListOf<HTMLTableElement> =
+      questionContainer.querySelectorAll(".qtext table");
     for (const table of tables) {
       question = question.replace(table.textContent, htmlTableToString(table));
     }

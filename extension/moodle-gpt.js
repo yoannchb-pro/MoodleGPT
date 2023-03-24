@@ -141,7 +141,7 @@
       let question = questionContainer.textContent;
       if (config.table) {
           //make table more readable for chat-gpt
-          const tables = questionContainer.querySelectorAll("table");
+          const tables = questionContainer.querySelectorAll(".qtext table");
           for (const table of tables) {
               question = question.replace(table.textContent, htmlTableToString(table));
           }
