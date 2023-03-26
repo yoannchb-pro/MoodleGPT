@@ -20,11 +20,11 @@ If MoodleGPT cannot complete one of your moodle quiz please provide the html cod
 
 ## Set up
 
-Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Finally, enter a code that will activate the extension on your moodle page and enter the langage of the quiz.
+Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Finally, enter a code that will activate the extension on your moodle page and click on the save button (The extension need to be configured before entering the moodle quiz).
 
 ## Inject the code into the moodle
 
-You just need to enter on the keyboard the <b>code</b> you have set into the extension.
+You just need to enter on the keyboard the <b>code</b> you have set into the extension and clique on the question you want to solve.
 
 ## Remove injection
 
