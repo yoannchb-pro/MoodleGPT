@@ -2,7 +2,7 @@
 href="https://www.flaticon.com/free-icons/mortarboard" target="_blank" rel="noopener noreferrer"
 title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/icon.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150" style="display:block; margin:auto;"></a></p>
 
-# Moodle-gpt
+# Moodle-gpt v1.0.1
 
 This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
@@ -36,22 +36,21 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 <img src="./assets/popup.png" alt="Popup"  height="300">
 </p>
 
-- <b>Api key\*</b>: the openai api key.
-- <b>Code\*</b>: code that you will need to inject/remove the code.
-- <b>Langage</b>: the langage you want chatgpt reply (if it's not set it will take the question langage).
-- <b>GPT Model</b>: the gpt model you want to use (by default it's "gpt-3.5-turbo").
+- <b>Api key</b>: the openai api key.
+- <b>Code</b>: code that you will need to inject/remove the code.
+- <b>GPT Model</b>: the gpt model you want to use (by default it's "gpt-3.5-turbo"). You can click on the reload button to get the latest version of available gpt model for your account but you need to enter the api key first.
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
 - <b>Console logs</b>: show logs into the console.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
-- <b>Request timeout</b>: If the request is too long it will be abort after 10seconds.
+- <b>Request timeout</b>: if the request is too long it will be abort after 10seconds.
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
   <br/> ![Typing](./assets/typing.gif)
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
-- <b>Table formatting</b>: Format table from the question to make it more readable for CHAT-GPT but cost most tokens (so if the question is too large it will make an error). Example of formatted table:
+- <b>Table formatting</b>: format table from the question to make it more readable for CHAT-GPT but cost most tokens (so if the question is too large it will make an error). Example of formatted table:
 
 ```
 | id       | name  | birthDate  | cars |

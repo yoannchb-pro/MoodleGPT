@@ -21,8 +21,7 @@ async function getChatGPTResponse(
     },
     signal: config.timeout ? controller.signal : null,
     body: JSON.stringify({
-      model:
-        config.model && config.model !== "" ? config.model : "gpt-3.5-turbo",
+      model: config.model,
       messages: [{ role: "user", content: question }],
       temperature: 0.8,
       top_p: 1.0,

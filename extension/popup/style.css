@@ -103,3 +103,12 @@ a {
   margin-top: 0.75rem;
   margin-bottom: -0.25rem;
 }
+
+#reloadModel {
+  cursor: pointer;
+}
+
+#reloadModel[disabled] {
+  cursor: not-allowed;
+  opacity: 0.75;
+}

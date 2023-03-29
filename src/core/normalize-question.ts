@@ -23,11 +23,7 @@ function normalizeQuestion(config: Config, questionContainer: HTMLElement) {
     }
   }
 
-  const finalQuestion = `Give a short response as possible for this question, reply in ${
-    config.langage && config.langage !== ""
-      ? 'this langage "' + config.langage + '"'
-      : "the following question langage"
-  } and only show the result: 
+  const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result: 
       ${question} 
       (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
   return normalizeText(finalQuestion);

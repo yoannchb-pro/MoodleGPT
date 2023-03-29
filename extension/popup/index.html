@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
     <link rel="icon" type="image/png" href="../icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <main>
@@ -20,20 +27,22 @@
       /></a>
       <h1>MoodleGPT</h1>
       <div class="line center">
-        <label for="apiKey" class="textLabel">Api Key*</label>
-        <input id="apiKey" type="password" />
+        <label for="apiKey" class="textLabel">Api Key</label>
+        <input id="apiKey" type="text" />
       </div>
       <div class="line center">
-        <label for="code" class="textLabel">Code*</label>
+        <label for="code" class="textLabel">Code</label>
         <input id="code" type="text" />
       </div>
       <div class="line center">
-        <label for="langage" class="textLabel">Langage</label>
-        <input id="langage" type="text" />
-      </div>
-      <div class="line center">
         <label for="model" class="textLabel">GPT Model</label>
-        <input id="model" type="text" />
+        <input id="model" type="text" value="gpt-3.5-turbo" />
+        <i
+          id="reloadModel"
+          class="fa-solid fa-rotate-right"
+          disabled
+          title="Provide an api key first"
+        ></i>
       </div>
       <div class="line center" style="margin-top: 1rem">
         <div class="col">

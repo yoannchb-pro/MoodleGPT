@@ -87,7 +87,7 @@
               },
               signal: config.timeout ? controller.signal : null,
               body: JSON.stringify({
-                  model: config.model && config.model !== "" ? config.model : "gpt-3.5-turbo",
+                  model: config.model,
                   messages: [{ role: "user", content: question }],
                   temperature: 0.8,
                   top_p: 1.0,
@@ -147,9 +147,7 @@
               question = question.replace(table.textContent, "\n" + htmlTableToString(table) + "\n");
           }
       }
-      const finalQuestion = `Give a short response as possible for this question, reply in ${config.langage && config.langage !== ""
-        ? 'this langage "' + config.langage + '"'
-        : "the following question langage"} and only show the result: 
+      const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result: 
       ${question} 
       (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
       return normalizeText(finalQuestion);
