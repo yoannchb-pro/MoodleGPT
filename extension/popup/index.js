@@ -31,7 +31,7 @@ saveBtn.addEventListener("click", function () {
     );
 
   if (!apiKey || !code || !model) {
-    showMessage("Please comple all the form");
+    showMessage("Please complete all the form");
     return;
   }
 
@@ -61,8 +61,9 @@ saveBtn.addEventListener("click", function () {
 
 //we load back the configuration
 chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
-  if (storage.moodleGPT) {
-    const config = storage.moodleGPT;
+  const config = storage.moodleGPT;
+
+  if (config) {
     inputsText.forEach((key) =>
       config[key]
         ? (document.querySelector("#" + key).value = config[key])
@@ -79,7 +80,7 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
 
   let apiKey = apiKeySelector.value;
 
-  function checkFileldApiKey() {
+  function checkFiledApiKey() {
     if (apiKey) {
       reloadModel.removeAttribute("disabled");
       reloadModel.setAttribute("title", "Get last ChatGPT version");
@@ -90,11 +91,11 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
     reloadModel.setAttribute("title", "Provide an api key first");
   }
 
-  checkFileldApiKey();
+  checkFiledApiKey();
 
   apiKeySelector.addEventListener("change", function (event) {
     apiKey = apiKeySelector.value.trim();
-    checkFileldApiKey();
+    checkFiledApiKey();
   });
 
   reloadModel.addEventListener("click", async function () {
