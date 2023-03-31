@@ -20,7 +20,7 @@ If MoodleGPT cannot complete one of your moodle quiz please provide the html cod
 
 ## Set up
 
-Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Afterward, enter a <b>code</b> that will activate the extension on your moodle page. Finally, click one the <b>reload button</b> next to model and click on the save button (The extension need to be configured before entering the moodle quiz).
+Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the apiKey obtained from [openai](https://platform.openai.com/) and enter a <b>code</b> that will activate the extension on your moodle page. Finally, click on the <b>reload button</b> next to model (it should give you the last ChatGPT version, otherwise enter it by your self) and click on the save button (The extension need to be configured before entering the moodle quiz).
 
 ## Inject the code into the moodle
 
