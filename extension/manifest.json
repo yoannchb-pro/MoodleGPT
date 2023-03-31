@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "moddle-gpt",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Hidden chat-gpt for moodle cheat",
   "permissions": ["activeTab", "tabs", "storage"],
   "action": {
@@ -22,7 +22,8 @@
         "*://*/**/mod/quiz/*",
         "*://*/mod/quiz/*",
         "http://localhost:*/*",
-        "http://127.0.0.1:*/*"
+        "http://127.0.0.1:*/*",
+        "file:///*"
       ],
       "js": ["moodle-gpt.js"],
       "run_at": "document_end"
