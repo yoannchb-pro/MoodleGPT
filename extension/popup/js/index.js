@@ -97,7 +97,7 @@ function getLastChatGPTVersion() {
 
   checkFiledApiKey();
 
-  apiKeySelector.addEventListener("change", function (event) {
+  apiKeySelector.addEventListener("input", function () {
     apiKey = apiKeySelector.value.trim();
     checkFiledApiKey();
   });
