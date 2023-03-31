@@ -458,4 +458,4 @@
   });
 
 }));
-//# sourceMappingURL=moodle-gpt.js.map
+//# sourceMappingURL=MoodleGPT.js.map

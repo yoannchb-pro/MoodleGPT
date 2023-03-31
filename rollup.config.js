@@ -6,7 +6,7 @@ module.exports = {
   input: "./src/index.ts",
   output: [
     {
-      file: "./extension/moodle-gpt.js",
+      file: "./extension/MoodleGPT.js",
       format: "umd",
       sourcemap: true,
     },
