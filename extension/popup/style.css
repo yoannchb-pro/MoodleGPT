@@ -40,7 +40,7 @@ img {
   margin-top: 0.75rem;
 }
 
-h1 {
+.title {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
@@ -96,6 +96,10 @@ a {
   border-radius: 0.2rem;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
+}
+
+#version {
+  font-size: 0.75rem;
 }
 
 #message {

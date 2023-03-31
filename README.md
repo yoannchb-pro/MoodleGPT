@@ -20,7 +20,7 @@ If MoodleGPT cannot complete one of your moodle quiz please provide the html cod
 
 ## Set up
 
-Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Finally, enter a code that will activate the extension on your moodle page and click on the save button (The extension need to be configured before entering the moodle quiz).
+Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icons and enter the apiKey obtained from [openai](https://platform.openai.com/). Afterward, enter a <b>code</b> that will activate the extension on your moodle page. Finally, click one the <b>reload button</b> next to model and click on the save button (The extension need to be configured before entering the moodle quiz).
 
 ## Inject the code into the moodle
 
@@ -38,7 +38,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 
 - <b>Api key</b>: the openai api key.
 - <b>Code</b>: code that you will need to inject/remove the code.
-- <b>GPT Model</b>: the gpt model you want to use (by default it's "gpt-3.5-turbo"). You can click on the reload button to get the latest version of available gpt model for your account but you need to enter the api key first.
+- <b>GPT Model</b>: the gpt model you want to use. You can click on the reload button to get the latest version of available gpt model for your account but you need to enter the api key first.
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
