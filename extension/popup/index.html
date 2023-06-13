@@ -48,7 +48,28 @@
           title="Provide an api key first"
         ></i>
       </div>
-      <div class="line center" style="margin-top: 1rem">
+      <div class="line mt">
+        <i class="fa-solid fa-robot"></i>
+        <p>Mode:</p>
+      </div>
+      <div class="line">
+        <ul id="mode" class="line center">
+          <li><button value="autocomplete">autocomplete</button></li>
+          <li>
+            <button value="clipboard" class="not-selected">clipboard</button>
+          </li>
+          <li>
+            <button value="question-to-answer" class="not-selected">
+              question to answer
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="line mt">
+        <i class="fa-solid fa-gear"></i>
+        <p>Settings:</p>
+      </div>
+      <div class="line center">
         <div class="col">
           <div class="line">
             <input id="typing" type="checkbox" />

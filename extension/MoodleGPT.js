@@ -382,6 +382,21 @@
               Logs.question(question);
               Logs.response(response);
           }
+          if (config.mode === "clipboard") {
+              return handleClipboard(config, response);
+          }
+          if (config.mode === "question-to-answer") {
+              const questionBackup = form.textContent;
+              const questionContainer = form.querySelector(".qtext");
+              questionContainer.textContent = response;
+              questionContainer.addEventListener("click", function () {
+                  questionContainer.textContent =
+                      questionContainer.textContent === questionBackup
+                          ? response
+                          : questionBackup;
+              });
+              return;
+          }
           const handlers = [
               handleContentEditable,
               handleTextbox,
@@ -393,6 +408,7 @@
               if (handler(config, inputList, response))
                   return;
           }
+          /** In the case we can't auto complete the question */
           handleClipboard(config, response);
       });
   }

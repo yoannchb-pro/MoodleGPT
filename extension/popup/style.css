@@ -52,6 +52,7 @@ a {
 
 .line {
   display: flex;
+  flex-direction: row;
   width: 100%;
   gap: 0.5rem;
 }
@@ -96,6 +97,34 @@ a {
   border-radius: 0.2rem;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
+}
+
+.mt {
+  margin-top: 1rem;
+}
+
+.not-selected {
+  opacity: 0.4;
+}
+
+#mode li {
+  list-style: none;
+  flex-grow: 1;
+}
+
+#mode {
+  flex-wrap: wrap;
+}
+
+#mode button {
+  background-color: var(--btn-color);
+  border: none;
+  text-align: center;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
 }
 
 #version {

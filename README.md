@@ -10,6 +10,10 @@ This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to en
 
 I hereby declare that I am not responsible for any misuse or illegal activities carried out using my program. The code is provided for educational and research purposes only, and any use of it outside of these purposes is at the user's own risk.
 
+## Support
+
+Will be a pleasure if you want to supprot this project :). Just right [here](example.com)
+
 ## Update
 
 See [changelog](./CHANGELOG.md)
@@ -22,6 +26,10 @@ If MoodleGPT cannot complete one of your moodle quiz please provide the html cod
 
 > NOTE: This extension only works on Chromium-based browsers like Edge, Chrome, etc. Unfortunately, Firefox requires a click on the extension, which is not very discreet.
 
+<p align="center">
+<img src="./assets/setup.png" alt="Popup" width="300">
+</p>
+
 Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the apiKey obtained from [openai](https://platform.openai.com/) and enter a <b>code</b> that will activate the extension on your moodle page. Finally, click on the <b>reload button</b> next to model (it should give you the last ChatGPT version, otherwise enter it by your self) and click on the save button (The extension need to be configured before entering the moodle quiz).
 
 ## Inject the code into the moodle
@@ -32,10 +40,20 @@ You just need to enter on the keyboard the <b>code</b> you have set into the ext
 
 Type back the <b>code</b> on the keyboard and the code will be removed from the current page.
 
-## Options
+## Mode
 
 <p align="center">
-<img src="./assets/popup.png" alt="Popup"  height="300">
+<img src="./assets/mode.png" alt="Popup" width="300">
+</p>
+
+- <b>Autocomplete:</b> The extension will complete the question for you.
+- <b>Clipboard:</b> The response is copied into the clipboard.
+- <b>Question to answer:</b> The question is converted to the answer and you can click on it to show back the question (or show back the answer).
+
+## Settings
+
+<p align="center">
+<img src="./assets/settings.png" alt="Popup" width="300">
 </p>
 
 - <b>Api key</b>: the openai api key.

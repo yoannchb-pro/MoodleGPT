@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.2
+
+- Added `mode`
+
 ## v1.0.1
 
 - Removed langage
