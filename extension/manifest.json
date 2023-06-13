@@ -18,13 +18,7 @@
 
   "content_scripts": [
     {
-      "matches": [
-        "*://*/**/mod/quiz/*",
-        "*://*/mod/quiz/*",
-        "http://localhost:*/*",
-        "http://127.0.0.1:*/*",
-        "file:///*"
-      ],
+      "matches": ["*://*/**/mod/quiz/*", "*://*/mod/quiz/*", "file:///*"],
       "js": ["MoodleGPT.js"],
       "run_at": "document_end"
     }

@@ -2,9 +2,34 @@
 href="https://www.flaticon.com/free-icons/mortarboard" target="_blank" rel="noopener noreferrer"
 title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/icon.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150" style="display:block; margin:auto;"></a></p>
 
-# MoodleGPT v1.0.1
+# MoodleGPT v1.0.2
 
 This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
+
+## Summary
+
+- [MoodleGPT v1.0.2](#moodlegpt-v102)
+  - [Summary](#summary)
+  - [Disclaimer !](#disclaimer-)
+  - [Support](#support)
+  - [Update](#update)
+  - [MoodleGPT don't complete my quiz ?](#moodlegpt-dont-complete-my-quiz-)
+  - [Set up](#set-up)
+  - [Inject the code into the moodle](#inject-the-code-into-the-moodle)
+  - [Remove injection](#remove-injection)
+  - [Mode](#mode)
+  - [Settings](#settings)
+  - [Supported questions type](#supported-questions-type)
+    - [Select](#select)
+    - [Put in order question](#put-in-order-question)
+    - [Resolve equation](#resolve-equation)
+    - [One response (radio button)](#one-response-radio-button)
+    - [Multiples responses (checkbox)](#multiples-responses-checkbox)
+    - [True or false](#true-or-false)
+    - [Number](#number)
+    - [Text](#text)
+  - [What about if the question can't be completed ?](#what-about-if-the-question-cant-be-completed-)
+  - [Test](#test)
 
 ## Disclaimer !
 
@@ -12,7 +37,7 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 ## Support
 
-Will be a pleasure if you want to supprot this project :). Just right [here](example.com)
+Will be a pleasure if you want to supprot this project :) -> Just right [here](https://www.buymeacoffee.com/yoannchbpro)
 
 ## Update
 
@@ -115,7 +140,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 
 ![Text](./assets/text.gif)
 
-## If it can't complete the question, the answer will be copied to your clipboard
+## What about if the question can't be completed ?
 
 To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds.
 
