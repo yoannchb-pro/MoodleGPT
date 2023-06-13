@@ -16,3 +16,7 @@ for (const input of document.querySelectorAll(
 for (const icon of document.querySelectorAll(".text-danger, .text-success")) {
   icon.remove();
 }
+
+for (const feedback of document.querySelectorAll(".specificfeedback")) {
+  feedback.remove();
+}

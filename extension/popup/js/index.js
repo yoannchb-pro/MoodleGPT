@@ -1,6 +1,7 @@
 const saveBtn = document.querySelector(".save");
 const message = document.querySelector("#message");
 
+/* inputs id */
 const inputsText = ["apiKey", "code", "model"];
 const inputsCheckbox = [
   "logs",
@@ -13,6 +14,21 @@ const inputsCheckbox = [
   "timeout",
 ];
 
+const mode = document.querySelector("#mode");
+const modes = mode.querySelectorAll("button");
+let actualMode = "autocomplete";
+/* inputs id that need to be disabled for a specific mode */
+const disabledForThisMode = {
+  autocomplete: [],
+  clipboard: ["typing", "mouseover"],
+  "question-to-answer": ["typing", "infinite", "mouseover"],
+};
+
+/**
+ * Show message into the popup
+ * @param {string} messageTxt
+ * @param {boolean} valide
+ */
 function showMessage(messageTxt, valide) {
   message.style.color = valide ? "limegreen" : "red";
   message.textContent = messageTxt;
@@ -20,15 +36,48 @@ function showMessage(messageTxt, valide) {
   setTimeout(() => (message.style.display = "none"), 5000);
 }
 
-//save the configuration
+/**
+ * Handle when a mode change to show specific input
+ */
+function handleModeChange() {
+  const needDisable = disabledForThisMode[actualMode];
+  const dontNeedDisable = inputsCheckbox.filter(
+    (input) => !needDisable.includes(input)
+  );
+  for (const id of needDisable) {
+    document.querySelector("#" + id).parentElement.style.display = "none";
+  }
+  for (const id of dontNeedDisable) {
+    document.querySelector("#" + id).parentElement.style.display = null;
+  }
+}
+
+/* Mode handler */
+modes.forEach((button) => {
+  button.addEventListener("click", function () {
+    const value = button.value;
+    actualMode = value;
+    for (const mode of modes) {
+      if (mode.value !== value) {
+        mode.classList.add("not-selected");
+      } else {
+        mode.classList.remove("not-selected");
+      }
+    }
+    handleModeChange();
+  });
+});
+
+/* Save the configuration */
 saveBtn.addEventListener("click", function () {
   const [apiKey, code, model] = inputsText.map((selector) =>
     document.querySelector("#" + selector).value.trim()
   );
   const [logs, title, cursor, typing, mouseover, infinite, table, timeout] =
-    inputsCheckbox.map(
-      (selector) => document.querySelector("#" + selector).checked
-    );
+    inputsCheckbox.map((selector) => {
+      const element = document.querySelector("#" + selector);
+      return element.checked && element.parentElement.style.display !== "none";
+    });
 
   if (!apiKey || !code || !model) {
     showMessage("Please complete all the form");
@@ -53,31 +102,16 @@ saveBtn.addEventListener("click", function () {
       infinite,
       table,
       timeout,
+      mode: actualMode,
     },
   });
 
   showMessage("Configuration saved", true);
 });
 
-//we load back the configuration
-chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
-  const config = storage.moodleGPT;
-
-  if (config) {
-    inputsText.forEach((key) =>
-      config[key]
-        ? (document.querySelector("#" + key).value = config[key])
-        : null
-    );
-    inputsCheckbox.forEach(
-      (key) => (document.querySelector("#" + key).checked = config[key] || "")
-    );
-  }
-
-  getLastChatGPTVersion();
-});
-
-//getting the last chatgpt version
+/**
+ * Get the last ChatGPT version
+ */
 function getLastChatGPTVersion() {
   const apiKeySelector = document.querySelector("#apiKey");
   const reloadModel = document.querySelector("#reloadModel");
@@ -119,3 +153,33 @@ function getLastChatGPTVersion() {
     }
   });
 }
+
+/* we load back the configuration */
+chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
+  const config = storage.moodleGPT;
+
+  if (config) {
+    if (config.mode) {
+      actualMode = config.mode;
+      for (const mode of modes) {
+        if (mode.value === config.mode) {
+          mode.classList.remove("not-selected");
+        } else {
+          mode.classList.add("not-selected");
+        }
+      }
+    }
+
+    inputsText.forEach((key) =>
+      config[key]
+        ? (document.querySelector("#" + key).value = config[key])
+        : null
+    );
+    inputsCheckbox.forEach(
+      (key) => (document.querySelector("#" + key).checked = config[key] || "")
+    );
+  }
+
+  handleModeChange();
+  getLastChatGPTVersion();
+});

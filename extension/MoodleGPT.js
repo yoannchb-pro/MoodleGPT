@@ -61,8 +61,8 @@
    */
   function normalizeText(text) {
       return text
-          .replace(/\n+/g, "\n")
-          .replace(/[ \t]+/g, " ")
+          .replace(/(\n\s*)+/gi, "\n")
+          .replace(/[ \t]+/gi, " ")
           .toLowerCase()
           .trim()
           .replace(/^[a-z\d]\.\s/gi, "") //a. text, b. text, c. text, 1. text, 2. text, 3.text
@@ -382,6 +382,21 @@
               Logs.question(question);
               Logs.response(response);
           }
+          if (config.mode === "clipboard") {
+              return handleClipboard(config, response);
+          }
+          if (config.mode === "question-to-answer") {
+              const questionBackup = form.textContent;
+              const questionContainer = form.querySelector(".qtext");
+              questionContainer.textContent = response;
+              questionContainer.addEventListener("click", function () {
+                  questionContainer.textContent =
+                      questionContainer.textContent === questionBackup
+                          ? response
+                          : questionBackup;
+              });
+              return;
+          }
           const handlers = [
               handleContentEditable,
               handleTextbox,
@@ -393,6 +408,7 @@
               if (handler(config, inputList, response))
                   return;
           }
+          /** In the case we can't auto complete the question */
           handleClipboard(config, response);
       });
   }

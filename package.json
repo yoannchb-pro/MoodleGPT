@@ -1,6 +1,6 @@
 {
   "name": "moodlegpt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This extension allows you to hide CHAT-GPT in a Moodle quiz.",
   "scripts": {
     "build": "rollup -c"
