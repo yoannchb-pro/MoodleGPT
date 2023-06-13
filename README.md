@@ -8,7 +8,7 @@ This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to en
 
 ## Webstore
 
-Find it one the webstore "MoodleGPT"
+Find it on the chrome webstore "MoodleGPT"
 
 ## Summary
 
