@@ -74,6 +74,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Autocomplete:</b> The extension will complete the question for you.
 - <b>Clipboard:</b> The response is copied into the clipboard.
 - <b>Question to answer:</b> The question is converted to the answer and you can click on it to show back the question (or show back the answer).
+  <br/><img src="./assets/question-to-answer.gif" alt="Question to Answer">
 
 ## Settings
 

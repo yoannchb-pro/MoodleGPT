@@ -61,8 +61,8 @@
    */
   function normalizeText(text) {
       return text
-          .replace(/\n+/g, "\n")
-          .replace(/[ \t]+/g, " ")
+          .replace(/(\n\s*)+/gi, "\n")
+          .replace(/[ \t]+/gi, " ")
           .toLowerCase()
           .trim()
           .replace(/^[a-z\d]\.\s/gi, "") //a. text, b. text, c. text, 1. text, 2. text, 3.text
