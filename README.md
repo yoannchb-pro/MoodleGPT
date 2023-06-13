@@ -6,17 +6,17 @@ title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/
 
 This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
-## Webstore
+## Chrome Webstore
 
-Find it on the chrome webstore "MoodleGPT"
+I'm actually waiting for a review of my extension. It should be available in some days.
 
 ## Summary
 
 - [MoodleGPT v1.0.2](#moodlegpt-v102)
-  - [Webstore](#webstore)
+  - [Chrome Webstore](#chrome-webstore)
   - [Summary](#summary)
   - [Disclaimer !](#disclaimer-)
-  - [Support](#support)
+  - [Donation](#donation)
   - [Update](#update)
   - [MoodleGPT don't complete my quiz ?](#moodlegpt-dont-complete-my-quiz-)
   - [Set up](#set-up)
@@ -40,9 +40,9 @@ Find it on the chrome webstore "MoodleGPT"
 
 I hereby declare that I am not responsible for any misuse or illegal activities carried out using my program. The code is provided for educational and research purposes only, and any use of it outside of these purposes is at the user's own risk.
 
-## Support
+## Donation
 
-Will be a pleasure if you want to supprot this project :) -> Just right [here](https://www.buymeacoffee.com/yoannchbpro)
+Will be a pleasure if you want to support this project :) -> Just right [here](https://www.buymeacoffee.com/yoannchbpro)
 
 ## Update
 
