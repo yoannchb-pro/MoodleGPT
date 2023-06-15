@@ -101,7 +101,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
-- <b>Table formatting</b>: format table from the question to make it more readable for CHAT-GPT but cost most tokens (so if the question is too large it will make an error). Example of formatted table:
+- <b>Table formatting</b>: format table from the question to make it more readable for CHAT-GPT but cost more tokens (so if the question is too large it will make an error). Example of formatted table:
 
 ```
 | id       | name  | birthDate  | cars |
