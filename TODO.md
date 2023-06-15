@@ -3,6 +3,7 @@
 ## Priority: 1
 
 - Fixe `normalizeText` (line break are sometimes removed for nothing e.g: checkbox)
+- Support math equation from image stocked in the `data-mathml` attribute
 
 ## Priority: 3
 
