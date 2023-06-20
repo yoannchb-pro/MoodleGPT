@@ -48,7 +48,7 @@ function handleSelect(
       const valide = correct[j].includes(content);
 
       /* Handle put in order question */
-      if (!isNaN(parseInt(content))) {
+      if (!/[^\d]+/gi.test(content)) {
         const content = normalizeText(
           (option.parentNode as HTMLElement)
             .closest("tr")

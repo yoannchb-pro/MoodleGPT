@@ -243,7 +243,7 @@ Follow those rules:
               const content = normalizeText(option.textContent);
               const valide = correct[j].includes(content);
               /* Handle put in order question */
-              if (!isNaN(parseInt(content))) {
+              if (!/[^\d]+/gi.test(content)) {
                   const content = normalizeText(option.parentNode
                       .closest("tr")
                       .querySelector(".text").textContent);
