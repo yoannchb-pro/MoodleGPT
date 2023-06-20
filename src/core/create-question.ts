@@ -9,7 +9,7 @@ import htmlTableToString from "../utils/html-table-to-string";
  * @returns
  */
 function createQuestion(config: Config, questionContainer: HTMLElement) {
-  let question = questionContainer.innerText;
+  let question = questionContainer.innerText; //TODO: textContent better for reply ??
 
   /* Make tables more readable for chat-gpt */
   const tables: NodeListOf<HTMLTableElement> =
