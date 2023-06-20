@@ -145,7 +145,7 @@
       for (const table of tables) {
           question = question.replace(table.innerText, "\n" + htmlTableToString(table) + "\n");
       }
-      const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result: 
+      const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result:
       ${question} 
       (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
       return normalizeText(finalQuestion);
@@ -368,9 +368,12 @@
           const response = yield getChatGPTResponse(config, question).catch((error) => ({
               error,
           }));
+          const haveError = typeof response === "object" && "error" in response;
+          const isAbortError = haveError && response.error.name === "AbortError";
           if (config.cursor)
-              hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
-          if (typeof response === "object" && "error" in response) {
+              hiddenButton.style.cursor =
+                  config.infinite || isAbortError ? "pointer" : "initial";
+          if (haveError) {
               console.error(response.error);
               return;
           }
@@ -449,7 +452,7 @@
           .map((e) => `input[type="${e}"]`)
           .join(",");
       const query = inputQuery + ", textarea, select, [contenteditable]";
-      const forms = Array.from(document.querySelectorAll(".formulation"));
+      const forms = document.querySelectorAll(".formulation");
       for (const form of forms) {
           const hiddenButton = form.querySelector(".qtext");
           if (config.cursor)

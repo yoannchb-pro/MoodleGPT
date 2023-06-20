@@ -33,11 +33,18 @@ async function reply(
       error,
     })
   );
+  const haveError = typeof response === "object" && "error" in response;
+  const isAbortError = haveError && response.error.name === "AbortError";
 
   if (config.cursor)
-    hiddenButton.style.cursor = config.infinite ? "pointer" : "initial";
+    hiddenButton.style.cursor =
+      config.infinite || isAbortError ? "pointer" : "initial";
 
-  if (typeof response === "object" && "error" in response) {
+  if (haveError) {
+    if (isAbortError) {
+      //TODO: We need to inject back the event
+    }
+
     console.error(response.error);
     return;
   }

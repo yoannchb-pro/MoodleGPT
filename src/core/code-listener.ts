@@ -45,12 +45,13 @@ function setUpMoodleGpt(config: Config) {
     .map((e) => `input[type="${e}"]`)
     .join(",");
   const query = inputQuery + ", textarea, select, [contenteditable]";
-  const forms = Array.from(document.querySelectorAll(".formulation"));
+  const forms = document.querySelectorAll(".formulation");
 
   for (const form of forms) {
     const hiddenButton: HTMLElement = form.querySelector(".qtext");
 
     if (config.cursor) hiddenButton.style.cursor = "pointer";
+
     const fn = reply.bind(null, config, hiddenButton, form, query);
     listeners.push({ element: hiddenButton, fn });
     hiddenButton.addEventListener("click", fn, { once: !config.infinite });
