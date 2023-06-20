@@ -1,0 +1,11 @@
+MoodleGPT is a Chrome extension that allows you to enhance your Moodle quiz experience. With this extension, you can hide the CHAT-GPT feature and effortlessly solve quiz questions. Simply enter the code provided by the extension and click on the question you want to solve, and CHAT-GPT will automatically provide the answer.
+
+This extension supports various question types, including Select, Put in Order, Resolve Equation, One Response (radio button), Multiple Responses (checkbox), True or False, Number, and Text. It also provides different modes, such as Autocomplete, Clipboard, and Question to Answer, giving you flexibility in how you interact with the answers.
+
+To use MoodleGPT, you need to set it up by loading the unpacked extension in your browser's extension management page. Enter the API key obtained from OpenAI and a unique code to activate the extension on your Moodle page. You can customize the settings, including the GPT model, cursor indication, title indication, and more.
+
+MoodleGPT v1.0.2 simplifies and accelerates the process of completing Moodle quizzes, making it easier for users to obtain accurate answers. Download the extension now and enhance your Moodle quiz experience!
+
+Github: https://github.com/yoannchb-pro/MoodleGPT
+Donation: https://www.buymeacoffee.com/yoannchbpro
+Icon credits: Mortarboard icons created by itim2101 - Flaticon
