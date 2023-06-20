@@ -44,7 +44,8 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 ## Donation
 
-Will be a pleasure if you want to support this project :) -> Just right [here](https://www.buymeacoffee.com/yoannchbpro)
+Will be a pleasure if you want to support this project :)
+<a href="https://www.buymeacoffee.com/yoannchbpro" target="_blank" rel="noopener noreferrer"><img src="./assets/bmc-button.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150"></a>
 
 ## Update
 
