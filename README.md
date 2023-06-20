@@ -68,7 +68,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 
 ## Inject the code into the moodle
 
-You just need to enter on the keyboard the <b>code</b> you have set into the extension and clique on the question you want to solve.
+You just need to enter on the keyboard the <b>code</b> you have set into the extension and click on the question you want to solve.
 
 ## Remove injection
 

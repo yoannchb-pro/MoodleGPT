@@ -3,7 +3,6 @@
 ## Priority: 1
 
 - [ ] Increment question when there is statement
-- [ ] Original answer for text, clipboard and text to answer
 
 ## Priority: 3 (because hard to make)
 
