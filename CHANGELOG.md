@@ -3,6 +3,9 @@
 ## v1.0.3
 
 - Removed the option `table formating` because it will now set to true by default
+- Adjusted the abort timeout to 15seconds
+- If an error occur the user can now click back on the question
+- `Textbox, question to answser mode and clipboard mode` is not formatted anymore
 
 ## v1.0.2
 

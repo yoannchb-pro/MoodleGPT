@@ -1,4 +1,5 @@
 import Config from "../types/config";
+import GPTAnswer from "../types/gptAnswer";
 import normalizeText from "../utils/normalize-text";
 
 /**
@@ -10,7 +11,7 @@ import normalizeText from "../utils/normalize-text";
 async function getChatGPTResponse(
   config: Config,
   question: string
-): Promise<string> {
+): Promise<GPTAnswer> {
   const controller = new AbortController();
   const timeoutControler = setTimeout(() => controller.abort(), 15000);
   const req = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -32,7 +33,10 @@ async function getChatGPTResponse(
   clearTimeout(timeoutControler);
   const rep = await req.json();
   const response = rep.choices[0].message.content;
-  return normalizeText(response);
+  return {
+    response,
+    normalizedResponse: normalizeText(response),
+  };
 }
 
 export default getChatGPTResponse;

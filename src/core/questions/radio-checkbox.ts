@@ -1,4 +1,5 @@
 import Config from "../../types/config";
+import GPTAnswer from "../../types/gptAnswer";
 import Logs from "../../utils/logs";
 import normalizeText from "../../utils/normalize-text";
 
@@ -6,12 +7,12 @@ import normalizeText from "../../utils/normalize-text";
  * Handle checkbox and input elements
  * @param config
  * @param inputList
- * @param response
+ * @param gptAnswer
  */
 function handleRadioAndCheckbox(
   config: Config,
   inputList: NodeListOf<HTMLElement>,
-  response: string
+  gptAnswer: GPTAnswer
 ): boolean {
   const input = inputList?.[0] as HTMLInputElement;
 
@@ -20,7 +21,7 @@ function handleRadioAndCheckbox(
 
   for (const input of inputList as NodeListOf<HTMLInputElement>) {
     const content = normalizeText(input.parentNode.textContent);
-    const valide = response.includes(content);
+    const valide = gptAnswer.normalizedResponse.includes(content);
     if (config.logs) Logs.responseTry(content, valide);
     if (valide) {
       if (config.mouseover) {

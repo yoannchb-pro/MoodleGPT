@@ -99,7 +99,10 @@
           clearTimeout(timeoutControler);
           const rep = yield req.json();
           const response = rep.choices[0].message.content;
-          return normalizeText(response);
+          return {
+              response,
+              normalizedResponse: normalizeText(response),
+          };
       });
   }
 
@@ -155,15 +158,15 @@
    * Handle checkbox and input elements
    * @param config
    * @param inputList
-   * @param response
+   * @param gptAnswer
    */
-  function handleRadioAndCheckbox(config, inputList, response) {
+  function handleRadioAndCheckbox(config, inputList, gptAnswer) {
       const input = inputList === null || inputList === void 0 ? void 0 : inputList[0];
       if (!input || (input.type !== "checkbox" && input.type !== "radio"))
           return false;
       for (const input of inputList) {
           const content = normalizeText(input.parentNode.textContent);
-          const valide = response.includes(content);
+          const valide = gptAnswer.normalizedResponse.includes(content);
           if (config.logs)
               Logs.responseTry(content, valide);
           if (valide) {
@@ -184,15 +187,15 @@
    * Handle select elements (and put in order select)
    * @param config
    * @param inputList
-   * @param response
+   * @param gptAnswer
    * @returns
    */
-  function handleSelect(config, inputList, response) {
+  function handleSelect(config, inputList, gptAnswer) {
       if (inputList.length === 0 || inputList[0].tagName !== "SELECT")
           return false;
-      let correct = response.split("\n");
+      let correct = gptAnswer.normalizedResponse.split("\n");
       if (correct.length === 1 && correct.length !== inputList.length)
-          correct = response.split(",");
+          correct = gptAnswer.normalizedResponse.split(",");
       if (config.logs)
           Logs.array(correct);
       for (let j = 0; j < inputList.length; ++j) {
@@ -248,10 +251,10 @@
    * Handle textbox
    * @param config
    * @param inputList
-   * @param response
+   * @param gptAnswer
    * @returns
    */
-  function handleTextbox(config, inputList, response) {
+  function handleTextbox(config, inputList, gptAnswer) {
       const input = inputList[0];
       if (inputList.length !== 1 ||
           (input.tagName !== "TEXTAREA" && input.type !== "text"))
@@ -260,15 +263,15 @@
           let index = 0;
           input.addEventListener("keydown", function (event) {
               if (event.key === "Backspace")
-                  index = response.length + 1;
-              if (index > response.length)
+                  index = gptAnswer.response.length + 1;
+              if (index > gptAnswer.response.length)
                   return;
               event.preventDefault();
-              input.value = response.slice(0, ++index);
+              input.value = gptAnswer.response.slice(0, ++index);
           });
       }
       else {
-          input.value = response;
+          input.value = gptAnswer.response;
       }
       return true;
   }
@@ -276,30 +279,28 @@
   /**
    * Copy the response in the clipboard if we can automaticaly fill the question
    * @param config
-   * @param inputList
-   * @param response
-   * @param force Force the copy to clipboard
-   * @returns
+   * @param gptAnswer
    */
-  function handleClipboard(config, response) {
+  function handleClipboard(config, gptAnswer) {
       if (config.title)
           titleIndications("Copied to clipboard");
-      navigator.clipboard.writeText(response);
+      navigator.clipboard.writeText(gptAnswer.response);
   }
 
   /**
    * Handle number input
    * @param config
    * @param inputList
-   * @param response
+   * @param gptAnswer
    * @returns
    */
-  function handleNumber(config, inputList, response) {
+  function handleNumber(config, inputList, gptAnswer) {
       var _a, _b;
       const input = inputList[0];
       if (inputList.length !== 1 || input.type !== "number")
           return false;
-      const number = (_b = (_a = response.match(/\d+([,\.]\d+)?/gi)) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.replace(",", ".");
+      const number = (_b = (_a = gptAnswer.normalizedResponse
+          .match(/\d+([,\.]\d+)?/gi)) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.replace(",", ".");
       if (!number)
           return false;
       if (config.typing) {
@@ -321,7 +322,14 @@
       return true;
   }
 
-  function handleContentEditable(config, inputList, response) {
+  /**
+   * Hanlde contenteditable elements
+   * @param config
+   * @param inputList
+   * @param gptAnswer
+   * @returns
+   */
+  function handleContentEditable(config, inputList, gptAnswer) {
       const input = inputList[0];
       if (inputList.length !== 1 ||
           input.getAttribute("contenteditable") !== "true")
@@ -330,11 +338,11 @@
           let index = 0;
           input.addEventListener("keydown", function (event) {
               if (event.key === "Backspace")
-                  index = response.length + 1;
-              if (index > response.length)
+                  index = gptAnswer.response.length + 1;
+              if (index > gptAnswer.response.length)
                   return;
               event.preventDefault();
-              input.textContent = response.slice(0, ++index);
+              input.textContent = gptAnswer.response.slice(0, ++index);
               /* Put the cursor at the end of the typed text */
               input.focus();
               const range = document.createRange();
@@ -346,7 +354,7 @@
           });
       }
       else {
-          input.textContent = response;
+          input.textContent = gptAnswer.response;
       }
       return true;
   }
@@ -365,33 +373,41 @@
               hiddenButton.style.cursor = "wait";
           const question = createQuestion(config, form);
           const inputList = form.querySelectorAll(query);
-          const response = yield getChatGPTResponse(config, question).catch((error) => ({
+          const gptAnswer = yield getChatGPTResponse(config, question).catch((error) => ({
               error,
           }));
-          const haveError = typeof response === "object" && "error" in response;
+          const haveError = typeof gptAnswer === "object" && "error" in gptAnswer;
           if (config.cursor)
               hiddenButton.style.cursor =
                   config.infinite || haveError ? "pointer" : "initial";
           if (haveError) {
-              console.error(response.error);
+              console.error(gptAnswer.error);
               return;
           }
           if (config.logs) {
               Logs.question(question);
-              Logs.response(response);
+              Logs.response("Original: " + gptAnswer.response);
+              Logs.response("Normalized: " + gptAnswer.normalizedResponse);
           }
+          /* Handle clipboard mode */
           if (config.mode === "clipboard") {
-              return handleClipboard(config, response);
+              if (!config.infinite)
+                  removeListener(hiddenButton);
+              return handleClipboard(config, gptAnswer);
           }
+          /* Handle question to answer mode */
           if (config.mode === "question-to-answer") {
+              removeListener(hiddenButton);
               const questionBackup = form.textContent;
               const questionContainer = form.querySelector(".qtext");
-              questionContainer.textContent = response;
+              questionContainer.textContent = gptAnswer.response;
+              questionContainer.style.whiteSpace = "pre-wrap";
               questionContainer.addEventListener("click", function () {
-                  questionContainer.textContent =
-                      questionContainer.textContent === questionBackup
-                          ? response
-                          : questionBackup;
+                  const isNotResponse = questionContainer.textContent === questionBackup;
+                  questionContainer.style.whiteSpace = isNotResponse ? "pre-wrap" : null;
+                  questionContainer.textContent = isNotResponse
+                      ? gptAnswer.response
+                      : questionBackup;
               });
               return;
           }
@@ -403,18 +419,17 @@
               handleRadioAndCheckbox,
           ];
           for (const handler of handlers) {
-              if (handler(config, inputList, response))
+              if (handler(config, inputList, gptAnswer))
                   return;
           }
           /* In the case we can't auto complete the question */
-          handleClipboard(config, response);
+          handleClipboard(config, gptAnswer);
           /* Better then set once on the event because if there is an error the user can click an other time on the question */
           if (!config.infinite)
-              hiddenButton.removeEventListener("click", injectionFunction);
+              removeListener(hiddenButton);
       });
   }
 
-  let injectionFunction = null;
   const pressedKeys = [];
   const listeners = [];
   /**
@@ -460,12 +475,19 @@
           const hiddenButton = form.querySelector(".qtext");
           if (config.cursor)
               hiddenButton.style.cursor = "pointer";
-          injectionFunction = reply.bind(null, config, hiddenButton, form, query);
+          const injectionFunction = reply.bind(null, config, hiddenButton, form, query);
           listeners.push({ element: hiddenButton, fn: injectionFunction });
           hiddenButton.addEventListener("click", injectionFunction);
       }
       if (config.title)
           titleIndications("Injected");
+  }
+  function removeListener(element) {
+      const index = listeners.findIndex((listener) => listener.element === element);
+      if (index !== -1) {
+          const listener = listeners.splice(index, 1)[0];
+          listener.element.removeEventListener("click", listener.fn);
+      }
   }
 
   chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {

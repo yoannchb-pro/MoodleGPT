@@ -1,22 +1,25 @@
 import Config from "../../types/config";
+import GPTAnswer from "../../types/gptAnswer";
 
 /**
  * Handle number input
  * @param config
  * @param inputList
- * @param response
+ * @param gptAnswer
  * @returns
  */
 function handleNumber(
   config: Config,
   inputList: NodeListOf<HTMLElement>,
-  response: string
+  gptAnswer: GPTAnswer
 ): boolean {
   const input = inputList[0] as HTMLInputElement | HTMLTextAreaElement;
 
   if (inputList.length !== 1 || input.type !== "number") return false;
 
-  const number = response.match(/\d+([,\.]\d+)?/gi)?.[0]?.replace(",", ".");
+  const number = gptAnswer.normalizedResponse
+    .match(/\d+([,\.]\d+)?/gi)?.[0]
+    ?.replace(",", ".");
 
   if (!number) return false;
 

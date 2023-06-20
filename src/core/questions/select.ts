@@ -1,4 +1,5 @@
 import Config from "../../types/config";
+import GPTAnswer from "../../types/gptAnswer";
 import Logs from "../../utils/logs";
 import normalizeText from "../../utils/normalize-text";
 
@@ -6,19 +7,19 @@ import normalizeText from "../../utils/normalize-text";
  * Handle select elements (and put in order select)
  * @param config
  * @param inputList
- * @param response
+ * @param gptAnswer
  * @returns
  */
 function handleSelect(
   config: Config,
   inputList: NodeListOf<HTMLElement>,
-  response: string
+  gptAnswer: GPTAnswer
 ): boolean {
   if (inputList.length === 0 || inputList[0].tagName !== "SELECT") return false;
 
-  let correct = response.split("\n");
+  let correct = gptAnswer.normalizedResponse.split("\n");
   if (correct.length === 1 && correct.length !== inputList.length)
-    correct = response.split(",");
+    correct = gptAnswer.normalizedResponse.split(",");
 
   if (config.logs) Logs.array(correct);
 
