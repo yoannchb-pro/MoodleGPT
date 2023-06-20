@@ -49,19 +49,20 @@ function handleSelect(
 
       /* Handle put in order question */
       if (!/[^\d]+/gi.test(content)) {
+        console.log("Checking put in order...");
         const content = normalizeText(
           (option.parentNode as HTMLElement)
             .closest("tr")
             .querySelector(".text").textContent
         );
-        const index = correct.findIndex((c) => {
-          const valide = c.includes(content);
+        const index = correct.findIndex((answer) => {
+          const valide = answer.includes(content);
           if (config.logs) Logs.responseTry(content, valide);
           return valide;
         });
         if (index !== -1) {
           if (config.mouseover) {
-            options[index + 1].closest("select").addEventListener(
+            options[index].closest("select").addEventListener(
               "click",
               function () {
                 options[index + 1].selected = "selected" as any;
