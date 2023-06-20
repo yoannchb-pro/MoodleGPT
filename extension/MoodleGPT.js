@@ -50,8 +50,9 @@
       static array(arr) {
           console.log("[CORRECTS] ", arr);
       }
-      static response(text) {
-          console.log(text);
+      static response(gptAnswer) {
+          console.log("Original:\n" + gptAnswer.response);
+          console.log("Normalized:\n" + gptAnswer.normalizedResponse);
       }
   }
 
@@ -386,8 +387,7 @@
           }
           if (config.logs) {
               Logs.question(question);
-              Logs.response("Original: " + gptAnswer.response);
-              Logs.response("Normalized: " + gptAnswer.normalizedResponse);
+              Logs.response(gptAnswer);
           }
           /* Handle clipboard mode */
           if (config.mode === "clipboard") {

@@ -1,3 +1,4 @@
+import GPTAnswer from "../types/gptAnswer";
 class Logs {
   static question(text: string) {
     const css = "color: cyan";
@@ -13,8 +14,9 @@ class Logs {
     console.log("[CORRECTS] ", arr);
   }
 
-  static response(text: string) {
-    console.log(text);
+  static response(gptAnswer: GPTAnswer) {
+    console.log("Original:\n" + gptAnswer.response);
+    console.log("Normalized:\n" + gptAnswer.normalizedResponse);
   }
 }
 

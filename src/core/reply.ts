@@ -48,8 +48,7 @@ async function reply(
 
   if (config.logs) {
     Logs.question(question);
-    Logs.response("Original: " + gptAnswer.response);
-    Logs.response("Normalized: " + gptAnswer.normalizedResponse);
+    Logs.response(gptAnswer);
   }
 
   /* Handle clipboard mode */
