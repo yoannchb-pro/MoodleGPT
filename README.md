@@ -16,7 +16,7 @@ I'm actually waiting for a review of my extension. It should be available in som
   - [Chrome Webstore](#chrome-webstore)
   - [Summary](#summary)
   - [Disclaimer !](#disclaimer-)
-  - [Donation](#donation)
+  - [Donate](#donate)
   - [Update](#update)
   - [MoodleGPT don't complete my quiz ?](#moodlegpt-dont-complete-my-quiz-)
   - [Set up](#set-up)
@@ -42,7 +42,7 @@ I'm actually waiting for a review of my extension. It should be available in som
 
 I hereby declare that I am not responsible for any misuse or illegal activities carried out using my program. The code is provided for educational and research purposes only, and any use of it outside of these purposes is at the user's own risk.
 
-## Donation
+## Donate
 
 Will be a pleasure if you want to support this project :)
 <br/>
