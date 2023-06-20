@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.3
+
+- Removed the option `table formating` because it will now set to true by default
+
 ## v1.0.2
 
 - Added `mode`

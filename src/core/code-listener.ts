@@ -29,7 +29,7 @@ function codeListener(config: Config) {
  * @returns
  */
 function setUpMoodleGpt(config: Config) {
-  //removing events
+  /* Removing events */
   if (listeners.length > 0) {
     for (const listener of listeners) {
       if (config.cursor) listener.element.style.cursor = "initial";
@@ -40,7 +40,7 @@ function setUpMoodleGpt(config: Config) {
     return;
   }
 
-  //injection
+  /* Code injection */
   const inputQuery = ["checkbox", "radio", "text", "number"]
     .map((e) => `input[type="${e}"]`)
     .join(",");

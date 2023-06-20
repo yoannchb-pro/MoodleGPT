@@ -61,7 +61,8 @@
    */
   function normalizeText(text) {
       return text
-          .replace(/(\n\s*)+/gi, "\n")
+          .replace(/\n+/gi, "\n")
+          .replace(/(\n\s*\n)+/g, "\n") //remove useless white sapce from textcontent
           .replace(/[ \t]+/gi, " ")
           .toLowerCase()
           .trim()
@@ -124,8 +125,7 @@
       const lineSeparationSize = maxColumnsLength.reduce((a, b) => a + b) + tab[0].length * 3 + 1;
       const lineSeparation = "\n" + Array(lineSeparationSize).fill("-").join("") + "\n";
       const mappedTab = tab.map((line) => {
-          const mappedLine = line.map((content, index) => content.padEnd(maxColumnsLength[index], "\u00A0") //for no matching with \s
-          );
+          const mappedLine = line.map((content, index) => content.padEnd(maxColumnsLength[index], "\u00A0" /* For no matching with \s */));
           return "| " + mappedLine.join(" | ") + " |";
       });
       const head = mappedTab.shift();
@@ -138,14 +138,12 @@
    * @param question
    * @returns
    */
-  function normalizeQuestion(config, questionContainer) {
-      let question = questionContainer.textContent;
-      if (config.table) {
-          //make table more readable for chat-gpt
-          const tables = questionContainer.querySelectorAll(".qtext table");
-          for (const table of tables) {
-              question = question.replace(table.textContent, "\n" + htmlTableToString(table) + "\n");
-          }
+  function createQuestion(config, questionContainer) {
+      let question = questionContainer.innerText;
+      /* Make tables more readable for chat-gpt */
+      const tables = questionContainer.querySelectorAll(".qtext table");
+      for (const table of tables) {
+          question = question.replace(table.innerText, "\n" + htmlTableToString(table) + "\n");
       }
       const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result: 
       ${question} 
@@ -202,7 +200,7 @@
           for (const option of options) {
               const content = normalizeText(option.textContent);
               const valide = correct[j].includes(content);
-              //if it's a put in order
+              /* Handle put in order question */
               if (!isNaN(parseInt(content))) {
                   const content = normalizeText(option.parentNode
                       .closest("tr")
@@ -225,7 +223,7 @@
                       break;
                   }
               }
-              //end put in order
+              /* End */
               if (config.logs)
                   Logs.responseTry(content, valide);
               if (valide) {
@@ -337,7 +335,7 @@
                   return;
               event.preventDefault();
               input.textContent = response.slice(0, ++index);
-              //put the cursor at the end
+              /* Put the cursor at the end of the typed text */
               input.focus();
               const range = document.createRange();
               range.selectNodeContents(input);
@@ -362,12 +360,10 @@
    * @returns
    */
   function reply(config, hiddenButton, form, query) {
-      var _a;
       return __awaiter(this, void 0, void 0, function* () {
           if (config.cursor)
               hiddenButton.style.cursor = "wait";
-          (_a = form.querySelector(".accesshide")) === null || _a === void 0 ? void 0 : _a.remove();
-          const question = normalizeQuestion(config, form);
+          const question = createQuestion(config, form);
           const inputList = form.querySelectorAll(query);
           const response = yield getChatGPTResponse(config, question).catch((error) => ({
               error,
@@ -436,7 +432,7 @@
    * @returns
    */
   function setUpMoodleGpt(config) {
-      //removing events
+      /* Removing events */
       if (listeners.length > 0) {
           for (const listener of listeners) {
               if (config.cursor)
@@ -448,7 +444,7 @@
           listeners.length = 0;
           return;
       }
-      //injection
+      /* Code injection */
       const inputQuery = ["checkbox", "radio", "text", "number"]
           .map((e) => `input[type="${e}"]`)
           .join(",");

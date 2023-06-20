@@ -8,7 +8,6 @@ type Config = {
   cursor?: boolean;
   logs?: boolean;
   title?: boolean;
-  table?: boolean;
   timeout?: boolean;
   mode?: "autocomplete" | "question-to-answer" | "clipboard";
 };

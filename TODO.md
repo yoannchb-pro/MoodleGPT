@@ -4,6 +4,7 @@
 
 - [ ] Fixe `normalizeText` (line break are sometimes removed for nothing e.g: checkbox)
 - [ ] Support math equation from image stocked in the `data-mathml` attribute
+- [ ] Increment question when there is statement
 
 ## Priority: 3 (because hard to make)
 

@@ -1,7 +1,7 @@
 import Config from "../types/config";
 import Logs from "../utils/logs";
 import getChatGPTResponse from "./get-response";
-import normalizeQuestion from "./normalize-question";
+import createQuestion from "./create-question";
 import handleRadioAndCheckbox from "./questions/radio-checkbox";
 import handleSelect from "./questions/select";
 import handleTextbox from "./questions/textbox";
@@ -25,9 +25,7 @@ async function reply(
 ) {
   if (config.cursor) hiddenButton.style.cursor = "wait";
 
-  form.querySelector(".accesshide")?.remove();
-
-  const question = normalizeQuestion(config, form);
+  const question = createQuestion(config, form);
   const inputList: NodeListOf<HTMLElement> = form.querySelectorAll(query);
 
   const response = await getChatGPTResponse(config, question).catch(

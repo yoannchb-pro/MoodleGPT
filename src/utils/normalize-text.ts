@@ -4,7 +4,8 @@
  */
 function normalizeText(text: string) {
   return text
-    .replace(/(\n\s*)+/gi, "\n")
+    .replace(/\n+/gi, "\n")
+    .replace(/(\n\s*\n)+/g, "\n") //remove useless white sapce from textcontent
     .replace(/[ \t]+/gi, " ")
     .toLowerCase()
     .trim()

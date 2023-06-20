@@ -21,7 +21,7 @@ function handleContentEditable(
       event.preventDefault();
       input.textContent = response.slice(0, ++index);
 
-      //put the cursor at the end
+      /* Put the cursor at the end of the typed text */
       input.focus();
       const range = document.createRange();
       range.selectNodeContents(input);

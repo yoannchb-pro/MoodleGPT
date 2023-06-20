@@ -29,7 +29,7 @@ function handleSelect(
       const content = normalizeText(option.textContent);
       const valide = correct[j].includes(content);
 
-      //if it's a put in order
+      /* Handle put in order question */
       if (!isNaN(parseInt(content))) {
         const content = normalizeText(
           (option.parentNode as HTMLElement)
@@ -56,7 +56,7 @@ function handleSelect(
           break;
         }
       }
-      //end put in order
+      /* End */
 
       if (config.logs) Logs.responseTry(content, valide);
 

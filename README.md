@@ -2,7 +2,7 @@
 href="https://www.flaticon.com/free-icons/mortarboard" target="_blank" rel="noopener noreferrer"
 title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/icon.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150" style="display:block; margin:auto;"></a></p>
 
-# MoodleGPT v1.0.2
+# MoodleGPT v1.0.3
 
 This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
@@ -12,7 +12,7 @@ I'm actually waiting for a review of my extension. It should be available in som
 
 ## Summary
 
-- [MoodleGPT v1.0.2](#moodlegpt-v102)
+- [MoodleGPT v1.0.3](#moodlegpt-v103)
   - [Chrome Webstore](#chrome-webstore)
   - [Summary](#summary)
   - [Disclaimer !](#disclaimer-)
@@ -24,6 +24,8 @@ I'm actually waiting for a review of my extension. It should be available in som
   - [Remove injection](#remove-injection)
   - [Mode](#mode)
   - [Settings](#settings)
+  - [Internal Features](#internal-features)
+    - [Support table](#support-table)
   - [Supported questions type](#supported-questions-type)
     - [Select](#select)
     - [Put in order question](#put-in-order-question)
@@ -101,7 +103,14 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
-- <b>Table formatting</b>: format table from the question to make it more readable for CHAT-GPT but cost more tokens (so if the question is too large it will make an error). Example of formatted table:
+
+- <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
+
+## Internal Features
+
+### Support table
+
+Table are formated from the question to make it more readable for CHAT-GPT. Example of formatted table output:
 
 ```
 | id       | name  | birthDate  | cars |
@@ -109,8 +118,6 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 | Person 1 | Yvick | 15/08/1999 | yes  |
 | Person 2 | Yann  | 19/01/2000 | no   |
 ```
-
-- <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 
 ## Supported questions type
 
@@ -154,4 +161,4 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 ## Test
 
-To test the code, you can run the index.html file located in the <b>"test"</b> folder. Or a better solution is to install moodle locally.
+To test the code, you can run the index.html file located in the <b>"test/fake-moodle"</b> folder. Or a better solution is to install moodle locally.
