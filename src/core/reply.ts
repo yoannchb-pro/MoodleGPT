@@ -78,6 +78,9 @@ async function reply(
     return;
   }
 
+  /* Better then set once on the event because if there is an error the user can click an other time on the question */
+  if (!config.infinite) removeListener(hiddenButton);
+
   const handlers = [
     handleContentEditable,
     handleTextbox,
@@ -92,9 +95,6 @@ async function reply(
 
   /* In the case we can't auto complete the question */
   handleClipboard(config, gptAnswer);
-
-  /* Better then set once on the event because if there is an error the user can click an other time on the question */
-  if (!config.infinite) removeListener(hiddenButton);
 }
 
 export default reply;
