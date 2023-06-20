@@ -2,6 +2,9 @@
 
 ## Priority: 1
 
+- [ ] Fixe put in order
+- [ ] Make some tests
+
 ## Priority: 2
 
 ## Priority: 3 (because hard to make)
