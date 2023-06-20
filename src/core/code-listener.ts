@@ -2,6 +2,7 @@ import Config from "../types/config";
 import titleIndications from "../utils/title-indications";
 import reply from "./reply";
 
+let injectionFunction: (this: HTMLElement, ev: MouseEvent) => any = null;
 const pressedKeys: string[] = [];
 const listeners: {
   element: HTMLElement;
@@ -52,12 +53,12 @@ function setUpMoodleGpt(config: Config) {
 
     if (config.cursor) hiddenButton.style.cursor = "pointer";
 
-    const fn = reply.bind(null, config, hiddenButton, form, query);
-    listeners.push({ element: hiddenButton, fn });
-    hiddenButton.addEventListener("click", fn, { once: !config.infinite });
+    injectionFunction = reply.bind(null, config, hiddenButton, form, query);
+    listeners.push({ element: hiddenButton, fn: injectionFunction });
+    hiddenButton.addEventListener("click", injectionFunction);
   }
 
   if (config.title) titleIndications("Injected");
 }
 
-export default codeListener;
+export { injectionFunction, codeListener };

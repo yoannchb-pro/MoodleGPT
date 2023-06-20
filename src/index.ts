@@ -1,4 +1,4 @@
-import codeListener from "./core/code-listener";
+import { codeListener } from "./core/code-listener";
 
 chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
   const config = storage.moodleGPT;

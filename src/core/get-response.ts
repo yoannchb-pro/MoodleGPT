@@ -12,7 +12,7 @@ async function getChatGPTResponse(
   question: string
 ): Promise<string> {
   const controller = new AbortController();
-  const timeoutControler = setTimeout(() => controller.abort(), 10000);
+  const timeoutControler = setTimeout(() => controller.abort(), 15000);
   const req = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {

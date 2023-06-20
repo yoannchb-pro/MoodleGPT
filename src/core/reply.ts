@@ -8,6 +8,7 @@ import handleTextbox from "./questions/textbox";
 import handleClipboard from "./questions/clipboard";
 import handleNumber from "./questions/number";
 import handleContentEditable from "./questions/contenteditable";
+import { injectionFunction } from "./code-listener";
 
 /**
  * Reply to the question
@@ -33,18 +34,14 @@ async function reply(
       error,
     })
   );
+
   const haveError = typeof response === "object" && "error" in response;
-  const isAbortError = haveError && response.error.name === "AbortError";
 
   if (config.cursor)
     hiddenButton.style.cursor =
-      config.infinite || isAbortError ? "pointer" : "initial";
+      config.infinite || haveError ? "pointer" : "initial";
 
   if (haveError) {
-    if (isAbortError) {
-      //TODO: We need to inject back the event
-    }
-
     console.error(response.error);
     return;
   }
@@ -83,8 +80,12 @@ async function reply(
     if (handler(config, inputList, response)) return;
   }
 
-  /** In the case we can't auto complete the question */
+  /* In the case we can't auto complete the question */
   handleClipboard(config, response);
+
+  /* Better then set once on the event because if there is an error the user can click an other time on the question */
+  if (!config.infinite)
+    hiddenButton.removeEventListener("click", injectionFunction);
 }
 
 export default reply;

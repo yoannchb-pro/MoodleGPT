@@ -79,7 +79,7 @@
   function getChatGPTResponse(config, question) {
       return __awaiter(this, void 0, void 0, function* () {
           const controller = new AbortController();
-          const timeoutControler = setTimeout(() => controller.abort(), 10000);
+          const timeoutControler = setTimeout(() => controller.abort(), 15000);
           const req = yield fetch("https://api.openai.com/v1/chat/completions", {
               method: "POST",
               headers: {
@@ -139,7 +139,7 @@
    * @returns
    */
   function createQuestion(config, questionContainer) {
-      let question = questionContainer.innerText;
+      let question = questionContainer.innerText; //TODO: textContent better for reply ??
       /* Make tables more readable for chat-gpt */
       const tables = questionContainer.querySelectorAll(".qtext table");
       for (const table of tables) {
@@ -369,10 +369,9 @@
               error,
           }));
           const haveError = typeof response === "object" && "error" in response;
-          const isAbortError = haveError && response.error.name === "AbortError";
           if (config.cursor)
               hiddenButton.style.cursor =
-                  config.infinite || isAbortError ? "pointer" : "initial";
+                  config.infinite || haveError ? "pointer" : "initial";
           if (haveError) {
               console.error(response.error);
               return;
@@ -407,11 +406,15 @@
               if (handler(config, inputList, response))
                   return;
           }
-          /** In the case we can't auto complete the question */
+          /* In the case we can't auto complete the question */
           handleClipboard(config, response);
+          /* Better then set once on the event because if there is an error the user can click an other time on the question */
+          if (!config.infinite)
+              hiddenButton.removeEventListener("click", injectionFunction);
       });
   }
 
+  let injectionFunction = null;
   const pressedKeys = [];
   const listeners = [];
   /**
@@ -457,9 +460,9 @@
           const hiddenButton = form.querySelector(".qtext");
           if (config.cursor)
               hiddenButton.style.cursor = "pointer";
-          const fn = reply.bind(null, config, hiddenButton, form, query);
-          listeners.push({ element: hiddenButton, fn });
-          hiddenButton.addEventListener("click", fn, { once: !config.infinite });
+          injectionFunction = reply.bind(null, config, hiddenButton, form, query);
+          listeners.push({ element: hiddenButton, fn: injectionFunction });
+          hiddenButton.addEventListener("click", injectionFunction);
       }
       if (config.title)
           titleIndications("Injected");
