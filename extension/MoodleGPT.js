@@ -60,15 +60,19 @@
    * Normlize text
    * @param text
    */
-  function normalizeText(text) {
-      return text
-          .replace(/\n+/gi, "\n")
+  function normalizeText(text, toLowerCase = true) {
+      let normalizedText = text
+          .replace(/\n+/gi, "\n") //remove duplicate new lines
           .replace(/(\n\s*\n)+/g, "\n") //remove useless white sapce from textcontent
-          .replace(/[ \t]+/gi, " ")
-          .toLowerCase()
+          .replace(/[ \t]+/gi, " "); //replace multiples space or tabs by a space
+      if (toLowerCase)
+          normalizedText = normalizedText.toLowerCase();
+      return (normalizedText
           .trim()
+          /* We remove that because sometimes ChatGPT will reply: "answer d" */
           .replace(/^[a-z\d]\.\s/gi, "") //a. text, b. text, c. text, 1. text, 2. text, 3.text
-          .replace(/\n[a-z\d]\.\s/gi, "\n"); //same but with new line
+          .replace(/\n[a-z\d]\.\s/gi, "\n") //same but with new line
+      );
   }
 
   /**
@@ -90,7 +94,23 @@
               signal: config.timeout ? controller.signal : null,
               body: JSON.stringify({
                   model: config.model,
-                  messages: [{ role: "user", content: question }],
+                  messages: [
+                      {
+                          role: "system",
+                          content: `
+Follow those rules:
+- Sometimes there won't be a question, so just answer the statement as you normally would without following the other rules and give the most detailled and complete answer with explication.
+- Your goal is to understand the statement and to reply to each question by giving only the answer.
+- You will keep the same order for the answers as the questions event if it's a put in order question.
+- You will separate all the answer with new lines and only show the correctes one.
+- You should answer in the same order as it is ine the question even if it's a put in order question.
+- You will omit the question or any other text/information we just want the correct answer.
+- You should only give exactly the same text as the question for each answer.
+- The question always have the good answer so you should always give an answer to the question.
+- You will always respond in the same langage as the user question.`,
+                      },
+                      { role: "user", content: question },
+                  ],
                   temperature: 0.8,
                   top_p: 1.0,
                   presence_penalty: 1.0,
@@ -143,16 +163,18 @@
    * @returns
    */
   function createQuestion(config, questionContainer) {
-      let question = questionContainer.innerText; //TODO: textContent better for reply ??
+      let question = questionContainer.innerText;
+      /* We remove unnecessary information */
+      const accesshideElements = questionContainer.querySelectorAll(".accesshide");
+      for (const useless of accesshideElements) {
+          question = question.replace(useless.innerText, "");
+      }
       /* Make tables more readable for chat-gpt */
       const tables = questionContainer.querySelectorAll(".qtext table");
       for (const table of tables) {
           question = question.replace(table.innerText, "\n" + htmlTableToString(table) + "\n");
       }
-      const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result:
-      ${question} 
-      (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
-      return normalizeText(finalQuestion);
+      return normalizeText(question, false);
   }
 
   /**
@@ -195,10 +217,26 @@
       if (inputList.length === 0 || inputList[0].tagName !== "SELECT")
           return false;
       let correct = gptAnswer.normalizedResponse.split("\n");
-      if (correct.length === 1 && correct.length !== inputList.length)
-          correct = gptAnswer.normalizedResponse.split(",");
       if (config.logs)
           Logs.array(correct);
+      /**
+       * Sometimes ChatGPT give the question so we should remove them
+       * Example:
+       * 5*5
+       * 25
+       * 10+10
+       * 20
+       * 20-10
+       * 10
+       *
+       * And we only want to keep answers
+       * 25
+       * 20
+       * 10
+       */
+      if (correct.length === inputList.length * 2) {
+          correct = correct.filter((answer, index) => index % 2 === 1);
+      }
       for (let j = 0; j < inputList.length; ++j) {
           const options = inputList[j].querySelectorAll("option");
           for (const option of options) {

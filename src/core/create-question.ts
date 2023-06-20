@@ -9,7 +9,14 @@ import htmlTableToString from "../utils/html-table-to-string";
  * @returns
  */
 function createQuestion(config: Config, questionContainer: HTMLElement) {
-  let question = questionContainer.innerText; //TODO: textContent better for reply ??
+  let question = questionContainer.innerText;
+
+  /* We remove unnecessary information */
+  const accesshideElements: NodeListOf<HTMLElement> =
+    questionContainer.querySelectorAll(".accesshide");
+  for (const useless of accesshideElements) {
+    question = question.replace(useless.innerText, "");
+  }
 
   /* Make tables more readable for chat-gpt */
   const tables: NodeListOf<HTMLTableElement> =
@@ -21,10 +28,7 @@ function createQuestion(config: Config, questionContainer: HTMLElement) {
     );
   }
 
-  const finalQuestion = `Give a short response as possible for this question, reply in the following question langage and only show the result:
-      ${question} 
-      (If you have to choose between multiple results only show the corrects one, separate them with new line and take the same text as the question)`;
-  return normalizeText(finalQuestion);
+  return normalizeText(question, false);
 }
 
 export default createQuestion;

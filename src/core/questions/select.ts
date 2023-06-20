@@ -18,10 +18,27 @@ function handleSelect(
   if (inputList.length === 0 || inputList[0].tagName !== "SELECT") return false;
 
   let correct = gptAnswer.normalizedResponse.split("\n");
-  if (correct.length === 1 && correct.length !== inputList.length)
-    correct = gptAnswer.normalizedResponse.split(",");
 
   if (config.logs) Logs.array(correct);
+
+  /**
+   * Sometimes ChatGPT give the question so we should remove them
+   * Example:
+   * 5*5
+   * 25
+   * 10+10
+   * 20
+   * 20-10
+   * 10
+   *
+   * And we only want to keep answers
+   * 25
+   * 20
+   * 10
+   */
+  if (correct.length === inputList.length * 2) {
+    correct = correct.filter((answer, index) => index % 2 === 1);
+  }
 
   for (let j = 0; j < inputList.length; ++j) {
     const options = inputList[j].querySelectorAll("option");
