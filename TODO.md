@@ -4,6 +4,8 @@
 
 - [ ] Increment question when there is statement
 
+## Priority: 2
+
 ## Priority: 3 (because hard to make)
 
 - [ ] Support math equation from image stocked in the `data-mathml` attribute
