@@ -482,6 +482,10 @@
       if (config.title)
           titleIndications("Injected");
   }
+  /**
+   * Remove the event listener on a specific question
+   * @param element
+   */
   function removeListener(element) {
       const index = listeners.findIndex((listener) => listener.element === element);
       if (index !== -1) {
