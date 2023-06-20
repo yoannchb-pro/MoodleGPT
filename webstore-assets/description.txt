@@ -4,7 +4,7 @@ This extension supports various question types, including Select, Put in Order, 
 
 To use MoodleGPT, you need to set it up by loading the unpacked extension in your browser's extension management page. Enter the API key obtained from OpenAI and a unique code to activate the extension on your Moodle page. You can customize the settings, including the GPT model, cursor indication, title indication, and more.
 
-MoodleGPT v1.0.2 simplifies and accelerates the process of completing Moodle quizzes, making it easier for users to obtain accurate answers. Download the extension now and enhance your Moodle quiz experience!
+MoodleGPT simplifies and accelerates the process of completing Moodle quizzes, making it easier for users to obtain accurate answers. Download the extension now and enhance your Moodle quiz experience!
 
 Github: https://github.com/yoannchb-pro/MoodleGPT
 Donation: https://www.buymeacoffee.com/yoannchbpro
