@@ -37,12 +37,6 @@ main {
 
 img {
   width: 5rem;
-  margin-top: 0.75rem;
-}
-
-.title {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
 }
 
 a {
@@ -79,7 +73,6 @@ a {
 
 .line input[type="checkbox"] {
   accent-color: var(--btn-color);
-  margin-right: 0.3rem;
 }
 
 .col {
