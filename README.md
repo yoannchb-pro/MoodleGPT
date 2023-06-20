@@ -99,7 +99,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
   <br/> ![Injected](./assets/title-injected.png)
 - <b>Console logs</b>: show logs into the console.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
-- <b>Request timeout</b>: if the request is too long it will be abort after 10seconds.
+- <b>Request timeout</b>: if the request is too long it will be abort after 15seconds.
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
   <br/> ![Typing](./assets/typing.gif)
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
