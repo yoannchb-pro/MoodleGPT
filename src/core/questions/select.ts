@@ -49,28 +49,29 @@ function handleSelect(
 
       /* Handle put in order question */
       if (!/[^\d]+/gi.test(content)) {
-        console.log("Checking put in order...");
-        const content = normalizeText(
-          (option.parentNode as HTMLElement)
-            .closest("tr")
-            .querySelector(".text").textContent
-        );
-        const index = correct.findIndex((answer) => {
+        const elementTitle = (option.parentNode as HTMLElement)
+          .closest("tr")
+          .querySelector(".text");
+        const content = normalizeText(elementTitle.textContent);
+
+        const indexCorrectAnswer = correct.findIndex((answer) => {
           const valide = answer.includes(content);
           if (config.logs) Logs.responseTry(content, valide);
           return valide;
         });
-        if (index !== -1) {
+
+        if (indexCorrectAnswer !== -1) {
+          //we do + 1 because we skip the first option: Choose...
           if (config.mouseover) {
-            options[index].closest("select").addEventListener(
+            options[indexCorrectAnswer + 1].closest("select").addEventListener(
               "click",
               function () {
-                options[index + 1].selected = "selected" as any;
+                options[indexCorrectAnswer + 1].selected = "selected" as any;
               },
               { once: true }
             );
           } else {
-            options[index + 1].selected = "selected" as any;
+            options[indexCorrectAnswer + 1].selected = "selected" as any;
           }
           break;
         }

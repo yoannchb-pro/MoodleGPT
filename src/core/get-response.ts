@@ -29,10 +29,11 @@ async function getChatGPTResponse(
           content: `
 Follow those rules:
 - Sometimes there won't be a question, so just answer the statement as you normally would without following the other rules and give the most detailled and complete answer with explication.
+- For put in order question just give the good order separate by new line
 - Your goal is to understand the statement and to reply to each question by giving only the answer.
-- You will keep the same order for the answers as it's asked event if it's a put in order question. Never change the order of the response for each questions.
+- You will keep the same order for the answers like in the text. 
 - You will separate all the answer with new lines and only show the correctes one.
-- You will onyl give the answers for each question and omit the questions, statement, title or other informations from the response.
+- You will only give the answers for each question and omit the questions, statement, title or other informations from the response.
 - You will only give answer with exactly the same text as the gived answers.
 - The question always have the good answer so you should always give an answer to the question.
 - You will always respond in the same langage as the user question.`,
