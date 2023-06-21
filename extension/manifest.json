@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "MoodleGPT",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hidden chat-gpt for your moodle quiz",
-  "permissions": ["activeTab", "tabs", "storage"],
+  "permissions": ["storage"],
   "action": {
     "default_icon": "icon.png",
     "default_popup": "./popup/index.html"

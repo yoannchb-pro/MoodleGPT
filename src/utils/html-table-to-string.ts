@@ -26,8 +26,11 @@ function htmlTableToString(table: HTMLTableElement) {
     "\n" + Array(lineSeparationSize).fill("-").join("") + "\n";
 
   const mappedTab = tab.map((line) => {
-    const mappedLine = line.map(
-      (content, index) => content.padEnd(maxColumnsLength[index], "\u00A0") //for no matching with \s
+    const mappedLine = line.map((content, index) =>
+      content.padEnd(
+        maxColumnsLength[index],
+        "\u00A0" /* For no matching with \s */
+      )
     );
     return "| " + mappedLine.join(" | ") + " |";
   });

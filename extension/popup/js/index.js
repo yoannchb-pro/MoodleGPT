@@ -10,7 +10,6 @@ const inputsCheckbox = [
   "typing",
   "mouseover",
   "infinite",
-  "table",
   "timeout",
 ];
 
@@ -73,7 +72,7 @@ saveBtn.addEventListener("click", function () {
   const [apiKey, code, model] = inputsText.map((selector) =>
     document.querySelector("#" + selector).value.trim()
   );
-  const [logs, title, cursor, typing, mouseover, infinite, table, timeout] =
+  const [logs, title, cursor, typing, mouseover, infinite, timeout] =
     inputsCheckbox.map((selector) => {
       const element = document.querySelector("#" + selector);
       return element.checked && element.parentElement.style.display !== "none";
@@ -100,7 +99,6 @@ saveBtn.addEventListener("click", function () {
       typing,
       mouseover,
       infinite,
-      table,
       timeout,
       mode: actualMode,
     },

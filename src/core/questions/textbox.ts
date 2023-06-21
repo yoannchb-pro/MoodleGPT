@@ -1,16 +1,17 @@
 import Config from "../../types/config";
+import GPTAnswer from "../../types/gptAnswer";
 
 /**
  * Handle textbox
  * @param config
  * @param inputList
- * @param response
+ * @param gptAnswer
  * @returns
  */
 function handleTextbox(
   config: Config,
   inputList: NodeListOf<HTMLElement>,
-  response: string
+  gptAnswer: GPTAnswer
 ): boolean {
   const input = inputList[0] as HTMLInputElement | HTMLTextAreaElement;
 
@@ -23,13 +24,13 @@ function handleTextbox(
   if (config.typing) {
     let index = 0;
     input.addEventListener("keydown", function (event: KeyboardEvent) {
-      if (event.key === "Backspace") index = response.length + 1;
-      if (index > response.length) return;
+      if (event.key === "Backspace") index = gptAnswer.response.length + 1;
+      if (index > gptAnswer.response.length) return;
       event.preventDefault();
-      input.value = response.slice(0, ++index);
+      input.value = gptAnswer.response.slice(0, ++index);
     });
   } else {
-    input.value = response;
+    input.value = gptAnswer.response;
   }
 
   return true;

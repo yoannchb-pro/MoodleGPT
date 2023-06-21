@@ -29,7 +29,7 @@ function codeListener(config: Config) {
  * @returns
  */
 function setUpMoodleGpt(config: Config) {
-  //removing events
+  /* Removing events */
   if (listeners.length > 0) {
     for (const listener of listeners) {
       if (config.cursor) listener.element.style.cursor = "initial";
@@ -40,23 +40,42 @@ function setUpMoodleGpt(config: Config) {
     return;
   }
 
-  //injection
+  /* Code injection */
   const inputQuery = ["checkbox", "radio", "text", "number"]
     .map((e) => `input[type="${e}"]`)
     .join(",");
   const query = inputQuery + ", textarea, select, [contenteditable]";
-  const forms = Array.from(document.querySelectorAll(".formulation"));
+  const forms = document.querySelectorAll(".formulation");
 
   for (const form of forms) {
     const hiddenButton: HTMLElement = form.querySelector(".qtext");
 
     if (config.cursor) hiddenButton.style.cursor = "pointer";
-    const fn = reply.bind(null, config, hiddenButton, form, query);
-    listeners.push({ element: hiddenButton, fn });
-    hiddenButton.addEventListener("click", fn, { once: !config.infinite });
+
+    const injectionFunction = reply.bind(
+      null,
+      config,
+      hiddenButton,
+      form,
+      query
+    );
+    listeners.push({ element: hiddenButton, fn: injectionFunction });
+    hiddenButton.addEventListener("click", injectionFunction);
   }
 
   if (config.title) titleIndications("Injected");
 }
 
-export default codeListener;
+/**
+ * Remove the event listener on a specific question
+ * @param element
+ */
+function removeListener(element: HTMLElement) {
+  const index = listeners.findIndex((listener) => listener.element === element);
+  if (index !== -1) {
+    const listener = listeners.splice(index, 1)[0];
+    listener.element.removeEventListener("click", listener.fn);
+  }
+}
+
+export { codeListener, removeListener };

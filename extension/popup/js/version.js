@@ -1,4 +1,4 @@
-const currentVersion = "1.0.2";
+const currentVersion = "1.0.3";
 const versionDisplay = document.querySelector("#version");
 
 /**
@@ -42,11 +42,20 @@ async function notifyUpdate() {
     console.error(err);
     return currentVersion;
   });
-  if (currentVersion !== lastVersion) {
-    setVersion(lastVersion, false);
-  } else {
-    setVersion(currentVersion);
+
+  const lastVertionSplitted = lastVersion.split(".");
+  const currentVersionSplitted = currentVersion.split(".");
+  const minVersionLength = Math.min(
+    lastVertionSplitted.length,
+    currentVersionSplitted.length
+  );
+
+  for (let i = 0; i < minVersionLength; ++i) {
+    if (parseInt(lastVertionSplitted[i]) > parseInt(currentVersionSplitted[i]))
+      return setVersion(lastVersion, false);
   }
+
+  setVersion(currentVersion);
 }
 
 notifyUpdate();

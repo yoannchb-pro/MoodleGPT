@@ -1,9 +1,17 @@
 import Config from "../../types/config";
+import GPTAnswer from "../../types/gptAnswer";
 
+/**
+ * Hanlde contenteditable elements
+ * @param config
+ * @param inputList
+ * @param gptAnswer
+ * @returns
+ */
 function handleContentEditable(
   config: Config,
   inputList: NodeListOf<HTMLElement>,
-  response: string
+  gptAnswer: GPTAnswer
 ): boolean {
   const input = inputList[0];
 
@@ -16,12 +24,12 @@ function handleContentEditable(
   if (config.typing) {
     let index = 0;
     input.addEventListener("keydown", function (event: KeyboardEvent) {
-      if (event.key === "Backspace") index = response.length + 1;
-      if (index > response.length) return;
+      if (event.key === "Backspace") index = gptAnswer.response.length + 1;
+      if (index > gptAnswer.response.length) return;
       event.preventDefault();
-      input.textContent = response.slice(0, ++index);
+      input.textContent = gptAnswer.response.slice(0, ++index);
 
-      //put the cursor at the end
+      /* Put the cursor at the end of the typed text */
       input.focus();
       const range = document.createRange();
       range.selectNodeContents(input);
@@ -31,7 +39,7 @@ function handleContentEditable(
       selection.addRange(range);
     });
   } else {
-    input.textContent = response;
+    input.textContent = gptAnswer.response;
   }
 
   return true;

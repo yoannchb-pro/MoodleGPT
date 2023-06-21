@@ -1,0 +1,67 @@
+@font-face {
+  font-family: Segeo UI;
+  src: url(../../../extension/fonts/Segoe\ UI.ttf);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Segeo UI";
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.formulation {
+  width: 60%;
+  background-color: #e7f3f5;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inp {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  position: relative;
+}
+
+select {
+  position: absolute;
+  right: 0;
+}
+
+.editable {
+  background-color: #fff;
+  height: 10rem;
+  width: 100%;
+  resize: vertical;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  padding: 0.5rem;
+  outline: none;
+  border: thin solid #000;
+}
+
+textarea {
+  outline: none;
+  padding: 0.5rem;
+  height: 10rem;
+  width: 100%;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
