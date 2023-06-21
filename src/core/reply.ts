@@ -61,8 +61,8 @@ async function reply(
   if (config.mode === "question-to-answer") {
     removeListener(hiddenButton);
 
-    const questionBackup = form.textContent;
     const questionContainer = form.querySelector<HTMLElement>(".qtext");
+    const questionBackup = questionContainer.textContent;
 
     questionContainer.textContent = gptAnswer.response;
     questionContainer.style.whiteSpace = "pre-wrap";
