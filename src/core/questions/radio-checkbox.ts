@@ -21,9 +21,7 @@ function handleRadioAndCheckbox(
 
   for (const input of inputList as NodeListOf<HTMLInputElement>) {
     const content = normalizeText(input.parentNode.textContent);
-    const valide =
-      gptAnswer.normalizedResponse.includes(content) ||
-      content.includes(gptAnswer.normalizedResponse);
+    const valide = gptAnswer.normalizedResponse.includes(content);
     if (config.logs) Logs.responseTry(content, valide);
     if (valide) {
       if (config.mouseover) {

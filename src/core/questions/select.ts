@@ -45,8 +45,7 @@ function handleSelect(
 
     for (const option of options) {
       const content = normalizeText(option.textContent);
-      const valide =
-        correct[j].includes(content) || content.includes(correct[j]);
+      const valide = correct[j].includes(content);
 
       /* Handle put in order question */
       if (!/[^\d]+/gi.test(content)) {
@@ -56,7 +55,7 @@ function handleSelect(
         const content = normalizeText(elementTitle.textContent);
 
         const indexCorrectAnswer = correct.findIndex((answer) => {
-          const valide = answer.includes(content) || content.includes(answer);
+          const valide = answer.includes(content);
           if (config.logs) Logs.responseTry(content, valide);
           return valide;
         });
