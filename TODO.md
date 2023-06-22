@@ -3,7 +3,7 @@
 ## Priority: 1
 
 - [ ] Fixe put in order
-- [ ] Make some tests
+- [ ] Option to remove `code`
 
 ## Priority: 2
 
