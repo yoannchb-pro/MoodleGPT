@@ -8,7 +8,7 @@ This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to en
 
 ## Chrome Webstore
 
-I'm actually waiting for a review of my extension. It should be available in some days.
+Find the extension on the Chrome Webstore right [here](https://chrome.google.com/webstore/detail/moodlegpt/fgiepdkoifhpcgdhbiikpgdapjdoemko?hl=fr)
 
 ## Summary
 
