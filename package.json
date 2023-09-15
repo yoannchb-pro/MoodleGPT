@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/yoannchb-pro/MoodleGPT#readme",
   "devDependencies": {
-    "@types/chrome": "^0.0.224",
     "@rollup/plugin-terser": "^0.4.3",
+    "@types/chrome": "^0.0.246",
     "rollup": "^3.20.0",
     "rollup-plugin-ts": "^3.2.0",
     "typescript": "^5.0.2"
