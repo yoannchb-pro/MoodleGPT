@@ -50,6 +50,8 @@ function setUpMoodleGpt(config: Config) {
   for (const form of forms) {
     const hiddenButton: HTMLElement = form.querySelector(".qtext");
 
+    if (!hiddenButton) continue;
+
     if (config.cursor) hiddenButton.style.cursor = "pointer";
 
     const injectionFunction = reply.bind(
