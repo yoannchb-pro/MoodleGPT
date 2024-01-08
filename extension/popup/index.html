@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MoodleGPT</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Should always be at the top -->
+    <script src="./js/utils.js" defer></script>
+
     <script src="./js/index.js" defer></script>
+    <script src="./js/modeHandler.js" defer></script>
+    <script src="./js/gptVersion.js" defer></script>
     <script src="./js/version.js" defer></script>
+
     <link rel="icon" type="image/png" href="../icon.png" />
     <link
       rel="stylesheet"
@@ -17,6 +24,7 @@
       referrerpolicy="no-referrer"
     />
   </head>
+
   <body>
     <main>
       <div class="line center" style="margin-top: 1rem; margin-bottom: 1rem">
@@ -33,15 +41,15 @@
         </div>
       </div>
       <div class="line center">
-        <label for="apiKey" class="textLabel">Api Key</label>
+        <label for="apiKey" class="textLabel"
+          >Api Key<span class="required">*</span>:</label
+        >
         <input id="apiKey" type="text" />
       </div>
       <div class="line center">
-        <label for="code" class="textLabel">Code</label>
-        <input id="code" type="text" />
-      </div>
-      <div class="line center">
-        <label for="model" class="textLabel">GPT Model</label>
+        <label for="model" class="textLabel"
+          >GPT Model<span class="required">*</span>:</label
+        >
         <input id="model" type="text" />
         <i
           id="reloadModel"
@@ -49,6 +57,10 @@
           disabled
           title="Provide an api key first"
         ></i>
+      </div>
+      <div class="line center">
+        <label for="code" class="textLabel">Code:</label>
+        <input id="code" type="text" />
       </div>
       <div class="line mt">
         <i class="fa-solid fa-robot"></i>
@@ -71,7 +83,7 @@
         <i class="fa-solid fa-gear"></i>
         <p>Settings:</p>
       </div>
-      <div class="line center">
+      <div class="line center" style="gap: 2rem">
         <div class="col">
           <div class="line">
             <input id="logs" type="checkbox" />

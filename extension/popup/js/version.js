@@ -1,4 +1,6 @@
-const currentVersion = "1.0.3";
+"use strict";
+
+const CURRENT_VERSION = "1.0.4";
 const versionDisplay = document.querySelector("#version");
 
 /**
@@ -35,16 +37,16 @@ function setVersion(version, isCurrent = true) {
 }
 
 /**
- * Check the extension neeed an update or no
+ * Check if the extension neeed an update or not
  */
 async function notifyUpdate() {
   const lastVersion = await getLastVersion().catch((err) => {
     console.error(err);
-    return currentVersion;
+    return CURRENT_VERSION;
   });
 
   const lastVertionSplitted = lastVersion.split(".");
-  const currentVersionSplitted = currentVersion.split(".");
+  const currentVersionSplitted = CURRENT_VERSION.split(".");
   const minVersionLength = Math.min(
     lastVertionSplitted.length,
     currentVersionSplitted.length
@@ -55,7 +57,7 @@ async function notifyUpdate() {
       return setVersion(lastVersion, false);
   }
 
-  setVersion(currentVersion);
+  setVersion(CURRENT_VERSION);
 }
 
 notifyUpdate();
