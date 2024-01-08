@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "module": "CommonJS",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -10,7 +11,13 @@
     "outDir": "extension",
     "resolveJsonModule": true,
     "types": ["node", "chrome"],
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "@typing/*": ["types/*"],
+      "@utils/*": ["utils/*"],
+      "@core/*": ["core/*"],
+      "@questions/*": ["core/question/*"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["**/*"]
 }

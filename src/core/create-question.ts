@@ -1,6 +1,6 @@
-import Config from "../types/config";
-import normalizeText from "../utils/normalize-text";
-import htmlTableToString from "../utils/html-table-to-string";
+import type Config from "@typing/config";
+import normalizeText from "@utils/normalize-text";
+import htmlTableToString from "@utils/html-table-to-string";
 
 /**
  * Normalize the question and add sub informations

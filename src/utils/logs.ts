@@ -1,4 +1,5 @@
-import GPTAnswer from "../types/gptAnswer";
+import GPTAnswer from "@typing/gptAnswer";
+
 class Logs {
   static question(text: string) {
     const css = "color: cyan";

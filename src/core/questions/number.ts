@@ -1,5 +1,5 @@
-import Config from "../../types/config";
-import GPTAnswer from "../../types/gptAnswer";
+import type Config from "@typing/config";
+import type GPTAnswer from "@typing/gptAnswer";
 
 /**
  * Handle number input

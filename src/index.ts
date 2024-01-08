@@ -1,5 +1,5 @@
+import type Config from "@typing/config";
 import { codeListener, setUpMoodleGpt } from "./core/code-listener";
-import type Config from "./types/config";
 
 chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
   const config: Config = storage.moodleGPT;

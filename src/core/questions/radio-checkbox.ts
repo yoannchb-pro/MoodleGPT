@@ -1,7 +1,7 @@
-import Config from "../../types/config";
-import GPTAnswer from "../../types/gptAnswer";
-import Logs from "../../utils/logs";
-import normalizeText from "../../utils/normalize-text";
+import type Config from "@typing/config";
+import type GPTAnswer from "@typing/gptAnswer";
+import Logs from "@utils/logs";
+import normalizeText from "@utils/normalize-text";
 
 /**
  * Handle checkbox and input elements

@@ -1,6 +1,6 @@
-import Config from "../types/config";
-import GPTAnswer from "../types/gptAnswer";
-import normalizeText from "../utils/normalize-text";
+import type Config from "@typing/config";
+import type GPTAnswer from "@typing/gptAnswer";
+import normalizeText from "@utils/normalize-text";
 
 /**
  * Get the response from chatGPT api

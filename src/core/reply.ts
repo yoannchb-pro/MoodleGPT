@@ -1,5 +1,5 @@
-import Config from "../types/config";
-import Logs from "../utils/logs";
+import type Config from "@typing/config";
+import Logs from "@utils/logs";
 import getChatGPTResponse from "./get-response";
 import createQuestion from "./create-question";
 import handleRadioAndCheckbox from "./questions/radio-checkbox";
