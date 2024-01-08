@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.0.4
+
+- Code is not required anymore
+- Issue [#9](https://github.com/yoannchb-pro/MoodleGPT/issues/9) resolved
+- GPT version button fixed
+
 ## v1.0.3
 
 - Removed the option `table formating` because it will now set to true by default
