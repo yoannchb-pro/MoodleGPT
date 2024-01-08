@@ -57,8 +57,14 @@ a {
 }
 
 .line .textLabel {
-  width: 6rem;
+  width: 5rem;
+  text-align: left;
   text-transform: uppercase;
+}
+
+.line .textLabel .required {
+  color: var(--btn-color);
+  font-weight: bold;
 }
 
 .line input[type="text"],
