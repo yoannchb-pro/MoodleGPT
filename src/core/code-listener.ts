@@ -2,11 +2,13 @@ import Config from "../types/config";
 import titleIndications from "../utils/title-indications";
 import reply from "./reply";
 
-const pressedKeys: string[] = [];
-const listeners: {
+type Listener = {
   element: HTMLElement;
   fn: (this: HTMLElement, ev: MouseEvent) => any;
-}[] = [];
+};
+
+const pressedKeys: string[] = [];
+const listeners: Listener[] = [];
 
 /**
  * Create a listener on the keyboard to inject the code
@@ -80,4 +82,4 @@ function removeListener(element: HTMLElement) {
   }
 }
 
-export { codeListener, removeListener };
+export { codeListener, removeListener, setUpMoodleGpt };
