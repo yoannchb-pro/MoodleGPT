@@ -5,7 +5,7 @@
 function normalizeText(text: string, toLowerCase: boolean = true) {
   if (toLowerCase) text = text.toLowerCase();
 
-  let normalizedText = text
+  const normalizedText = text
     .replace(/\n+/gi, "\n") //remove duplicate new lines
     .replace(/(\n\s*\n)+/g, "\n") //remove useless white space from textcontent
     .replace(/[ \t]+/gi, " ") //replace multiples space or tabs by a space

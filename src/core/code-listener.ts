@@ -4,7 +4,7 @@ import reply from "./reply";
 
 type Listener = {
   element: HTMLElement;
-  fn: (this: HTMLElement, ev: MouseEvent) => any;
+  fn: (this: HTMLElement, ev: MouseEvent) => void;
 };
 
 const pressedKeys: string[] = [];

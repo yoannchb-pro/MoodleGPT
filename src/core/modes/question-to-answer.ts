@@ -30,6 +30,8 @@ function questionToAnswerMode(props: Props) {
     questionElement.textContent = contentIsResponse
       ? questionBackup
       : props.gptAnswer.response;
+
+    contentIsResponse = !contentIsResponse;
   });
 }
 

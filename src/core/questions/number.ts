@@ -23,7 +23,7 @@ function handleNumber(
   }
 
   const number = gptAnswer.normalizedResponse
-    .match(/\d+([,\.]\d+)?/gi)?.[0]
+    .match(/\d+([,.]\d+)?/gi)?.[0]
     ?.replace(",", ".");
 
   if (number === undefined) return false;

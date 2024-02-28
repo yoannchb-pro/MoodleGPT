@@ -2,7 +2,7 @@ import type Config from "@typing/config";
 import type GPTAnswer from "@typing/gptAnswer";
 import Logs from "@utils/logs";
 import normalizeText from "@utils/normalize-text";
-import { pickBestReponse, toPourcentage } from "@utils/pick-best-response";
+import { pickBestReponse } from "@utils/pick-best-response";
 
 /**
  * Handle input checkbox elements
