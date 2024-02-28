@@ -13,9 +13,9 @@ function htmlTableToString(table: HTMLTableElement) {
       const content = cell.textContent?.trim();
       maxColumnsLength[index] = Math.max(
         maxColumnsLength[index] || 0,
-        content.length || 0
+        content?.length || 0
       );
-      return content;
+      return content ?? "";
     });
     tab.push(cellsContent);
   });
@@ -29,7 +29,7 @@ function htmlTableToString(table: HTMLTableElement) {
     const mappedLine = line.map((content, index) =>
       content.padEnd(
         maxColumnsLength[index],
-        "\u00A0" /* For no matching with \s */
+        "\u00A0" // For no matching with \s
       )
     );
     return "| " + mappedLine.join(" | ") + " |";

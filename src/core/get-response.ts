@@ -2,6 +2,41 @@ import type Config from "@typing/config";
 import type GPTAnswer from "@typing/gptAnswer";
 import normalizeText from "@utils/normalize-text";
 
+type History = {
+  url: string | null;
+  system: { role: ROLE; content: string };
+  history: { role: ROLE; content: string }[];
+};
+
+enum ROLE {
+  SYSTEM = "system",
+  USER = "user",
+  ASSISTANT = "assistant",
+}
+
+const INSTRUCTION: string = `
+Act as a quiz solver for the best notation with the following rules:
+- When asked for the result of an equation, provide only the result without any other information and skip the other rules.
+- If no answer(s) are given, answer the statement as usual without following the other rules, providing the most detailed, complete and precise explanation.
+- For 'put in order' questions, provide the position of the answer separated by a new line (e.g., '1\n3\n2') and ignore other rules.- Always reply in this format: '<answer 1>\n<answer 2>\n...'
+- Always reply in the format: '<answer 1>\n<answer 2>\n...'.
+- Retain only the correct answer(s).
+- Maintain the same order for the answers as in the text.
+- Retain all text from the answer with its description, content or definition.
+- Only provide answers that exactly match the given answer in the text.
+- The question always has the correct answer(s), so you should always provide an answer.
+- Always respond in the same language as the user's question.
+`.trim();
+
+const history: History = {
+  url: null,
+  system: {
+    role: ROLE.SYSTEM,
+    content: INSTRUCTION,
+  },
+  history: [],
+};
+
 /**
  * Get the response from chatGPT api
  * @param config
@@ -12,8 +47,19 @@ async function getChatGPTResponse(
   config: Config,
   question: string
 ): Promise<GPTAnswer> {
+  const URL = location.hostname + location.pathname;
+
+  // We reset the history when we enter a new moodle quiz or when it's desactivate
+  if (!config.history || history.url !== URL) {
+    history.url = URL;
+    history.history = [];
+  }
+
   const controller = new AbortController();
-  const timeoutControler = setTimeout(() => controller.abort(), 15000);
+  const timeoutControler = setTimeout(() => controller.abort(), 15 * 1000);
+
+  const message = { role: ROLE.USER, content: question };
+
   const req = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -23,33 +69,27 @@ async function getChatGPTResponse(
     signal: config.timeout ? controller.signal : null,
     body: JSON.stringify({
       model: config.model,
-      messages: [
-        {
-          role: "system",
-          content: `
-Follow those rules:
-- Sometimes there won't be a question, so just answer the statement as you normally would without following the other rules and give the most detailled and complete answer with explication.
-- For put in order question just give the good order separate by new line
-- Your goal is to understand the statement and to reply to each question by giving only the answer.
-- You will keep the same order for the answers like in the text. 
-- You will separate all the answer with new lines and only show the correctes one.
-- You will only give the answers for each question and omit the questions, statement, title or other informations from the response.
-- You will only give answer with exactly the same text as the gived answers.
-- The question always have the good answer so you should always give an answer to the question.
-- You will always respond in the same langage as the user question.`,
-        },
-        { role: "user", content: question },
-      ],
+      messages: [history.system, ...history.history, message],
       temperature: 0.8,
       top_p: 1.0,
       presence_penalty: 1.0,
       stop: null,
     }),
   });
+
   clearTimeout(timeoutControler);
+
   const rep = await req.json();
   const response = rep.choices[0].message.content;
+
+  // Register the conversation
+  if (config.history) {
+    history.history.push(message);
+    history.history.push({ role: ROLE.ASSISTANT, content: response });
+  }
+
   return {
+    question,
     response,
     normalizedResponse: normalizeText(response),
   };

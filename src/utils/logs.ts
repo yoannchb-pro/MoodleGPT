@@ -1,4 +1,5 @@
 import GPTAnswer from "@typing/gptAnswer";
+import { toPourcentage } from "./pick-best-response";
 
 class Logs {
   static question(text: string) {
@@ -6,9 +7,13 @@ class Logs {
     console.log("%c[QUESTION]: %s", css, text);
   }
 
-  static responseTry(text: string, valide: boolean) {
-    const css = "color: " + (valide ? "green" : "red");
-    console.log("%c[CHECKING]: %s", css, text);
+  static bestAnswer(answer: string, similarity: number) {
+    const css = "color: green";
+    console.log(
+      "%c[BEST ANSWER]: %s",
+      css,
+      `"${answer}" with a similarity of ${toPourcentage(similarity)}`
+    );
   }
 
   static array(arr: unknown[]) {

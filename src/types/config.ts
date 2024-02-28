@@ -9,6 +9,7 @@ type Config = {
   logs?: boolean;
   title?: boolean;
   timeout?: boolean;
+  history?: boolean;
   mode?: "autocomplete" | "question-to-answer" | "clipboard";
 };
 

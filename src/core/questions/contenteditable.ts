@@ -16,10 +16,11 @@ function handleContentEditable(
   const input = inputList[0];
 
   if (
-    inputList.length !== 1 ||
+    inputList.length !== 1 || // for now we don't handle many input for editable textcontent
     input.getAttribute("contenteditable") !== "true"
-  )
+  ) {
     return false;
+  }
 
   if (config.typing) {
     let index = 0;
@@ -29,14 +30,16 @@ function handleContentEditable(
       event.preventDefault();
       input.textContent = gptAnswer.response.slice(0, ++index);
 
-      /* Put the cursor at the end of the typed text */
+      // Put the cursor at the end of the typed text
       input.focus();
       const range = document.createRange();
       range.selectNodeContents(input);
       range.collapse(false);
       const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+      if (selection !== null) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
     });
   } else {
     input.textContent = gptAnswer.response;
