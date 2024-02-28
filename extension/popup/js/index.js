@@ -10,6 +10,7 @@ const inputsCheckbox = [
   "mouseover",
   "infinite",
   "timeout",
+  "history",
 ];
 
 /* Save the configuration */
@@ -17,19 +18,22 @@ saveBtn.addEventListener("click", function () {
   const [apiKey, code, model] = inputsText.map((selector) =>
     document.querySelector("#" + selector).value.trim()
   );
-  const [logs, title, cursor, typing, mouseover, infinite, timeout] =
+  const [logs, title, cursor, typing, mouseover, infinite, timeout, history] =
     inputsCheckbox.map((selector) => {
       const element = document.querySelector("#" + selector);
       return element.checked && element.parentElement.style.display !== "none";
     });
 
   if (!apiKey || !model) {
-    showMessage("Please complete all the form");
+    showMessage({ msg: "Please complete all the form", error: true });
     return;
   }
 
   if (code.length > 0 && code.length < 3) {
-    showMessage("The code should at least contain 3 characters");
+    showMessage({
+      msg: "The code should at least contain 3 characters",
+      error: true,
+    });
     return;
   }
 
@@ -45,11 +49,12 @@ saveBtn.addEventListener("click", function () {
       mouseover,
       infinite,
       timeout,
+      history,
       mode: actualMode,
     },
   });
 
-  showMessage("Configuration saved", true);
+  showMessage({ msg: "Configuration saved" });
 });
 
 /* we load back the configuration */

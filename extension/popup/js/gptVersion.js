@@ -43,7 +43,7 @@ function getLastChatGPTVersion() {
       document.querySelector("#model").value = model.id;
     } catch (err) {
       console.error(err);
-      showMessage("Failed to fetch last ChatGPT version");
+      showMessage({ msg: "Failed to fetch last ChatGPT version", error: true });
     }
   });
 }
