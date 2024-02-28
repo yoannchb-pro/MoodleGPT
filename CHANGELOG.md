@@ -5,6 +5,9 @@
 - Code is not required anymore
 - Issue [#9](https://github.com/yoannchb-pro/MoodleGPT/issues/9) resolved
 - GPT version button fixed
+- Better algo to find the correct answer
+- Better chatGPT prompt
+- Added `history` to the configuration
 
 ## v1.0.3
 
