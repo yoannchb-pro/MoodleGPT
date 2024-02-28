@@ -3,7 +3,9 @@
   "version": "1.0.4",
   "description": "This extension allows you to hide CHAT-GPT in a Moodle quiz.",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,11 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.3",
     "@types/chrome": "^0.0.246",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
     "rollup": "^3.20.0",
     "rollup-plugin-ts": "^3.2.0",
     "typescript": "^5.0.2"
