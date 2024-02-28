@@ -163,4 +163,5 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 ## Test
 
-To test the code, you can run the index.html file located in the <b>"test/fake-moodle"</b> folder. Or a better solution is to install moodle locally.
+- <b>Solution 1</b>: Go on [this moodle test page](https://school.moodledemo.net/login/index.php) (username: `student`, password: `moodle`) and choose any quiz.
+- <b>Solution 2</b>: Run the `index.html` file located in the `test/fake-moodle` folder.
