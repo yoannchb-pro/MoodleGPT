@@ -36,8 +36,8 @@ enum CONTENT_TYPE {
 
 const INSTRUCTION: string = `
 Act as a quiz solver for the best notation with the following rules:
-- When asked for the result of an equation, provide only the result without any other information and skip the other rules.
-- If no answer(s) are given, answer the statement as usual without following the other rules, providing the most detailed, complete and precise explanation.
+- If no answer(s) are given, answer the statement as usual without following the other rules, providing the most detailed, complete and precise explanation. 
+  But for the calculation provide this format 'result: <result of the equation> explenation: <answer>'
 - For 'put in order' questions, provide the position of the answer separated by a new line (e.g., '1\n3\n2') and ignore other rules.- Always reply in this format: '<answer 1>\n<answer 2>\n...'
 - Always reply in the format: '<answer 1>\n<answer 2>\n...'.
 - Retain only the correct answer(s).
@@ -121,7 +121,7 @@ async function getChatGPTResponse(
   }
 
   const controller = new AbortController();
-  const timeoutControler = setTimeout(() => controller.abort(), 15 * 1000);
+  const timeoutControler = setTimeout(() => controller.abort(), 20 * 1000);
 
   const content = await getContent(config, questionElement, question);
   const message = { role: ROLE.USER, content };
@@ -136,10 +136,11 @@ async function getChatGPTResponse(
     body: JSON.stringify({
       model: config.model,
       messages: [history.system, ...history.history, message],
-      temperature: 0.8,
-      top_p: 1.0,
-      presence_penalty: 1.0,
-      ...(isGPTModelGreaterOrEqualTo4(config.model) ? { max_tokens: 1000 } : { stop: null }) // look like that on 3.5 we can say stop do null but not on gpt >= 4
+
+      temperature: 0.1, // Controls the randomness of the generated responses, with lower values producing more deterministic and predictable outputs. With set to 0.1 instead of 0 for more creativity.
+      top_p: 1, // Determines the diversity of the generated responses
+      presence_penalty: 0, // Encourages the model to introduce new concepts by penalizing words that have already appeared in the text.
+      max_tokens: 2000 // Maximum length of the response
     })
   });
 
