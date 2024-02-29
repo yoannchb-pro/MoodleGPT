@@ -4,12 +4,13 @@
  * @returns
  */
 function imageToBase64(imageElement: HTMLImageElement): Promise<string | null> {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
     if (!ctx) {
       resolve(null);
+      canvas.remove();
       return;
     }
 
@@ -22,9 +23,13 @@ function imageToBase64(imageElement: HTMLImageElement): Promise<string | null> {
 
       const base64 = canvas.toDataURL('image/png');
       resolve(base64);
+
+      canvas.remove();
     };
-    img.onerror = error => {
-      reject(error);
+
+    img.onerror = () => {
+      resolve(null);
+      canvas.remove();
     };
 
     img.src = imageElement.src;
