@@ -19,8 +19,6 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
   - [Donate](#donate)
   - [Update](#update)
   - [Set up](#set-up)
-  - [Inject the code into the moodle](#inject-the-code-into-the-moodle)
-  - [Remove injection](#remove-injection)
   - [Mode](#mode)
   - [Settings](#settings)
   - [Internal Features](#internal-features)
@@ -61,14 +59,6 @@ See the [changelog](./CHANGELOG.md) to see every updates !
 
 Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the ApiKey obtained from [openai api](https://platform.openai.com/api-keys). Finally, click on the <b>reload button</b> next to model (it should give you the last ChatGPT version, otherwise enter it by your self) and click on the save button (The extension need to be configured before entering the moodle quiz).
 
-## Inject the code into the moodle
-
-You just need to enter on the keyboard the <b>code</b> you have set into the extension and click on the question you want to solve.
-
-## Remove injection
-
-Type back the <b>code</b> you entered into the extension configuration on the keyboard and the injection will be removed from the current page. If You didn't provide a code into the extension then there is no way to remove the injection.
-
 ## Mode
 
 <p align="center">
@@ -87,7 +77,7 @@ Type back the <b>code</b> you entered into the extension configuration on the ke
 </p>
 
 - <b>Api key</b>: the openai api key.
-- <b>Code</b>: code that you will need to inject/remove the code.
+- <b>Code</b>: a code to be more discret for injecting/removing the extension from the page. Simply type your code you entered into the configuration on the keyboard when you are on your moodle quiz and the extension will be inject. If you want to remove the injection just simply type back the code on your keyboard.
 - <b>GPT Model</b>: the gpt model you want to use. You can click on the reload button to get the latest version of available gpt model for your account but you need to enter the api key first.
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
