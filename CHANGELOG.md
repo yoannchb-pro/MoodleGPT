@@ -8,6 +8,8 @@
 - Better algorithm to find the correct answer (levenshtein distance)
 - Better ChatGPT prompt
 - Added `history` to the options/configuration
+- Added `include images` to the option/configuration
+- `gpt-4` support
 
 ## v1.0.3
 
