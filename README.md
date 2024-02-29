@@ -2,7 +2,7 @@
 href="https://www.flaticon.com/free-icons/mortarboard" target="_blank" rel="noopener noreferrer"
 title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/icon.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150" style="display:block; margin:auto;"></a></p>
 
-# MoodleGPT
+# MoodleGPT 1.1.0
 
 This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
@@ -12,13 +12,12 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
 
 ## Summary
 
-- [MoodleGPT](#moodlegpt)
+- [MoodleGPT 1.1.0](#moodlegpt-110)
   - [Chrome Webstore](#chrome-webstore)
   - [Summary](#summary)
   - [Disclaimer !](#disclaimer-)
   - [Donate](#donate)
   - [Update](#update)
-  - [MoodleGPT don't complete my quiz ?](#moodlegpt-dont-complete-my-quiz-)
   - [Set up](#set-up)
   - [Inject the code into the moodle](#inject-the-code-into-the-moodle)
   - [Remove injection](#remove-injection)
@@ -50,11 +49,7 @@ Will be a pleasure if you want to support this project :)
 
 ## Update
 
-See [changelog](./CHANGELOG.md)
-
-## MoodleGPT don't complete my quiz ?
-
-If MoodleGPT cannot complete one of your moodle quiz please provide the html code of the page. It will help us to add it in the futur version of MoodleGPT ! Check the [TODO](./TODO.md) to see what is comming in the futur version.
+See the [changelog](./CHANGELOG.md) to see every updates !
 
 ## Set up
 
@@ -72,7 +67,7 @@ You just need to enter on the keyboard the <b>code</b> you have set into the ext
 
 ## Remove injection
 
-Type back the <b>code</b> on the keyboard and the code will be removed from the current page.
+Type back the <b>code</b> you entered into the extension configuration on the keyboard and the injection will be removed from the current page. If You didn't provide a code into the extension then there is no way to remove the injection.
 
 ## Mode
 
@@ -97,7 +92,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
-- <b>Console logs</b>: show logs into the console.
+- <b>Console logs</b>: show logs into the console for the question, chatgpt answer and which response has been chosen.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
 - <b>Request timeout</b>: if the request is too long it will be abort after 15seconds.
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
@@ -105,8 +100,8 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
-
 - <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
+- <b>Save history</b>: allows you to create a conversation with ChatGPT by saving the previous question with its answer. However, note that it can consume a significant number of tokens.
 
 ## Internal Features
 
