@@ -92,6 +92,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
   <br/> ![Mouseover2](./assets/mouseover2.gif)
 - <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 - <b>Save history</b>: allows you to create a conversation with ChatGPT by saving the previous question with its answer. However, note that it can consume a significant number of tokens.
+- <b>Include images</b> (only work with gpt-4): allows you to include the images from the question to be send to the chatgpt api. However, note that it can consume a significant number of tokens.
 
 ## Internal Features
 
