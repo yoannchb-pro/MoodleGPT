@@ -84,7 +84,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
   <br/> ![Injected](./assets/title-injected.png)
 - <b>Console logs</b>: show logs into the console for the question, chatgpt answer and which response has been chosen.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
-- <b>Request timeout</b>: if the request is too long it will be abort after 15seconds.
+- <b>Request timeout</b>: if the request is too long it will be abort after 20 seconds.
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
   <br/> ![Typing](./assets/typing.gif)
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
