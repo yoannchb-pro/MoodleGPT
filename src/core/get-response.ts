@@ -1,17 +1,31 @@
 import type Config from '@typing/config';
 import type GPTAnswer from '@typing/gptAnswer';
+import imageToBase64 from '@utils/image-to-base64';
 import normalizeText from '@utils/normalize-text';
+import isCurrentVersionSupportingImages from '@utils/version-support-images';
+
+type Content =
+  | string
+  | Array<{
+      type: CONTENT_TYPE;
+      content: string;
+    }>;
 
 type History = {
   url: string | null;
-  system: { role: ROLE; content: string };
-  history: { role: ROLE; content: string }[];
+  system: { role: ROLE; content: Content };
+  history: { role: ROLE; content: Content }[];
 };
 
 enum ROLE {
   SYSTEM = 'system',
   USER = 'user',
   ASSISTANT = 'assistant'
+}
+
+enum CONTENT_TYPE {
+  TEXT = 'text',
+  IMAGE = 'image_url'
 }
 
 const INSTRUCTION: string = `
@@ -38,12 +52,60 @@ const history: History = {
 };
 
 /**
+ * Get the content to send to ChatGPT API (it allows to includes images if supported)
+ * @param config
+ */
+async function getContent(
+  config: Config,
+  questionElement: HTMLElement,
+  question: string
+): Promise<Content> {
+  const imagesElements = questionElement.querySelectorAll('img');
+
+  if (
+    !config.includeImages ||
+    !isCurrentVersionSupportingImages(config.model) ||
+    imagesElements.length === 0
+  ) {
+    return question;
+  }
+
+  let content: Content = [];
+
+  const base64Images = Array.from(imagesElements).map(imgEl => imageToBase64(imgEl));
+  const results = await Promise.all(base64Images);
+  const filteredResults = results.filter(value => value !== null) as string[];
+
+  for (const result of filteredResults) {
+    content.push({
+      type: CONTENT_TYPE.IMAGE,
+      content: result
+    });
+  }
+
+  if (content.length > 0) {
+    content.push({
+      type: CONTENT_TYPE.TEXT,
+      content: question
+    });
+  } else {
+    content = question;
+  }
+
+  return content;
+}
+
+/**
  * Get the response from chatGPT api
  * @param config
  * @param question
  * @returns
  */
-async function getChatGPTResponse(config: Config, question: string): Promise<GPTAnswer> {
+async function getChatGPTResponse(
+  config: Config,
+  questionElement: HTMLElement,
+  question: string
+): Promise<GPTAnswer> {
   const URL = location.hostname + location.pathname;
 
   // We reset the history when we enter a new moodle quiz or when it's desactivate
@@ -55,7 +117,8 @@ async function getChatGPTResponse(config: Config, question: string): Promise<GPT
   const controller = new AbortController();
   const timeoutControler = setTimeout(() => controller.abort(), 15 * 1000);
 
-  const message = { role: ROLE.USER, content: question };
+  const content = await getContent(config, questionElement, question);
+  const message = { role: ROLE.USER, content };
 
   const req = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',

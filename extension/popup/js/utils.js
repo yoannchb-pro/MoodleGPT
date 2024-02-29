@@ -10,3 +10,16 @@ function showMessage({ msg, error, infinite }) {
   message.style.display = 'block';
   if (!infinite) setTimeout(() => (message.style.display = 'none'), 5000);
 }
+
+/**
+ * Check if the current model support images integrations
+ * @param {string} version
+ * @returns
+ */
+function isCurrentVersionSupportingImages(version) {
+  const versionNumber = version.match(/gpt-(\d+)/);
+  if (!versionNumber?.[1]) {
+    return false;
+  }
+  return Number(versionNumber[1]) >= 4;
+}

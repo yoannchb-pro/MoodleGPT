@@ -1,5 +1,18 @@
 'use strict';
 
+const modelInput = document.querySelector('#model');
+const imagesIntegrationLine = document.querySelector('#includeImages-line');
+
+// Check if the gpt version is at least 4 to show the option 'Include images'
+modelInput.addEventListener('input', function () {
+  const version = modelInput.value;
+  if (isCurrentVersionSupportingImages(version)) {
+    imagesIntegrationLine.style.display = 'flex';
+  } else {
+    imagesIntegrationLine.style.display = 'none';
+  }
+});
+
 /**
  * Get the last ChatGPT version
  */
@@ -7,7 +20,7 @@ function getLastChatGPTVersion() {
   const apiKeySelector = document.querySelector('#apiKey');
   const reloadModel = document.querySelector('#reloadModel');
 
-  let apiKey = apiKeySelector.value;
+  let apiKey = apiKeySelector.value?.trim();
 
   // If the api key is set we enable the button to get the last chatgpt version
   function checkFiledApiKey() {
@@ -40,7 +53,7 @@ function getLastChatGPTVersion() {
       });
       const rep = await req.json();
       const model = rep.data.find(model => model.id.startsWith('gpt'));
-      document.querySelector('#model').value = model.id;
+      modelInput.value = model.id;
     } catch (err) {
       console.error(err);
       showMessage({ msg: 'Failed to fetch last ChatGPT version', error: true });

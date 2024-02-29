@@ -1,6 +1,8 @@
+'use strict';
+
 const saveBtn = document.querySelector('.save');
 
-/* inputs id */
+// inputs id
 const inputsText = ['apiKey', 'code', 'model'];
 const inputsCheckbox = [
   'logs',
@@ -10,20 +12,20 @@ const inputsCheckbox = [
   'mouseover',
   'infinite',
   'timeout',
-  'history'
+  'history',
+  'includeImages'
 ];
 
-/* Save the configuration */
+// Save the configuration
 saveBtn.addEventListener('click', function () {
   const [apiKey, code, model] = inputsText.map(selector =>
     document.querySelector('#' + selector).value.trim()
   );
-  const [logs, title, cursor, typing, mouseover, infinite, timeout, history] = inputsCheckbox.map(
-    selector => {
+  const [logs, title, cursor, typing, mouseover, infinite, timeout, history, includeImages] =
+    inputsCheckbox.map(selector => {
       const element = document.querySelector('#' + selector);
       return element.checked && element.parentElement.style.display !== 'none';
-    }
-  );
+    });
 
   if (!apiKey || !model) {
     showMessage({ msg: 'Please complete all the form', error: true });
@@ -51,6 +53,7 @@ saveBtn.addEventListener('click', function () {
       infinite,
       timeout,
       history,
+      includeImages,
       mode: actualMode
     }
   });
@@ -58,7 +61,7 @@ saveBtn.addEventListener('click', function () {
   showMessage({ msg: 'Configuration saved' });
 });
 
-/* we load back the configuration */
+// we load back the configuration
 chrome.storage.sync.get(['moodleGPT']).then(function (storage) {
   const config = storage.moodleGPT;
 

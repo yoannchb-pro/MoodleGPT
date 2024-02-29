@@ -132,8 +132,7 @@ a {
 
 #message {
   display: none;
-  margin-top: 0.75rem;
-  margin-bottom: -0.25rem;
+  margin-bottom: -0.5rem;
 }
 
 #reloadModel {

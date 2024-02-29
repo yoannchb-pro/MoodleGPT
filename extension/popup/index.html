@@ -27,14 +27,15 @@
 
   <body>
     <main>
-      <div class="line center" style="margin-top: 1rem; margin-bottom: 1rem">
+      <div class="line center" style="margin-bottom: 0.5rem">
         <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.flaticon.com/free-icons/mortarboard"
           title="Mortarboard icons created by itim2101 - Flaticon"
-          ><img src="../icon.png" alt="icon"
-        /></a>
+        >
+          <img src="../icon.png" alt="icon" />
+        </a>
         <div class="col center title">
           <h1>MoodleGPT</h1>
           <p id="version"></p>
@@ -113,9 +114,14 @@
             <input id="history" type="checkbox" />
             <label for="history">Save history</label>
           </div>
+          <!-- This option is only showed if the current version of the model support it -->
+          <div class="line" id="includeImages-line" style="display: none">
+            <input id="includeImages" type="checkbox" />
+            <label for="includeImages">Include images</label>
+          </div>
         </div>
       </div>
-      <p id="message">Message</p>
+      <p id="message">{Message}</p>
       <div class="line center">
         <button class="save">Save</button>
       </div>

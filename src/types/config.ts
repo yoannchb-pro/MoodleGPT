@@ -1,7 +1,7 @@
 type Config = {
   apiKey: string;
+  model: string;
   code?: string;
-  model?: string;
   infinite?: boolean;
   typing?: boolean;
   mouseover?: boolean;
@@ -10,6 +10,7 @@ type Config = {
   title?: boolean;
   timeout?: boolean;
   history?: boolean;
+  includeImages?: boolean;
   mode?: 'autocomplete' | 'question-to-answer' | 'clipboard';
 };
 
