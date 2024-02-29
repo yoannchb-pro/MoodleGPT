@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v1.0.4
+## v1.1.0
 
 - `code` is not required anymore
 - Issue [#9](https://github.com/yoannchb-pro/MoodleGPT/issues/9) resolved
