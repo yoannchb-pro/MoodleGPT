@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "This extension allows you to hide CHAT-GPT in a Moodle quiz.",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm run prettier && npm run lint && rollup -c",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ."
   },
