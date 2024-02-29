@@ -10,7 +10,7 @@ type Config = {
   title?: boolean;
   timeout?: boolean;
   history?: boolean;
-  mode?: "autocomplete" | "question-to-answer" | "clipboard";
+  mode?: 'autocomplete' | 'question-to-answer' | 'clipboard';
 };
 
 export default Config;

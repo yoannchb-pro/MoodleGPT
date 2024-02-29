@@ -1,8 +1,8 @@
-import type Config from "@typing/config";
-import type GPTAnswer from "@typing/gptAnswer";
-import Logs from "@utils/logs";
-import normalizeText from "@utils/normalize-text";
-import { pickBestReponse } from "@utils/pick-best-response";
+import type Config from '@typing/config';
+import type GPTAnswer from '@typing/gptAnswer';
+import Logs from '@utils/logs';
+import normalizeText from '@utils/normalize-text';
+import { pickBestReponse } from '@utils/pick-best-response';
 
 /**
  * Handle input checkbox elements
@@ -18,18 +18,18 @@ function handleCheckbox(
   const firstInput = inputList?.[0] as HTMLInputElement;
 
   // Handle the case the input is not a checkbox
-  if (!firstInput || firstInput.type !== "checkbox") {
+  if (!firstInput || firstInput.type !== 'checkbox') {
     return false;
   }
 
-  const corrects = gptAnswer.normalizedResponse.split("\n");
+  const corrects = gptAnswer.normalizedResponse.split('\n');
 
   const possibleAnswers = Array.from(inputList)
-    .map((inp) => ({
+    .map(inp => ({
       element: inp,
-      value: normalizeText(inp?.parentElement?.textContent ?? ""),
+      value: normalizeText(inp?.parentElement?.textContent ?? '')
     }))
-    .filter((obj) => obj.value !== "");
+    .filter(obj => obj.value !== '');
 
   for (const correct of corrects) {
     const bestAnswer = pickBestReponse(correct, possibleAnswers);
@@ -40,13 +40,9 @@ function handleCheckbox(
 
     const correctInput = bestAnswer.element as HTMLInputElement;
     if (config.mouseover) {
-      correctInput.addEventListener(
-        "mouseover",
-        () => (correctInput.checked = true),
-        {
-          once: true,
-        }
-      );
+      correctInput.addEventListener('mouseover', () => (correctInput.checked = true), {
+        once: true
+      });
     } else {
       correctInput.checked = true;
     }

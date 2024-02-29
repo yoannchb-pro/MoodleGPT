@@ -1,5 +1,5 @@
-import type Config from "@typing/config";
-import type GPTAnswer from "@typing/gptAnswer";
+import type Config from '@typing/config';
+import type GPTAnswer from '@typing/gptAnswer';
 
 /**
  * Handle textbox
@@ -17,16 +17,16 @@ function handleTextbox(
 
   if (
     inputList.length !== 1 || // for now we don't handle many input text
-    (input.tagName !== "TEXTAREA" && input.type !== "text")
+    (input.tagName !== 'TEXTAREA' && input.type !== 'text')
   ) {
     return false;
   }
 
   if (config.typing) {
     let index = 0;
-    input.addEventListener("keydown", function (event: Event) {
+    input.addEventListener('keydown', function (event: Event) {
       event.preventDefault();
-      if ((<KeyboardEvent>event).key === "Backspace") {
+      if ((<KeyboardEvent>event).key === 'Backspace') {
         index = gptAnswer.response.length + 1;
       }
       if (index > gptAnswer.response.length) return;

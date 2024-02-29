@@ -1,38 +1,39 @@
-const saveBtn = document.querySelector(".save");
+const saveBtn = document.querySelector('.save');
 
 /* inputs id */
-const inputsText = ["apiKey", "code", "model"];
+const inputsText = ['apiKey', 'code', 'model'];
 const inputsCheckbox = [
-  "logs",
-  "title",
-  "cursor",
-  "typing",
-  "mouseover",
-  "infinite",
-  "timeout",
-  "history",
+  'logs',
+  'title',
+  'cursor',
+  'typing',
+  'mouseover',
+  'infinite',
+  'timeout',
+  'history'
 ];
 
 /* Save the configuration */
-saveBtn.addEventListener("click", function () {
-  const [apiKey, code, model] = inputsText.map((selector) =>
-    document.querySelector("#" + selector).value.trim()
+saveBtn.addEventListener('click', function () {
+  const [apiKey, code, model] = inputsText.map(selector =>
+    document.querySelector('#' + selector).value.trim()
   );
-  const [logs, title, cursor, typing, mouseover, infinite, timeout, history] =
-    inputsCheckbox.map((selector) => {
-      const element = document.querySelector("#" + selector);
-      return element.checked && element.parentElement.style.display !== "none";
-    });
+  const [logs, title, cursor, typing, mouseover, infinite, timeout, history] = inputsCheckbox.map(
+    selector => {
+      const element = document.querySelector('#' + selector);
+      return element.checked && element.parentElement.style.display !== 'none';
+    }
+  );
 
   if (!apiKey || !model) {
-    showMessage({ msg: "Please complete all the form", error: true });
+    showMessage({ msg: 'Please complete all the form', error: true });
     return;
   }
 
   if (code.length > 0 && code.length < 3) {
     showMessage({
-      msg: "The code should at least contain 3 characters",
-      error: true,
+      msg: 'The code should at least contain 3 characters',
+      error: true
     });
     return;
   }
@@ -50,15 +51,15 @@ saveBtn.addEventListener("click", function () {
       infinite,
       timeout,
       history,
-      mode: actualMode,
-    },
+      mode: actualMode
+    }
   });
 
-  showMessage({ msg: "Configuration saved" });
+  showMessage({ msg: 'Configuration saved' });
 });
 
 /* we load back the configuration */
-chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
+chrome.storage.sync.get(['moodleGPT']).then(function (storage) {
   const config = storage.moodleGPT;
 
   if (config) {
@@ -66,21 +67,17 @@ chrome.storage.sync.get(["moodleGPT"]).then(function (storage) {
       actualMode = config.mode;
       for (const mode of modes) {
         if (mode.value === config.mode) {
-          mode.classList.remove("not-selected");
+          mode.classList.remove('not-selected');
         } else {
-          mode.classList.add("not-selected");
+          mode.classList.add('not-selected');
         }
       }
     }
 
-    inputsText.forEach((key) =>
-      config[key]
-        ? (document.querySelector("#" + key).value = config[key])
-        : null
+    inputsText.forEach(key =>
+      config[key] ? (document.querySelector('#' + key).value = config[key]) : null
     );
-    inputsCheckbox.forEach(
-      (key) => (document.querySelector("#" + key).checked = config[key] || "")
-    );
+    inputsCheckbox.forEach(key => (document.querySelector('#' + key).checked = config[key] || ''));
   }
 
   handleModeChange();

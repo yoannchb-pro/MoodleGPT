@@ -1,6 +1,6 @@
-import type Config from "@typing/config";
-import type GPTAnswer from "@typing/gptAnswer";
-import normalizeText from "@utils/normalize-text";
+import type Config from '@typing/config';
+import type GPTAnswer from '@typing/gptAnswer';
+import normalizeText from '@utils/normalize-text';
 
 type History = {
   url: string | null;
@@ -9,9 +9,9 @@ type History = {
 };
 
 enum ROLE {
-  SYSTEM = "system",
-  USER = "user",
-  ASSISTANT = "assistant",
+  SYSTEM = 'system',
+  USER = 'user',
+  ASSISTANT = 'assistant'
 }
 
 const INSTRUCTION: string = `
@@ -32,9 +32,9 @@ const history: History = {
   url: null,
   system: {
     role: ROLE.SYSTEM,
-    content: INSTRUCTION,
+    content: INSTRUCTION
   },
-  history: [],
+  history: []
 };
 
 /**
@@ -43,10 +43,7 @@ const history: History = {
  * @param question
  * @returns
  */
-async function getChatGPTResponse(
-  config: Config,
-  question: string
-): Promise<GPTAnswer> {
+async function getChatGPTResponse(config: Config, question: string): Promise<GPTAnswer> {
   const URL = location.hostname + location.pathname;
 
   // We reset the history when we enter a new moodle quiz or when it's desactivate
@@ -60,11 +57,11 @@ async function getChatGPTResponse(
 
   const message = { role: ROLE.USER, content: question };
 
-  const req = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
+  const req = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${config.apiKey}`,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${config.apiKey}`
     },
     signal: config.timeout ? controller.signal : null,
     body: JSON.stringify({
@@ -73,8 +70,8 @@ async function getChatGPTResponse(
       temperature: 0.8,
       top_p: 1.0,
       presence_penalty: 1.0,
-      stop: null,
-    }),
+      stop: null
+    })
   });
 
   clearTimeout(timeoutControler);
@@ -91,7 +88,7 @@ async function getChatGPTResponse(
   return {
     question,
     response,
-    normalizedResponse: normalizeText(response),
+    normalizedResponse: normalizeText(response)
   };
 }
 

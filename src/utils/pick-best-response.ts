@@ -21,8 +21,8 @@ function levenshteinDistance(str1: string, str2: string) {
   if (str2.length === 0) return str1.length;
 
   const matrix: number[][] = [];
-  const str1WithoutSpaces = str1.replace(/\s+/, "");
-  const str2WithoutSpaces = str2.replace(/\s+/, "");
+  const str1WithoutSpaces = str1.replace(/\s+/, '');
+  const str2WithoutSpaces = str2.replace(/\s+/, '');
 
   for (let i = 0; i <= str1WithoutSpaces.length; ++i) {
     matrix.push([i]);
@@ -33,8 +33,7 @@ function levenshteinDistance(str1: string, str2: string) {
           : Math.min(
               matrix[i - 1][j] + 1,
               matrix[i][j - 1] + 1,
-              matrix[i - 1][j - 1] +
-                (str1WithoutSpaces[i - 1] === str2WithoutSpaces[j - 1] ? 0 : 1)
+              matrix[i - 1][j - 1] + (str1WithoutSpaces[i - 1] === str2WithoutSpaces[j - 1] ? 0 : 1)
             );
     }
   }
@@ -67,7 +66,7 @@ export function pickBestReponse(
   let bestResponse: BestResponse = {
     element: null,
     similarity: 0,
-    value: null,
+    value: null
   };
   for (const obj of arr) {
     const similarity = sentenceSimilarity(obj.value, answer);
@@ -100,7 +99,7 @@ export function pickResponsesWithSimilarityGreaterThan(
       responses.push({
         similarity,
         value: obj.value,
-        element: obj.element,
+        element: obj.element
       });
   }
   return responses.sort((a, b) => a.similarity - b.similarity);
@@ -111,5 +110,5 @@ export function pickResponsesWithSimilarityGreaterThan(
  * @param similarity
  */
 export function toPourcentage(similarity: number): string {
-  return Math.round(similarity * 100 * 100) / 100 + "%";
+  return Math.round(similarity * 100 * 100) / 100 + '%';
 }

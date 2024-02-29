@@ -1,5 +1,5 @@
-import type Config from "@typing/config";
-import type GPTAnswer from "@typing/gptAnswer";
+import type Config from '@typing/config';
+import type GPTAnswer from '@typing/gptAnswer';
 
 /**
  * Hanlde contenteditable elements
@@ -17,15 +17,15 @@ function handleContentEditable(
 
   if (
     inputList.length !== 1 || // for now we don't handle many input for editable textcontent
-    input.getAttribute("contenteditable") !== "true"
+    input.getAttribute('contenteditable') !== 'true'
   ) {
     return false;
   }
 
   if (config.typing) {
     let index = 0;
-    input.addEventListener("keydown", function (event: KeyboardEvent) {
-      if (event.key === "Backspace") index = gptAnswer.response.length + 1;
+    input.addEventListener('keydown', function (event: KeyboardEvent) {
+      if (event.key === 'Backspace') index = gptAnswer.response.length + 1;
       if (index > gptAnswer.response.length) return;
       event.preventDefault();
       input.textContent = gptAnswer.response.slice(0, ++index);

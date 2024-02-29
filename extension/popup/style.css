@@ -13,7 +13,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Segeo UI", sans-serif;
+  font-family: 'Segeo UI', sans-serif;
   color: var(--color);
 }
 
@@ -67,8 +67,8 @@ a {
   font-weight: bold;
 }
 
-.line input[type="text"],
-.line input[type="password"] {
+.line input[type='text'],
+.line input[type='password'] {
   flex: 1 1;
   border: thin solid var(--color);
   padding: 0.3rem 0.5rem;
@@ -77,7 +77,7 @@ a {
   background-color: transparent;
 }
 
-.line input[type="checkbox"] {
+.line input[type='checkbox'] {
   accent-color: var(--btn-color);
 }
 

@@ -1,12 +1,12 @@
-import type GPTAnswer from "@typing/gptAnswer";
-import type Config from "@typing/config";
-import handleClipboard from "@core/questions/clipboard";
-import handleContentEditable from "@core/questions/contenteditable";
-import handleNumber from "@core/questions/number";
-import handleRadio from "@core/questions/radio";
-import handleCheckbox from "@core/questions/checkbox";
-import handleSelect from "@core/questions/select";
-import handleTextbox from "@core/questions/textbox";
+import type GPTAnswer from '@typing/gptAnswer';
+import type Config from '@typing/config';
+import handleClipboard from '@core/questions/clipboard';
+import handleContentEditable from '@core/questions/contenteditable';
+import handleNumber from '@core/questions/number';
+import handleRadio from '@core/questions/radio';
+import handleCheckbox from '@core/questions/checkbox';
+import handleSelect from '@core/questions/select';
+import handleTextbox from '@core/questions/textbox';
 
 type Props = {
   config: Config;
@@ -31,7 +31,7 @@ function autoCompleteMode(props: Props) {
     handleNumber,
     handleSelect,
     handleRadio,
-    handleCheckbox,
+    handleCheckbox
   ];
 
   for (const handler of handlers) {

@@ -1,10 +1,10 @@
-import type Config from "@typing/config";
-import Logs from "@utils/logs";
-import getChatGPTResponse from "./get-response";
-import createAndNormalizeQuestion from "./create-question";
-import clipboardMode from "./modes/clipboard";
-import questionToAnswerMode from "./modes/question-to-answer";
-import autoCompleteMode from "./modes/autocomplete";
+import type Config from '@typing/config';
+import Logs from '@utils/logs';
+import getChatGPTResponse from './get-response';
+import createAndNormalizeQuestion from './create-question';
+import clipboardMode from './modes/clipboard';
+import questionToAnswerMode from './modes/question-to-answer';
+import autoCompleteMode from './modes/autocomplete';
 
 type Props = {
   config: Config;
@@ -20,24 +20,19 @@ type Props = {
  * @returns
  */
 async function reply(props: Props): Promise<void> {
-  if (props.config.cursor) props.questionElement.style.cursor = "wait";
+  if (props.config.cursor) props.questionElement.style.cursor = 'wait';
 
   const question = createAndNormalizeQuestion(props.form);
-  const inputList: NodeListOf<HTMLElement> = props.form.querySelectorAll(
-    props.inputQuery
-  );
+  const inputList: NodeListOf<HTMLElement> = props.form.querySelectorAll(props.inputQuery);
 
-  const gptAnswer = await getChatGPTResponse(props.config, question).catch(
-    (error) => ({
-      error,
-    })
-  );
+  const gptAnswer = await getChatGPTResponse(props.config, question).catch(error => ({
+    error
+  }));
 
-  const haveError = typeof gptAnswer === "object" && "error" in gptAnswer;
+  const haveError = typeof gptAnswer === 'object' && 'error' in gptAnswer;
 
   if (props.config.cursor) {
-    props.questionElement.style.cursor =
-      props.config.infinite || haveError ? "pointer" : "initial";
+    props.questionElement.style.cursor = props.config.infinite || haveError ? 'pointer' : 'initial';
   }
 
   if (haveError) {
@@ -51,28 +46,28 @@ async function reply(props: Props): Promise<void> {
   }
 
   switch (props.config.mode) {
-    case "clipboard":
+    case 'clipboard':
       clipboardMode({
         config: props.config,
         questionElement: props.questionElement,
         gptAnswer,
-        removeListener: props.removeListener,
+        removeListener: props.removeListener
       });
       break;
-    case "question-to-answer":
+    case 'question-to-answer':
       questionToAnswerMode({
         gptAnswer,
         questionElement: props.questionElement,
-        removeListener: props.removeListener,
+        removeListener: props.removeListener
       });
       break;
-    case "autocomplete":
+    case 'autocomplete':
       autoCompleteMode({
         config: props.config,
         gptAnswer,
         inputList,
         questionElement: props.questionElement,
-        removeListener: props.removeListener,
+        removeListener: props.removeListener
       });
       break;
   }
