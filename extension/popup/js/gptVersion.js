@@ -3,15 +3,20 @@
 const modelInput = document.querySelector('#model');
 const imagesIntegrationLine = document.querySelector('#includeImages-line');
 
-// Check if the gpt version is at least 4 to show the option 'Include images'
-modelInput.addEventListener('input', function () {
+/**
+ * Check if the gpt version is at least 4 to show the option 'Include images'
+ */
+function checkCanIncludeImages() {
   const version = modelInput.value;
   if (isCurrentVersionSupportingImages(version)) {
     imagesIntegrationLine.style.display = 'flex';
   } else {
     imagesIntegrationLine.style.display = 'none';
   }
-});
+}
+
+checkCanIncludeImages();
+modelInput.addEventListener('input', checkCanIncludeImages);
 
 /**
  * Get the last ChatGPT version

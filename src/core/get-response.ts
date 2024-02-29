@@ -2,14 +2,20 @@ import type Config from '@typing/config';
 import type GPTAnswer from '@typing/gptAnswer';
 import imageToBase64 from '@utils/image-to-base64';
 import normalizeText from '@utils/normalize-text';
-import isCurrentVersionSupportingImages from '@utils/version-support-images';
+import isGPTModelGreaterOrEqualTo4 from '@utils/version-support-images';
 
 type Content =
   | string
-  | Array<{
-      type: CONTENT_TYPE;
-      content: string;
-    }>;
+  | Array<
+      | {
+          type: CONTENT_TYPE.TEXT;
+          text: string;
+        }
+      | {
+          type: CONTENT_TYPE.IMAGE;
+          image_url: { url: string };
+        }
+    >;
 
 type History = {
   url: string | null;
@@ -63,8 +69,8 @@ async function getContent(
   const imagesElements = questionElement.querySelectorAll('img');
 
   if (
-    !config.includeImages ||
-    !isCurrentVersionSupportingImages(config.model) ||
+    config.includeImages &&
+    isGPTModelGreaterOrEqualTo4(config.model) &&
     imagesElements.length === 0
   ) {
     return question;
@@ -79,14 +85,14 @@ async function getContent(
   for (const result of filteredResults) {
     content.push({
       type: CONTENT_TYPE.IMAGE,
-      content: result
+      image_url: { url: result }
     });
   }
 
   if (content.length > 0) {
     content.push({
       type: CONTENT_TYPE.TEXT,
-      content: question
+      text: question
     });
   } else {
     content = question;
@@ -133,7 +139,7 @@ async function getChatGPTResponse(
       temperature: 0.8,
       top_p: 1.0,
       presence_penalty: 1.0,
-      stop: null
+      ...(isGPTModelGreaterOrEqualTo4(config.model) ? { max_tokens: 1000 } : { stop: null }) // look like that on 3.5 we can say stop do null but not on gpt >= 4
     })
   });
 
