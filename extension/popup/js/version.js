@@ -50,8 +50,11 @@ async function notifyUpdate() {
   const minVersionLength = Math.min(lastVertionSplitted.length, currentVersionSplitted.length);
 
   for (let i = 0; i < minVersionLength; ++i) {
-    if (parseInt(lastVertionSplitted[i]) > parseInt(currentVersionSplitted[i]))
+    if (parseInt(lastVertionSplitted[i]) > parseInt(currentVersionSplitted[i])) {
       return setVersion(lastVersion, false);
+    } else if (parseInt(currentVersionSplitted[i]) > parseInt(lastVertionSplitted[i])) {
+      return setVersion(CURRENT_VERSION);
+    }
   }
 
   setVersion(CURRENT_VERSION);
