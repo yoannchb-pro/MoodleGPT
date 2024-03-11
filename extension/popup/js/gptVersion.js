@@ -15,7 +15,6 @@ function checkCanIncludeImages() {
   }
 }
 
-checkCanIncludeImages();
 modelInput.addEventListener('input', checkCanIncludeImages);
 
 /**
@@ -57,8 +56,11 @@ function getLastChatGPTVersion() {
         }
       });
       const rep = await req.json();
+      rep.data.sort((a, b) => b.id.localeCompare(a.id)); // we sort the model to get the best chatgpt version
       const model = rep.data.find(model => model.id.startsWith('gpt'));
       modelInput.value = model.id;
+
+      checkCanIncludeImages();
     } catch (err) {
       console.error(err);
       showMessage({ msg: 'Failed to fetch last ChatGPT version', error: true });
