@@ -3,11 +3,11 @@ import { ROLE, CONTENT_TYPE, type MessageContent, type Message } from '@typing/m
 import imageToBase64 from '@utils/image-to-base64';
 import isGPTModelGreaterOrEqualTo4 from '@utils/version-support-images';
 
-// @TODO: implement cmid, attempt, effacer choix
-
+// The attempt and the cmid allow us to identify a quiz
 type History = {
-  url: string | null;
-  params: Record<string, string>;
+  host: string;
+  cmid: string; // The id of the quiz
+  attempt: string; // The attempt of the current quiz
   history: { role: ROLE; content: MessageContent }[];
 };
 
@@ -28,7 +28,7 @@ Act as a quiz solver for the best notation with the following rules:
 const SYSTEM_INSTRUCTION_MESSAGE = {
   role: ROLE.SYSTEM,
   content: INSTRUCTION
-} as const;
+} as const satisfies Message;
 
 /**
  * Get the content to send to ChatGPT API (it allows to includes images if supported)
@@ -42,36 +42,35 @@ async function getContent(
   const imagesElements = questionElement.querySelectorAll('img');
 
   if (
-    config.includeImages &&
-    isGPTModelGreaterOrEqualTo4(config.model) &&
+    !config.includeImages ||
+    !isGPTModelGreaterOrEqualTo4(config.model) ||
     imagesElements.length === 0
   ) {
     return question;
   }
 
-  let content: MessageContent = [];
+  const contentWithImages: MessageContent = [];
 
   const base64Images = Array.from(imagesElements).map(imgEl => imageToBase64(imgEl));
-  const results = await Promise.all(base64Images);
-  const filteredResults = results.filter(value => value !== null) as string[];
+  const base64ImagesResolved = await Promise.allSettled(base64Images);
 
-  for (const result of filteredResults) {
-    content.push({
-      type: CONTENT_TYPE.IMAGE,
-      image_url: { url: result }
-    });
+  for (const result of base64ImagesResolved) {
+    if (result.status === 'fulfilled') {
+      contentWithImages.push({
+        type: CONTENT_TYPE.IMAGE,
+        image_url: { url: result.value }
+      });
+    } else if (config.logs) {
+      console.error(result.reason);
+    }
   }
 
-  if (content.length > 0) {
-    content.push({
-      type: CONTENT_TYPE.TEXT,
-      text: question
-    });
-  } else {
-    content = question;
-  }
+  contentWithImages.push({
+    type: CONTENT_TYPE.TEXT,
+    text: question
+  });
 
-  return content;
+  return contentWithImages;
 }
 
 /**
@@ -79,17 +78,12 @@ async function getContent(
  * @returns
  */
 function createNewHistory(): History {
-  const url_params = new URLSearchParams(document.location.search).entries();
-  const params: Record<string, string> = {};
-
-  for (const [key, value] of url_params) {
-    if (key === 'page') continue;
-    params[key] = value;
-  }
+  const urlParams = new URLSearchParams(document.location.search);
 
   return {
-    url: document.location.host,
-    params,
+    host: document.location.host,
+    cmid: urlParams.get('cmid') ?? '',
+    attempt: urlParams.get('attempt') ?? '',
     history: []
   };
 }
@@ -108,13 +102,11 @@ function loadPastHistory(): History | null {
  * @param b
  * @returns
  */
-function areHistorySameOrigin(a: History, b: History): boolean {
-  if (a.url !== b.url) return false;
+function areHistoryFromSameQuiz(a: History, b: History): boolean {
+  const KEYS_TO_COMPARE: (keyof History)[] = ['host', 'cmid', 'attempt'];
 
-  if (Object.keys(a.params).length !== Object.keys(b.params).length) return false;
-
-  for (const [key, value] of Object.entries(a.params)) {
-    if (!(key in b.params) || b.params[key] !== value) return false;
+  for (const key of KEYS_TO_COMPARE) {
+    if (a[key] !== b[key]) return false;
   }
 
   return true;
@@ -145,7 +137,7 @@ async function getContentWithHistory(
   const pastHistory: History | null = loadPastHistory();
   const newHistory: History = createNewHistory();
 
-  if (pastHistory === null || !areHistorySameOrigin(pastHistory, newHistory)) {
+  if (pastHistory === null || !areHistoryFromSameQuiz(pastHistory, newHistory)) {
     history = newHistory;
   } else {
     history = pastHistory;

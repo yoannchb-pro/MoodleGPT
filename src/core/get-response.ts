@@ -17,6 +17,8 @@ async function getChatGPTResponse(
   const controller = new AbortController();
   const timeoutControler = setTimeout(() => controller.abort(), 20 * 1000);
 
+  // Get the content to send to chatgpt
+  // Including the instructions to the AI, the images as base64 if needed, the question and the past conversation if history is set to true
   const contentHandler = await getContentWithHistory(config, questionElement, question);
 
   const req = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -43,7 +45,7 @@ async function getChatGPTResponse(
   const response = rep.choices[0].message.content;
 
   // Save the response into the history
-  if (contentHandler.saveResponse) contentHandler.saveResponse(response);
+  if (typeof contentHandler.saveResponse === 'function') contentHandler.saveResponse(response);
 
   return {
     question,
