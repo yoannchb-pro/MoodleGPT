@@ -1,4 +1,4 @@
-import type GPTAnswer from '@typing/gptAnswer';
+import type GPTAnswer from '@typing/gpt-answer';
 import type Config from '@typing/config';
 import handleClipboard from '@core/questions/clipboard';
 import handleContentEditable from '@core/questions/contenteditable';

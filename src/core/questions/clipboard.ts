@@ -1,5 +1,5 @@
 import type Config from '@typing/config';
-import type GPTAnswer from '@typing/gptAnswer';
+import type GPTAnswer from '@typing/gpt-answer';
 import titleIndications from '@utils/title-indications';
 
 /**
