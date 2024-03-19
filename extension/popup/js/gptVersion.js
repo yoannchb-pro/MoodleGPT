@@ -20,7 +20,7 @@ modelInput.addEventListener('input', checkCanIncludeImages);
 /**
  * Get the list of chatgpt versions
  */
-function getLastChatGPTVersion() {
+function getLastChatGPTVersion(selectedModel) {
   const apiKeySelector = document.querySelector('#apiKey');
   const selectModel = document.querySelector('#model');
 
@@ -49,6 +49,7 @@ function getLastChatGPTVersion() {
         const opt = document.createElement('option');
         opt.value = model.id;
         opt.textContent = model.id;
+        opt.selected = selectedModel && model.id === selectedModel;
         selectModel.appendChild(opt);
       }
 

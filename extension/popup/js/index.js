@@ -84,6 +84,6 @@ chrome.storage.sync.get(['moodleGPT']).then(function (storage) {
   }
 
   handleModeChange();
-  getLastChatGPTVersion();
+  getLastChatGPTVersion(config?.model);
   checkCanIncludeImages();
 });
