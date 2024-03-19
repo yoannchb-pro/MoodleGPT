@@ -37,11 +37,11 @@ function handleRadio(
 
   const correctInput = bestAnswer.element as HTMLInputElement;
   if (config.mouseover) {
-    correctInput.addEventListener('mouseover', () => (correctInput.checked = true), {
+    correctInput.addEventListener('mouseover', () => correctInput.click(), {
       once: true
     });
   } else {
-    correctInput.checked = true;
+    correctInput.click();
   }
 
   return true;
