@@ -18,36 +18,22 @@ function checkCanIncludeImages() {
 modelInput.addEventListener('input', checkCanIncludeImages);
 
 /**
- * Get the last ChatGPT version
+ * Get the list of chatgpt versions
  */
 function getLastChatGPTVersion() {
   const apiKeySelector = document.querySelector('#apiKey');
-  const reloadModel = document.querySelector('#reloadModel');
+  const selectModel = document.querySelector('#model');
 
   let apiKey = apiKeySelector.value?.trim();
 
   // If the api key is set we enable the button to get the last chatgpt version
-  function checkFiledApiKey() {
-    if (apiKey) {
-      reloadModel.removeAttribute('disabled');
-      reloadModel.setAttribute('title', 'Get last ChatGPT version');
+  async function getGptVersions() {
+    if (!apiKey) {
+      selectModel.setAttribute('disabled', true);
       return;
     }
 
-    reloadModel.setAttribute('disabled', true);
-    reloadModel.setAttribute('title', 'Provide an api key first');
-  }
-  checkFiledApiKey();
-
-  // Check if the api key is set
-  apiKeySelector.addEventListener('input', function () {
-    apiKey = apiKeySelector.value.trim();
-    checkFiledApiKey();
-  });
-
-  // Event listener to handle a click on the relaod icon button
-  reloadModel.addEventListener('click', async function () {
-    if (!apiKey) return;
+    selectModel.innerHTML = '';
 
     try {
       const req = await fetch('https://api.openai.com/v1/models', {
@@ -57,13 +43,29 @@ function getLastChatGPTVersion() {
       });
       const rep = await req.json();
       rep.data.sort((a, b) => b.id.localeCompare(a.id)); // we sort the model to get the best chatgpt version
-      const model = rep.data.find(model => model.id.startsWith('gpt'));
-      modelInput.value = model.id;
+      const models = rep.data.filter(model => model.id.startsWith('gpt'));
+
+      for (const model of models) {
+        const opt = document.createElement('option');
+        opt.value = model.id;
+        opt.textContent = model.id;
+        selectModel.appendChild(opt);
+      }
 
       checkCanIncludeImages();
     } catch (err) {
       console.error(err);
       showMessage({ msg: 'Failed to fetch last ChatGPT version', error: true });
     }
+
+    selectModel.removeAttribute('disabled');
+  }
+
+  // Check if the api key is set
+  apiKeySelector.addEventListener('blur', function () {
+    apiKey = apiKeySelector.value.trim();
+    getGptVersions();
   });
+
+  getGptVersions();
 }

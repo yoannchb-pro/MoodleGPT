@@ -68,13 +68,18 @@ a {
 }
 
 .line input[type='text'],
-.line input[type='password'] {
+.line input[type='password'],
+.line select {
   flex: 1 1;
   border: thin solid var(--color);
   padding: 0.3rem 0.5rem;
   border-radius: 0.2rem;
   outline-color: transparent;
   background-color: transparent;
+}
+
+.line option {
+  color: #000;
 }
 
 .line input[type='checkbox'] {
