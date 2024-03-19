@@ -33,7 +33,7 @@ async function getChatGPTResponse(
       messages: contentHandler.messages,
 
       temperature: 0.1, // Controls the randomness of the generated responses, with lower values producing more deterministic and predictable outputs. With set to 0.1 instead of 0 for more creativity.
-      top_p: 1, // Determines the diversity of the generated responses
+      top_p: 0.6, // Determines the diversity of the generated responses
       presence_penalty: 0, // Encourages the model to introduce new concepts by penalizing words that have already appeared in the text.
       max_tokens: 2000 // Maximum length of the response
     })

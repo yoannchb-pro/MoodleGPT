@@ -28,6 +28,7 @@ function handleSelect(
     const options = inputList[i].querySelectorAll('option');
 
     const possibleAnswers = Array.from(options)
+      .slice(1) // We remove the first option which correspond to "Choose..."
       .map(opt => ({
         element: opt,
         value: normalizeText(opt.textContent ?? '')
