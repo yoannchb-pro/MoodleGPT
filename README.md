@@ -34,6 +34,7 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
     - [Text](#text)
   - [What about if the question can't be completed ?](#what-about-if-the-question-cant-be-completed-)
   - [Test](#test)
+  - [Beta version with advanced features](#beta-version-with-advanced-features)
 
 ## Disclaimer !
 
@@ -152,3 +153,7 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 - <b>Solution 1</b>: Go on [this moodle test page](https://school.moodledemo.net/login/index.php) (username: `student`, password: `moodle`) and choose any quiz.
 - <b>Solution 2</b>: Run the `index.html` file located in the `test/fake-moodle` folder.
+
+## Beta version with advanced features
+
+If you're interested in accessing advanced features ahead of their official release, please consider downloading the extension from the [dev branch](https://github.com/yoannchb-pro/MoodleGPT/tree/dev). However, please be aware that this branch is under development and may contain bugs. If you encounter any issues, don't hesitate to contact me or create an issue on GitHub. Your feedback is invaluable in helping us improve the extension.
