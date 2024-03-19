@@ -47,7 +47,8 @@
       </div>
       <div class="line center">
         <label for="model" class="textLabel">GPT Model<span class="required">*</span>:</label>
-        <select name="model" id="model" disabled></select>
+        <input type="text" id="model" list="models" disabled />
+        <datalist id="models"></datalist>
       </div>
       <div class="line center">
         <label for="code" class="textLabel">Code:</label>

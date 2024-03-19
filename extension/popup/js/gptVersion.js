@@ -20,20 +20,22 @@ modelInput.addEventListener('input', checkCanIncludeImages);
 /**
  * Get the list of chatgpt versions
  */
-function getLastChatGPTVersion(selectedModel) {
+function getLastChatGPTVersion() {
   const apiKeySelector = document.querySelector('#apiKey');
-  const selectModel = document.querySelector('#model');
+  const inputModel = document.querySelector('#model');
+  const modelsList = document.querySelector('#models');
 
   let apiKey = apiKeySelector.value?.trim();
 
   // If the api key is set we enable the button to get the last chatgpt version
   async function getGptVersions() {
     if (!apiKey) {
-      selectModel.setAttribute('disabled', true);
+      inputModel.setAttribute('disabled', true);
+      modelsList.setAttribute('disabled', true);
       return;
     }
 
-    selectModel.innerHTML = '';
+    inputModel.innerHTML = '';
 
     try {
       const req = await fetch('https://api.openai.com/v1/models', {
@@ -49,8 +51,7 @@ function getLastChatGPTVersion(selectedModel) {
         const opt = document.createElement('option');
         opt.value = model.id;
         opt.textContent = model.id;
-        opt.selected = selectedModel && model.id === selectedModel;
-        selectModel.appendChild(opt);
+        modelsList.appendChild(opt);
       }
 
       checkCanIncludeImages();
@@ -59,7 +60,8 @@ function getLastChatGPTVersion(selectedModel) {
       showMessage({ msg: 'Failed to fetch last ChatGPT version', error: true });
     }
 
-    selectModel.removeAttribute('disabled');
+    inputModel.removeAttribute('disabled');
+    modelsList.removeAttribute('disabled');
   }
 
   // Check if the api key is set
