@@ -4,7 +4,7 @@ title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/
 
 # MoodleGPT 1.1.0
 
-This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
+This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
 ## Chrome Webstore
 
@@ -32,7 +32,7 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
     - [True or false](#true-or-false)
     - [Number](#number)
     - [Text](#text)
-  - [What about if the question can't be completed ?](#what-about-if-the-question-cant-be-completed-)
+  - [What about if the question can't be autocompleted ?](#what-about-if-the-question-cant-be-autocompleted-)
   - [Test](#test)
   - [Beta version with advanced features](#beta-version-with-advanced-features)
 
@@ -42,7 +42,7 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 ## Donate
 
-Will be a pleasure if you want to support this project :)
+Will be a pleasure if you want to support this project :). I'm alone working on this project and I'm still a student.
 <br/>
 <a href="https://www.buymeacoffee.com/yoannchbpro" target="_blank" rel="noopener noreferrer"><img src="./assets/bmc-button.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150"></a>
 
@@ -52,13 +52,13 @@ See the [changelog](./CHANGELOG.md) to see every updates !
 
 ## Set up
 
-> NOTE: This extension only works on Chromium-based browsers like Edge, Chrome, etc. Unfortunately, Firefox requires a click on the extension, which is not very discreet.
+> NOTE: This extension only works on Chromium-based browsers like Edge, Chrome, etc.
 
 <p align="center">
 <img src="./assets/setup.png" alt="Popup" width="300">
 </p>
 
-Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the ApiKey obtained from [openai api](https://platform.openai.com/api-keys). Finally, select a gpt model (ensure it work with completion api).
+Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the ApiKey obtained from [openai api](https://platform.openai.com/api-keys). Finally, select a [gpt model](https://platform.openai.com/docs/models) (ensure it work with completion api).
 
 ## Mode
 
@@ -66,7 +66,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 <img src="./assets/mode.png" alt="Popup" width="300">
 </p>
 
-- <b>Autocomplete:</b> The extension will complete the question for you.
+- <b>Autocomplete:</b> The extension will complete the question for you by selecting the correct(s) answer(s).
 - <b>Clipboard:</b> The response is copied into the clipboard.
 - <b>Question to answer:</b> The question is converted to the answer and you can click on it to show back the question (or show back the answer).
   <br/><img src="./assets/question-to-answer.gif" alt="Question to Answer">
@@ -77,9 +77,9 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 <img src="./assets/settings.png" alt="Popup" width="300">
 </p>
 
-- <b>Api key</b>: the openai api key.
+- <b>Api key\*</b>: the [openai api key](https://platform.openai.com/api-keys) from your account (Note you have to put credits by entering a credit card onto your account).
+- <b>GPT Model\*</b>: the [gpt model](https://platform.openai.com/docs/models) you want to use.
 - <b>Code</b>: a code to be more discret for injecting/removing the extension from the page. Simply type your code you entered into the configuration on the keyboard when you are on your moodle quiz and the extension will be inject. If you want to remove the injection just simply type back the code on your keyboard.
-- <b>GPT Model</b>: the gpt model you want to use. You can click on the reload button to get the latest version of available gpt model for your account but you need to enter the api key first.
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
@@ -93,7 +93,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
   <br/> ![Mouseover2](./assets/mouseover2.gif)
 - <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
 - <b>Save history</b>: allows you to create a conversation with ChatGPT by saving the previous question with its answer. However, note that it can consume a significant number of tokens.
-- <b>Include images</b> (only work with gpt-4): allows you to include the images from the question to be send to the chatgpt api. The quality is reduced to 75% to use less tokens.However, note that it can consume a significant number of tokens.
+- <b>Include images</b> (only work with gpt-4): allows you to include the images from the question to be send to the chatgpt api. The quality is reduced to 75% to use less tokens. However, note that it can consume a significant number of tokens.
   <br/> ![Images](./assets/images.gif)
 
 ## Internal Features
@@ -143,9 +143,9 @@ Table are formated from the question to make it more readable for CHAT-GPT. Exam
 
 ![Text](./assets/text.gif)
 
-## What about if the question can't be completed ?
+## What about if the question can't be autocompleted ?
 
-To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds.
+To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds if `Title indication` is on.
 
 ![Clipboard](./assets/clipboard.gif)
 
