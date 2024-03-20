@@ -7,6 +7,7 @@ function htmlTableToString(table: HTMLTableElement) {
   const tab: string[][] = [];
   const lines = Array.from(table.querySelectorAll('tr'));
   const maxColumnsLength: number[] = [];
+
   lines.map(line => {
     const cells = Array.from(line.querySelectorAll('td, th'));
     const cellsContent = cells.map((cell, index) => {
@@ -17,7 +18,10 @@ function htmlTableToString(table: HTMLTableElement) {
     tab.push(cellsContent);
   });
 
-  const lineSeparationSize = maxColumnsLength.reduce((a, b) => a + b) + tab[0].length * 3 + 1;
+  const jointure = ' | ';
+  const headerLineLength = tab[0].length;
+  const lineSeparationSize =
+    maxColumnsLength.reduce((a, b) => a + b, 0) + (headerLineLength - 1) * jointure.length;
   const lineSeparation = '\n' + Array(lineSeparationSize).fill('-').join('') + '\n';
 
   const mappedTab = tab.map(line => {
@@ -27,9 +31,11 @@ function htmlTableToString(table: HTMLTableElement) {
         '\u00A0' // For no matching with \s
       )
     );
-    return '| ' + mappedLine.join(' | ') + ' |';
+    return mappedLine.join(jointure);
   });
+
   const head = mappedTab.shift();
+
   return head + lineSeparation + mappedTab.join('\n');
 }
 
