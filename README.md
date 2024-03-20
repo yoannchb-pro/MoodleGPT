@@ -103,11 +103,13 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 Table are formated from the question to make it more readable for CHAT-GPT. Example of formatted table output:
 
 ```
-| id       | name  | birthDate  | cars |
-----------------------------------------
-| Person 1 | Yvick | 15/08/1999 | yes  |
-| Person 2 | Yann  | 19/01/2000 | no   |
+id       | name  | birthDate  | cars
+------------------------------------
+Person 1 | Yvick | 15/08/1999 | yes 
+Person 2 | Yann  | 19/01/2000 | no
 ```
+
+![Table](./assets/table.gif)
 
 ## Supported questions type
 
