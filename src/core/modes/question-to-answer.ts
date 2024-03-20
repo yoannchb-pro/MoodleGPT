@@ -16,16 +16,16 @@ function questionToAnswerMode(props: Props) {
 
   props.removeListener();
 
-  const questionBackup = questionElement.textContent;
-  questionElement.textContent = props.gptAnswer.response;
+  const questionBackup = questionElement.innerHTML ?? '';
+  questionElement.innerHTML = props.gptAnswer.response;
   questionElement.style.whiteSpace = 'pre-wrap';
 
   // To go back to the question / answer
   questionElement.addEventListener('click', function () {
-    const contentIsResponse = questionElement.textContent === props.gptAnswer.response;
+    const contentIsResponse = questionElement.innerHTML === props.gptAnswer.response;
 
     questionElement.style.whiteSpace = contentIsResponse ? 'initial' : 'pre-wrap';
-    questionElement.textContent = contentIsResponse ? questionBackup : props.gptAnswer.response;
+    questionElement.innerHTML = contentIsResponse ? questionBackup : props.gptAnswer.response;
   });
 }
 
