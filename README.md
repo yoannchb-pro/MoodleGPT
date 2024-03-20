@@ -21,7 +21,7 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
   - [Set up](#set-up)
   - [Mode](#mode)
   - [Settings](#settings)
-  - [Internal Features](#internal-features)
+  - [Internal other features](#internal-other-features)
     - [Support table](#support-table)
   - [Supported questions type](#supported-questions-type)
     - [Select](#select)
@@ -96,7 +96,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 - <b>Include images</b> (only work with gpt-4): allows you to include the images from the question to be send to the chatgpt api. The quality is reduced to 75% to use less tokens. However, note that it can consume a significant number of tokens.
   <br/> ![Images](./assets/images.gif)
 
-## Internal Features
+## Internal other features
 
 ### Support table
 
