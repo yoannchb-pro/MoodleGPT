@@ -7,7 +7,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Segeo UI";
+  font-family: 'Segeo UI';
 }
 
 body {
@@ -64,4 +64,29 @@ textarea {
   resize: vertical;
   white-space: pre-wrap;
   overflow-y: auto;
+}
+
+img {
+  height: 5rem;
+}
+
+.style-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.style-table th,
+.style-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.style-table th {
+  background-color: #f2f2f2;
+}
+
+.style-table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }

@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.1.0
+
+- Bugs correction
+- Adjusted the abort timeout to 20seconds
+- `code` is not required anymore
+- Issue [#9](https://github.com/yoannchb-pro/MoodleGPT/issues/9) resolved
+- GPT model autocompletation
+- Better algorithm to find the correct answer (levenshtein distance)
+- Better ChatGPT prompt
+- Added `history` to the options/configuration
+- Added `include images` to the option/configuration
+- `gpt-4` support
+
 ## v1.0.3
 
 - Removed the option `table formating` because it will now set to true by default

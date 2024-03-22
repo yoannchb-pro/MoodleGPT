@@ -1,99 +1,78 @@
-import Config from "../types/config";
-import Logs from "../utils/logs";
-import getChatGPTResponse from "./get-response";
-import createQuestion from "./create-question";
-import handleRadioAndCheckbox from "./questions/radio-checkbox";
-import handleSelect from "./questions/select";
-import handleTextbox from "./questions/textbox";
-import handleClipboard from "./questions/clipboard";
-import handleNumber from "./questions/number";
-import handleContentEditable from "./questions/contenteditable";
-import { removeListener } from "./code-listener";
+import type Config from '@typing/config';
+import Logs from '@utils/logs';
+import getChatGPTResponse from './get-response';
+import createAndNormalizeQuestion from './create-question';
+import clipboardMode from './modes/clipboard';
+import questionToAnswerMode from './modes/question-to-answer';
+import autoCompleteMode from './modes/autocomplete';
+
+type Props = {
+  config: Config;
+  questionElement: HTMLElement;
+  form: HTMLElement;
+  inputQuery: string;
+  removeListener: () => void;
+};
 
 /**
  * Reply to the question
- * @param config
- * @param hiddenButton
- * @param form
- * @param query
+ * @param props
  * @returns
  */
-async function reply(
-  config: Config,
-  hiddenButton: HTMLElement,
-  form: HTMLElement,
-  query: string
-) {
-  if (config.cursor) hiddenButton.style.cursor = "wait";
+async function reply(props: Props): Promise<void> {
+  if (props.config.cursor) props.questionElement.style.cursor = 'wait';
 
-  const question = createQuestion(config, form);
-  const inputList: NodeListOf<HTMLElement> = form.querySelectorAll(query);
+  const question = createAndNormalizeQuestion(props.form);
+  const inputList: NodeListOf<HTMLElement> = props.form.querySelectorAll(props.inputQuery);
 
-  const gptAnswer = await getChatGPTResponse(config, question).catch(
-    (error) => ({
-      error,
+  const gptAnswer = await getChatGPTResponse(props.config, props.questionElement, question).catch(
+    error => ({
+      error
     })
   );
 
-  const haveError = typeof gptAnswer === "object" && "error" in gptAnswer;
+  const haveError = typeof gptAnswer === 'object' && 'error' in gptAnswer;
 
-  if (config.cursor)
-    hiddenButton.style.cursor =
-      config.infinite || haveError ? "pointer" : "initial";
+  if (props.config.cursor) {
+    props.questionElement.style.cursor = props.config.infinite || haveError ? 'pointer' : 'initial';
+  }
 
   if (haveError) {
     console.error(gptAnswer.error);
     return;
   }
 
-  if (config.logs) {
+  if (props.config.logs) {
     Logs.question(question);
     Logs.response(gptAnswer);
   }
 
-  /* Handle clipboard mode */
-  if (config.mode === "clipboard") {
-    if (!config.infinite) removeListener(hiddenButton);
-    return handleClipboard(config, gptAnswer);
+  switch (props.config.mode) {
+    case 'clipboard':
+      clipboardMode({
+        config: props.config,
+        questionElement: props.questionElement,
+        gptAnswer,
+        removeListener: props.removeListener
+      });
+      break;
+    case 'question-to-answer':
+      questionToAnswerMode({
+        gptAnswer,
+        questionElement: props.questionElement,
+        removeListener: props.removeListener
+      });
+      break;
+    case 'autocomplete':
+      autoCompleteMode({
+        config: props.config,
+        gptAnswer,
+        inputList,
+        questionElement: props.questionElement,
+        removeListener: props.removeListener
+      });
+      break;
   }
-
-  /* Handle question to answer mode */
-  if (config.mode === "question-to-answer") {
-    removeListener(hiddenButton);
-
-    const questionContainer = form.querySelector<HTMLElement>(".qtext");
-    const questionBackup = questionContainer.textContent;
-
-    questionContainer.textContent = gptAnswer.response;
-    questionContainer.style.whiteSpace = "pre-wrap";
-
-    questionContainer.addEventListener("click", function () {
-      const isNotResponse = questionContainer.textContent === questionBackup;
-      questionContainer.style.whiteSpace = isNotResponse ? "pre-wrap" : null;
-      questionContainer.textContent = isNotResponse
-        ? gptAnswer.response
-        : questionBackup;
-    });
-    return;
-  }
-
-  /* Better then set once on the event because if there is an error the user can click an other time on the question */
-  if (!config.infinite) removeListener(hiddenButton);
-
-  const handlers = [
-    handleContentEditable,
-    handleTextbox,
-    handleNumber,
-    handleSelect,
-    handleRadioAndCheckbox,
-  ];
-
-  for (const handler of handlers) {
-    if (handler(config, inputList, gptAnswer)) return;
-  }
-
-  /* In the case we can't auto complete the question */
-  handleClipboard(config, gptAnswer);
 }
 
 export default reply;

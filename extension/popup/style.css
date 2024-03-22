@@ -13,7 +13,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Segeo UI", sans-serif;
+  font-family: 'Segeo UI', sans-serif;
   color: var(--color);
 }
 
@@ -57,12 +57,19 @@ a {
 }
 
 .line .textLabel {
-  width: 6rem;
+  width: 5rem;
+  text-align: left;
   text-transform: uppercase;
 }
 
-.line input[type="text"],
-.line input[type="password"] {
+.line .textLabel .required {
+  color: var(--btn-color);
+  font-weight: bold;
+}
+
+.line input[type='text'],
+.line input[type='password'],
+.line select {
   flex: 1 1;
   border: thin solid var(--color);
   padding: 0.3rem 0.5rem;
@@ -71,7 +78,11 @@ a {
   background-color: transparent;
 }
 
-.line input[type="checkbox"] {
+.line option {
+  color: #000;
+}
+
+.line input[type='checkbox'] {
   accent-color: var(--btn-color);
 }
 
@@ -126,8 +137,7 @@ a {
 
 #message {
   display: none;
-  margin-top: 0.75rem;
-  margin-bottom: -0.25rem;
+  margin-bottom: -0.5rem;
 }
 
 #reloadModel {

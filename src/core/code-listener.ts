@@ -1,26 +1,40 @@
-import Config from "../types/config";
-import titleIndications from "../utils/title-indications";
-import reply from "./reply";
+import type Config from '@typing/config';
+import titleIndications from '@utils/title-indications';
+import reply from './reply';
+
+type Listener = {
+  element: HTMLElement;
+  fn: (this: HTMLElement, ev: MouseEvent) => void;
+};
 
 const pressedKeys: string[] = [];
-const listeners: {
-  element: HTMLElement;
-  fn: (this: HTMLElement, ev: MouseEvent) => any;
-}[] = [];
+const listeners: Listener[] = [];
 
 /**
  * Create a listener on the keyboard to inject the code
  * @param config
  */
 function codeListener(config: Config) {
-  document.body.addEventListener("keydown", function (event) {
+  document.body.addEventListener('keydown', function (event) {
     pressedKeys.push(event.key);
-    if (pressedKeys.length > config.code.length) pressedKeys.shift();
-    if (pressedKeys.join("") === config.code) {
+    if (pressedKeys.length > config.code!.length) pressedKeys.shift();
+    if (pressedKeys.join('') === config.code) {
       pressedKeys.length = 0;
       setUpMoodleGpt(config);
     }
   });
+}
+
+/**
+ * Remove the event listener on a specific question
+ * @param element
+ */
+function removeListener(element: HTMLElement) {
+  const index = listeners.findIndex(listener => listener.element === element);
+  if (index !== -1) {
+    const listener = listeners.splice(index, 1)[0];
+    listener.element.removeEventListener('click', listener.fn);
+  }
 }
 
 /**
@@ -29,53 +43,45 @@ function codeListener(config: Config) {
  * @returns
  */
 function setUpMoodleGpt(config: Config) {
-  /* Removing events */
+  // Removing events if there are already declared
   if (listeners.length > 0) {
     for (const listener of listeners) {
-      if (config.cursor) listener.element.style.cursor = "initial";
-      listener.element.removeEventListener("click", listener.fn);
+      if (config.cursor) listener.element.style.cursor = 'initial';
+      listener.element.removeEventListener('click', listener.fn);
     }
-    if (config.title) titleIndications("Removed");
+    if (config.title) titleIndications('Removed');
     listeners.length = 0;
     return;
   }
 
-  /* Code injection */
-  const inputQuery = ["checkbox", "radio", "text", "number"]
-    .map((e) => `input[type="${e}"]`)
-    .join(",");
-  const query = inputQuery + ", textarea, select, [contenteditable]";
-  const forms = document.querySelectorAll(".formulation");
+  // Query to find inputs and forms
+  const inputTypeQuery = ['checkbox', 'radio', 'text', 'number']
+    .map(e => `input[type="${e}"]`)
+    .join(',');
+  const inputQuery = inputTypeQuery + ', textarea, select, [contenteditable]';
+  const forms = document.querySelectorAll('.formulation');
 
+  // For each form we inject a function on the queqtion
   for (const form of forms) {
-    const hiddenButton: HTMLElement = form.querySelector(".qtext");
+    const questionElement: HTMLElement | null = form.querySelector('.qtext');
 
-    if (config.cursor) hiddenButton.style.cursor = "pointer";
+    if (questionElement === null) continue;
 
-    const injectionFunction = reply.bind(
-      null,
+    if (config.cursor) questionElement.style.cursor = 'pointer';
+
+    const injectionFunction = reply.bind(null, {
       config,
-      hiddenButton,
-      form,
-      query
-    );
-    listeners.push({ element: hiddenButton, fn: injectionFunction });
-    hiddenButton.addEventListener("click", injectionFunction);
+      questionElement,
+      form: form as HTMLElement,
+      inputQuery,
+      removeListener: () => removeListener(questionElement)
+    });
+
+    listeners.push({ element: questionElement, fn: injectionFunction });
+    questionElement.addEventListener('click', injectionFunction);
   }
 
-  if (config.title) titleIndications("Injected");
+  if (config.title) titleIndications('Injected');
 }
 
-/**
- * Remove the event listener on a specific question
- * @param element
- */
-function removeListener(element: HTMLElement) {
-  const index = listeners.findIndex((listener) => listener.element === element);
-  if (index !== -1) {
-    const listener = listeners.splice(index, 1)[0];
-    listener.element.removeEventListener("click", listener.fn);
-  }
-}
-
-export { codeListener, removeListener };
+export { codeListener, removeListener, setUpMoodleGpt };

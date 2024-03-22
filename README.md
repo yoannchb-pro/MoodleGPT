@@ -2,9 +2,9 @@
 href="https://www.flaticon.com/free-icons/mortarboard" target="_blank" rel="noopener noreferrer"
 title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/icon.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150" style="display:block; margin:auto;"></a></p>
 
-# MoodleGPT v1.0.3
+# MoodleGPT 1.1.0
 
-This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to enter <b>the code configured in the extension</b> on the keyboard and then click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
+This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
 ## Chrome Webstore
 
@@ -12,19 +12,16 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
 
 ## Summary
 
-- [MoodleGPT v1.0.3](#moodlegpt-v103)
+- [MoodleGPT 1.1.0](#moodlegpt-110)
   - [Chrome Webstore](#chrome-webstore)
   - [Summary](#summary)
   - [Disclaimer !](#disclaimer-)
   - [Donate](#donate)
   - [Update](#update)
-  - [MoodleGPT don't complete my quiz ?](#moodlegpt-dont-complete-my-quiz-)
   - [Set up](#set-up)
-  - [Inject the code into the moodle](#inject-the-code-into-the-moodle)
-  - [Remove injection](#remove-injection)
   - [Mode](#mode)
   - [Settings](#settings)
-  - [Internal Features](#internal-features)
+  - [Internal other features](#internal-other-features)
     - [Support table](#support-table)
   - [Supported questions type](#supported-questions-type)
     - [Select](#select)
@@ -35,8 +32,9 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
     - [True or false](#true-or-false)
     - [Number](#number)
     - [Text](#text)
-  - [What about if the question can't be completed ?](#what-about-if-the-question-cant-be-completed-)
+  - [What about if the question can't be autocompleted ?](#what-about-if-the-question-cant-be-autocompleted-)
   - [Test](#test)
+  - [Beta version with advanced features](#beta-version-with-advanced-features)
 
 ## Disclaimer !
 
@@ -44,35 +42,23 @@ I hereby declare that I am not responsible for any misuse or illegal activities 
 
 ## Donate
 
-Will be a pleasure if you want to support this project :)
+Will be a pleasure if you want to support this project :). I'm alone working on this project and I'm still a student.
 <br/>
 <a href="https://www.buymeacoffee.com/yoannchbpro" target="_blank" rel="noopener noreferrer"><img src="./assets/bmc-button.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150"></a>
 
 ## Update
 
-See [changelog](./CHANGELOG.md)
-
-## MoodleGPT don't complete my quiz ?
-
-If MoodleGPT cannot complete one of your moodle quiz please provide the html code of the page. It will help us to add it in the futur version of MoodleGPT ! Check the [TODO](./TODO.md) to see what is comming in the futur version.
+See the [changelog](./CHANGELOG.md) to see every updates !
 
 ## Set up
 
-> NOTE: This extension only works on Chromium-based browsers like Edge, Chrome, etc. Unfortunately, Firefox requires a click on the extension, which is not very discreet.
+> NOTE: This extension only works on Chromium-based browsers like Edge, Chrome, etc.
 
 <p align="center">
 <img src="./assets/setup.png" alt="Popup" width="300">
 </p>
 
-Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the apiKey obtained from [openai](https://platform.openai.com/) and enter a <b>code</b> that will activate the extension on your moodle page. Finally, click on the <b>reload button</b> next to model (it should give you the last ChatGPT version, otherwise enter it by your self) and click on the save button (The extension need to be configured before entering the moodle quiz).
-
-## Inject the code into the moodle
-
-You just need to enter on the keyboard the <b>code</b> you have set into the extension and click on the question you want to solve.
-
-## Remove injection
-
-Type back the <b>code</b> on the keyboard and the code will be removed from the current page.
+Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the ApiKey obtained from [openai api](https://platform.openai.com/api-keys). Finally, select a [gpt model](https://platform.openai.com/docs/models) (ensure it work with completion api).
 
 ## Mode
 
@@ -80,7 +66,7 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 <img src="./assets/mode.png" alt="Popup" width="300">
 </p>
 
-- <b>Autocomplete:</b> The extension will complete the question for you.
+- <b>Autocomplete:</b> The extension will complete the question for you by selecting the correct(s) answer(s).
 - <b>Clipboard:</b> The response is copied into the clipboard.
 - <b>Question to answer:</b> The question is converted to the answer and you can click on it to show back the question (or show back the answer).
   <br/><img src="./assets/question-to-answer.gif" alt="Question to Answer">
@@ -91,35 +77,39 @@ Type back the <b>code</b> on the keyboard and the code will be removed from the 
 <img src="./assets/settings.png" alt="Popup" width="300">
 </p>
 
-- <b>Api key</b>: the openai api key.
-- <b>Code</b>: code that you will need to inject/remove the code.
-- <b>GPT Model</b>: the gpt model you want to use. You can click on the reload button to get the latest version of available gpt model for your account but you need to enter the api key first.
+- <b>Api key\*</b>: the [openai api key](https://platform.openai.com/api-keys) from your account (Note you have to put credits by entering a credit card onto your account).
+- <b>GPT Model\*</b>: the [gpt model](https://platform.openai.com/docs/models) you want to use.
+- <b>Code</b>: a code to be more discret for injecting/removing the extension from the page. Simply type your code you entered into the configuration on the keyboard when you are on your moodle quiz and the extension will be inject. If you want to remove the injection just simply type back the code on your keyboard.
 - <b>Cursor indication</b>: show a pointer cursor and a hourglass to know when the request is finished.
 - <b>Title indication</b>: show some informations into the title to know for example if the code have been injected.
   <br/> ![Injected](./assets/title-injected.png)
-- <b>Console logs</b>: show logs into the console.
+- <b>Console logs</b>: show logs into the console for the question, chatgpt answer and which response has been chosen.
   <br/><img src="./assets/logs.png" alt="Logs" width="250">
-- <b>Request timeout</b>: if the request is too long it will be abort after 15seconds.
+- <b>Request timeout</b>: if the request is too long it will be abort after 20 seconds.
 - <b>Typing effect</b>: create a typing effect for text. Type any text and it will be replaced by the correct one. If you want to stop it press <b>Backspace</b> key.
   <br/> ![Typing](./assets/typing.gif)
 - <b>Mouseover effect</b>: you will need to hover (or click for select) the question response to complete it automaticaly.
   <br/> ![Mouseover](./assets/mouseover.gif)
   <br/> ![Mouseover2](./assets/mouseover2.gif)
-
 - <b>Infinite try</b>: click as much as you want on the question (don't forget to reset the question).
+- <b>Save history</b>: allows you to create a conversation with ChatGPT by saving the previous question with its answer. However, note that it can consume a significant number of tokens.
+- <b>Include images</b> (only work with gpt-4): allows you to include the images from the question to be send to the chatgpt api. The quality is reduced to 75% to use less tokens. However, note that it can consume a significant number of tokens.
+  <br/> ![Images](./assets/images.gif)
 
-## Internal Features
+## Internal other features
 
 ### Support table
 
 Table are formated from the question to make it more readable for CHAT-GPT. Example of formatted table output:
 
 ```
-| id       | name  | birthDate  | cars |
-----------------------------------------
-| Person 1 | Yvick | 15/08/1999 | yes  |
-| Person 2 | Yann  | 19/01/2000 | no   |
+id       | name  | birthDate  | cars
+------------------------------------
+Person 1 | Yvick | 15/08/1999 | yes 
+Person 2 | Yann  | 19/01/2000 | no
 ```
+
+![Table](./assets/table.gif)
 
 ## Supported questions type
 
@@ -155,12 +145,17 @@ Table are formated from the question to make it more readable for CHAT-GPT. Exam
 
 ![Text](./assets/text.gif)
 
-## What about if the question can't be completed ?
+## What about if the question can't be autocompleted ?
 
-To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds.
+To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds if `Title indication` is on.
 
 ![Clipboard](./assets/clipboard.gif)
 
 ## Test
 
-To test the code, you can run the index.html file located in the <b>"test/fake-moodle"</b> folder. Or a better solution is to install moodle locally.
+- <b>Solution 1</b>: Go on [this moodle test page](https://school.moodledemo.net/login/index.php) (username: `student`, password: `moodle`) and choose any quiz.
+- <b>Solution 2</b>: Run the `index.html` file located in the `test/fake-moodle` folder.
+
+## Beta version with advanced features
+
+If you're interested in accessing advanced features ahead of their official release, please consider downloading the extension from the [dev branch](https://github.com/yoannchb-pro/MoodleGPT/tree/dev). However, please be aware that this branch is under development and may contain bugs. If you encounter any issues, don't hesitate to contact me or create an issue on GitHub. Your feedback is invaluable in helping us improve the extension.

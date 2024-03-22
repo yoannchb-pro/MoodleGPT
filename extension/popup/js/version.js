@@ -1,5 +1,7 @@
-const currentVersion = "1.0.3";
-const versionDisplay = document.querySelector("#version");
+'use strict';
+
+const CURRENT_VERSION = '1.1.0';
+const versionDisplay = document.querySelector('#version');
 
 /**
  * Get the last version from the github
@@ -7,7 +9,7 @@ const versionDisplay = document.querySelector("#version");
  */
 async function getLastVersion() {
   const req = await fetch(
-    "https://raw.githubusercontent.com/yoannchb-pro/MoodleGPT/main/package.json"
+    'https://raw.githubusercontent.com/yoannchb-pro/MoodleGPT/main/package.json'
   );
   const rep = await req.json();
   return rep.version;
@@ -21,41 +23,41 @@ async function getLastVersion() {
  */
 function setVersion(version, isCurrent = true) {
   if (isCurrent) {
-    versionDisplay.textContent = "v" + version;
+    versionDisplay.textContent = 'v' + version;
     return;
   }
 
-  const link = document.createElement("a");
-  link.href = "https://github.com/yoannchb-pro/MoodleGPT";
-  link.rel = "noopener noreferrer";
-  link.target = "_blank";
-  link.textContent = "v" + version;
+  const link = document.createElement('a');
+  link.href = 'https://github.com/yoannchb-pro/MoodleGPT';
+  link.rel = 'noopener noreferrer';
+  link.target = '_blank';
+  link.textContent = 'v' + version;
   versionDisplay.appendChild(link);
-  versionDisplay.appendChild(document.createTextNode(" is now available !"));
+  versionDisplay.appendChild(document.createTextNode(' is now available !'));
 }
 
 /**
- * Check the extension neeed an update or no
+ * Check if the extension neeed an update or not
  */
 async function notifyUpdate() {
-  const lastVersion = await getLastVersion().catch((err) => {
+  const lastVersion = await getLastVersion().catch(err => {
     console.error(err);
-    return currentVersion;
+    return CURRENT_VERSION;
   });
 
-  const lastVertionSplitted = lastVersion.split(".");
-  const currentVersionSplitted = currentVersion.split(".");
-  const minVersionLength = Math.min(
-    lastVertionSplitted.length,
-    currentVersionSplitted.length
-  );
+  const lastVertionSplitted = lastVersion.split('.');
+  const currentVersionSplitted = CURRENT_VERSION.split('.');
+  const minVersionLength = Math.min(lastVertionSplitted.length, currentVersionSplitted.length);
 
   for (let i = 0; i < minVersionLength; ++i) {
-    if (parseInt(lastVertionSplitted[i]) > parseInt(currentVersionSplitted[i]))
+    if (parseInt(lastVertionSplitted[i]) > parseInt(currentVersionSplitted[i])) {
       return setVersion(lastVersion, false);
+    } else if (parseInt(currentVersionSplitted[i]) > parseInt(lastVertionSplitted[i])) {
+      return setVersion(CURRENT_VERSION);
+    }
   }
 
-  setVersion(currentVersion);
+  setVersion(CURRENT_VERSION);
 }
 
 notifyUpdate();

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
+    <!-- checkbox more complicated -->
+    <section class="formulation">
+      <div class="qtext">
+        <p>Which are the roles of an informatician ?</p>
+      </div>
+      <div>
+        <div class="inp">
+          <input type="checkbox" />
+          <label
+            >a. Systems Administrator: Managing and maintaining computer systems and
+            networks.</label
+          >
+        </div>
+        <div class="inp">
+          <input type="checkbox" />
+          <label
+            >b. Software Developer: Designing, coding, testing, and maintaining software
+            applications.</label
+          >
+        </div>
+        <div class="inp">
+          <input type="checkbox" />
+          <label> c. Professional Chef: Creating delicious meals in a restaurant kitchen. </label>
+        </div>
+      </div>
+    </section>
+
     <!-- checkbox -->
     <section class="formulation">
       <div class="qtext">
@@ -242,13 +269,68 @@
       </div>
     </section>
 
-    <!-- Clipboard -->
+    <!--Table -->
+    <section class="formulation">
+      <div class="qtext">
+        <p>Give me the id of the personn who have a car</p>
+        <table class="style-table">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>birthDate</th>
+              <th>cars</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Person 1</td>
+              <td>Yvick</td>
+              <td>15/08/1999</td>
+              <td>yes</td>
+            </tr>
+            <tr>
+              <td>Person 2</td>
+              <td>Yann</td>
+              <td>19/01/2000</td>
+              <td>no</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <textarea></textarea>
+      </div>
+    </section>
+
+    <!-- Contenteditable -->
     <section class="formulation">
       <div class="qtext">
         <p>
-          Gives a "reverseWorld" function in javascript which takes as a
-          parameter a word and flips it in the opposite direction
+          Gives a "reverseWorld" function in javascript which takes as a parameter a word and flips
+          it in the opposite direction
         </p>
+      </div>
+      <div>
+        <div contenteditable="true" class="editable"></div>
+      </div>
+    </section>
+
+    <!-- Images -->
+    <section class="formulation">
+      <p class="accesshide" style="color: red">
+        Warning ! Only work with gpt-4 and if "includes images" is activate
+      </p>
+      <div class="qtext">
+        <p>What is the race of those cats:</p>
+        <img
+          alt="black cat"
+          src="https://images.ctfassets.net/cnu0m8re1exe/qDQgxOUG5DNKlKH5TXsbo/813fa629fe33794c7ff439070fc31b89/shutterstock_603117302.jpg"
+        />
+        <img
+          alt="white cat"
+          src="https://media.istockphoto.com/id/514515260/photo/neva-masquerade-looking-at-the-camera-isolated-on-white.jpg?s=612x612&w=0&k=20&c=HCoV7nQfnLWgRI26Nlv7Kobfucw6E6NeONx1dMVusMs="
+        />
       </div>
       <div>
         <div contenteditable="true" class="editable"></div>

@@ -1,7 +1,7 @@
 type Config = {
   apiKey: string;
-  code: string;
-  model?: string;
+  model: string;
+  code?: string;
   infinite?: boolean;
   typing?: boolean;
   mouseover?: boolean;
@@ -9,7 +9,9 @@ type Config = {
   logs?: boolean;
   title?: boolean;
   timeout?: boolean;
-  mode?: "autocomplete" | "question-to-answer" | "clipboard";
+  history?: boolean;
+  includeImages?: boolean;
+  mode?: 'autocomplete' | 'question-to-answer' | 'clipboard';
 };
 
 export default Config;

@@ -1,5 +1,5 @@
-import Config from "../../types/config";
-import GPTAnswer from "../../types/gptAnswer";
+import type Config from '@typing/config';
+import type GPTAnswer from '@typing/gpt-answer';
 
 /**
  * Handle number input
@@ -15,21 +15,24 @@ function handleNumber(
 ): boolean {
   const input = inputList[0] as HTMLInputElement | HTMLTextAreaElement;
 
-  if (inputList.length !== 1 || input.type !== "number") return false;
+  if (
+    inputList.length !== 1 || // for now we don't handle many input number
+    input.type !== 'number'
+  ) {
+    return false;
+  }
 
-  const number = gptAnswer.normalizedResponse
-    .match(/\d+([,\.]\d+)?/gi)?.[0]
-    ?.replace(",", ".");
+  const number = gptAnswer.normalizedResponse.match(/\d+([,.]\d+)?/gi)?.[0]?.replace(',', '.');
 
-  if (!number) return false;
+  if (number === undefined) return false;
 
   if (config.typing) {
     let index = 0;
-    input.addEventListener("keydown", function (event: KeyboardEvent) {
-      if (event.key === "Backspace") index = number.length + 1;
-      if (index > number.length) return;
+    input.addEventListener('keydown', function (event: Event) {
       event.preventDefault();
-      if (number.slice(index, index + 1) === ".") ++index;
+      if ((<KeyboardEvent>event).key === 'Backspace') index = number.length + 1;
+      if (index > number.length) return;
+      if (number.slice(index, index + 1) === '.') ++index;
       input.value = number.slice(0, ++index);
     });
   } else {

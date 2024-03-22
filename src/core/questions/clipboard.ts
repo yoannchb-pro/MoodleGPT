@@ -1,6 +1,6 @@
-import Config from "../../types/config";
-import GPTAnswer from "../../types/gptAnswer";
-import titleIndications from "../../utils/title-indications";
+import type Config from '@typing/config';
+import type GPTAnswer from '@typing/gpt-answer';
+import titleIndications from '@utils/title-indications';
 
 /**
  * Copy the response in the clipboard if we can automaticaly fill the question
@@ -8,7 +8,7 @@ import titleIndications from "../../utils/title-indications";
  * @param gptAnswer
  */
 function handleClipboard(config: Config, gptAnswer: GPTAnswer) {
-  if (config.title) titleIndications("Copied to clipboard");
+  if (config.title) titleIndications('Copied to clipboard');
   navigator.clipboard.writeText(gptAnswer.response);
 }
 

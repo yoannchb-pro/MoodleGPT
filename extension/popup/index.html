@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MoodleGPT</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Should always be at the top -->
+    <script src="./js/utils.js" defer></script>
+
     <script src="./js/index.js" defer></script>
+    <script src="./js/modeHandler.js" defer></script>
+    <script src="./js/gptVersion.js" defer></script>
     <script src="./js/version.js" defer></script>
+
     <link rel="icon" type="image/png" href="../icon.png" />
     <link
       rel="stylesheet"
@@ -17,38 +24,35 @@
       referrerpolicy="no-referrer"
     />
   </head>
+
   <body>
     <main>
-      <div class="line center" style="margin-top: 1rem; margin-bottom: 1rem">
+      <div class="line center" style="margin-bottom: 0.5rem">
         <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.flaticon.com/free-icons/mortarboard"
           title="Mortarboard icons created by itim2101 - Flaticon"
-          ><img src="../icon.png" alt="icon"
-        /></a>
+        >
+          <img src="../icon.png" alt="icon" />
+        </a>
         <div class="col center title">
           <h1>MoodleGPT</h1>
           <p id="version"></p>
         </div>
       </div>
       <div class="line center">
-        <label for="apiKey" class="textLabel">Api Key</label>
+        <label for="apiKey" class="textLabel">Api Key<span class="required">*</span>:</label>
         <input id="apiKey" type="text" />
       </div>
       <div class="line center">
-        <label for="code" class="textLabel">Code</label>
-        <input id="code" type="text" />
+        <label for="model" class="textLabel">GPT Model<span class="required">*</span>:</label>
+        <input type="text" id="model" list="models" />
+        <datalist id="models"></datalist>
       </div>
       <div class="line center">
-        <label for="model" class="textLabel">GPT Model</label>
-        <input id="model" type="text" />
-        <i
-          id="reloadModel"
-          class="fa-solid fa-rotate-right"
-          disabled
-          title="Provide an api key first"
-        ></i>
+        <label for="code" class="textLabel">Code:</label>
+        <input id="code" type="text" />
       </div>
       <div class="line mt">
         <i class="fa-solid fa-robot"></i>
@@ -61,9 +65,7 @@
             <button value="clipboard" class="not-selected">clipboard</button>
           </li>
           <li>
-            <button value="question-to-answer" class="not-selected">
-              question to answer
-            </button>
+            <button value="question-to-answer" class="not-selected">question to answer</button>
           </li>
         </ul>
       </div>
@@ -71,7 +73,7 @@
         <i class="fa-solid fa-gear"></i>
         <p>Settings:</p>
       </div>
-      <div class="line center">
+      <div class="line center" style="gap: 2rem">
         <div class="col">
           <div class="line">
             <input id="logs" type="checkbox" />
@@ -103,9 +105,18 @@
             <input id="infinite" type="checkbox" />
             <label for="infinite">Infinite try</label>
           </div>
+          <div class="line">
+            <input id="history" type="checkbox" />
+            <label for="history">Save history</label>
+          </div>
+          <!-- This option is only showed if the current version of the model support it -->
+          <div class="line" id="includeImages-line" style="display: none">
+            <input id="includeImages" type="checkbox" />
+            <label for="includeImages">Include images</label>
+          </div>
         </div>
       </div>
-      <p id="message">Message</p>
+      <p id="message">{Message}</p>
       <div class="line center">
         <button class="save">Save</button>
       </div>
