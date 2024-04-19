@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.1.1
+
+- Bugs correction
+
 ## v1.1.0
 
 - Bugs correction
