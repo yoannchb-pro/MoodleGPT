@@ -26,11 +26,13 @@ function handleCheckbox(
 
   const possibleAnswers = Array.from(inputList)
     .map(inp => ({
-      element: inp,
+      element: inp as HTMLInputElement,
       value: normalizeText(inp?.parentElement?.textContent ?? '')
     }))
     .filter(obj => obj.value !== '');
 
+  // Find the best answers elements
+  const correctElements: Set<HTMLInputElement> = new Set();
   for (const correct of corrects) {
     const bestAnswer = pickBestReponse(correct, possibleAnswers);
 
@@ -38,13 +40,23 @@ function handleCheckbox(
       Logs.bestAnswer(bestAnswer.value, bestAnswer.similarity);
     }
 
-    const correctInput = bestAnswer.element as HTMLInputElement;
+    correctElements.add(bestAnswer.element as HTMLInputElement);
+  }
+
+  // Check if it should be checked or not
+  for (const element of possibleAnswers.map(e => e.element)) {
+    const needAction =
+      (element.checked && !correctElements.has(element)) ||
+      (!element.checked && correctElements.has(element));
+
+    const action = () => needAction && element.click();
+
     if (config.mouseover) {
-      correctInput.addEventListener('mouseover', () => correctInput.click(), {
+      element.addEventListener('mouseover', action, {
         once: true
       });
     } else {
-      correctInput.click();
+      action();
     }
   }
 

@@ -17,7 +17,7 @@ function handleContentEditable(
 
   if (
     inputList.length !== 1 || // for now we don't handle many input for editable textcontent
-    input.getAttribute('contenteditable') !== 'true'
+    typeof input.getAttribute('contenteditable') !== 'string'
   ) {
     return false;
   }

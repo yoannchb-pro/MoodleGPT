@@ -32,9 +32,9 @@ saveBtn.addEventListener('click', function () {
     return;
   }
 
-  if (code.length > 0 && code.length < 3) {
+  if (code.length > 0 && code.length < 2) {
     showMessage({
-      msg: 'The code should at least contain 3 characters',
+      msg: 'The code should at least contain 2 characters',
       error: true
     });
     return;
