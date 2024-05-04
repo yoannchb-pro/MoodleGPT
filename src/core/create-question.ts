@@ -1,6 +1,5 @@
 import normalizeText from '@utils/normalize-text';
 import htmlTableToString from '@utils/html-table-to-string';
-import getVisibleText from '@utils/get-visible-text';
 
 /**
  * Normalize the question as text and add sub informations
@@ -9,7 +8,14 @@ import getVisibleText from '@utils/get-visible-text';
  * @returns
  */
 function createAndNormalizeQuestion(questionContainer: HTMLElement) {
-  let question = getVisibleText(questionContainer);
+  let question = questionContainer.innerText;
+
+  // We remove unnecessary information
+  const accesshideElements: NodeListOf<HTMLElement> =
+    questionContainer.querySelectorAll('.accesshide');
+  for (const useless of accesshideElements) {
+    question = question.replace(useless.innerText, '');
+  }
 
   // Make tables more readable for chat-gpt
   const tables: NodeListOf<HTMLTableElement> = questionContainer.querySelectorAll('.qtext table');
