@@ -28,13 +28,20 @@ function handleNumber(
 
   if (config.typing) {
     let index = 0;
-    input.addEventListener('keydown', function (event: Event) {
+
+    const eventHanlder = function (event: Event) {
       event.preventDefault();
-      if ((<KeyboardEvent>event).key === 'Backspace') index = number.length + 1;
-      if (index > number.length) return;
+      if ((<KeyboardEvent>event).key === 'Backspace' || index >= number.length) {
+        input.removeEventListener('keydown', eventHanlder);
+        return;
+      }
+
       if (number.slice(index, index + 1) === '.') ++index;
+
       input.value = number.slice(0, ++index);
-    });
+    };
+
+    input.addEventListener('keydown', eventHanlder);
   } else {
     input.value = number;
   }

@@ -24,14 +24,19 @@ function handleTextbox(
 
   if (config.typing) {
     let index = 0;
-    input.addEventListener('keydown', function (event: Event) {
+
+    const eventHandler = function (event: Event) {
       event.preventDefault();
-      if ((<KeyboardEvent>event).key === 'Backspace') {
-        index = gptAnswer.response.length + 1;
+
+      if ((<KeyboardEvent>event).key === 'Backspace' || index >= gptAnswer.response.length) {
+        input.removeEventListener('keydown', eventHandler);
+        return;
       }
-      if (index > gptAnswer.response.length) return;
+
       input.value = gptAnswer.response.slice(0, ++index);
-    });
+    };
+
+    input.addEventListener('keydown', eventHandler);
   } else {
     input.value = gptAnswer.response;
   }

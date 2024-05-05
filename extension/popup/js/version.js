@@ -1,6 +1,6 @@
 'use strict';
 
-const CURRENT_VERSION = '1.1.0';
+const CURRENT_VERSION = '1.1.1';
 const versionDisplay = document.querySelector('#version');
 
 /**

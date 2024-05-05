@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.1.1
+
+- Bugs correction
+- Support for Atto editor
+
 ## v1.1.0
 
 - Bugs correction
