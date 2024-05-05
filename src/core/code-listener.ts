@@ -58,7 +58,7 @@ function setUpMoodleGpt(config: Config) {
   const inputTypeQuery = ['checkbox', 'radio', 'text', 'number']
     .map(e => `input[type="${e}"]`)
     .join(',');
-  const inputQuery = inputTypeQuery + ', textarea, select, [contenteditable]';
+  const inputQuery = inputTypeQuery + ', textarea, select, [contenteditable], .qtype_essay_editor';
   const forms = document.querySelectorAll('.formulation');
 
   // For each form we inject a function on the queqtion

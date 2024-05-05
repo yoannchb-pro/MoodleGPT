@@ -1,6 +1,11 @@
 import type Config from '@typing/config';
 import type GPTAnswer from '@typing/gpt-answer';
 
+function isContentEditable(element: HTMLElement) {
+  const contenteditable = element.getAttribute('contenteditable');
+  return typeof contenteditable === 'string' && contenteditable !== 'false';
+}
+
 /**
  * Hanlde contenteditable elements
  * @param config
@@ -17,7 +22,7 @@ function handleContentEditable(
 
   if (
     inputList.length !== 1 || // for now we don't handle many input for editable textcontent
-    typeof input.getAttribute('contenteditable') !== 'string'
+    !isContentEditable(input)
   ) {
     return false;
   }
@@ -28,7 +33,7 @@ function handleContentEditable(
     const eventHandler = function (event: KeyboardEvent) {
       event.preventDefault();
 
-      if (event.key === 'Backspace' || index > gptAnswer.response.length) {
+      if (event.key === 'Backspace' || index >= gptAnswer.response.length) {
         input.removeEventListener('keydown', eventHandler);
         return;
       }

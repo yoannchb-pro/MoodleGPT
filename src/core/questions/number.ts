@@ -31,7 +31,7 @@ function handleNumber(
 
     const eventHanlder = function (event: Event) {
       event.preventDefault();
-      if ((<KeyboardEvent>event).key === 'Backspace' || index > number.length) {
+      if ((<KeyboardEvent>event).key === 'Backspace' || index >= number.length) {
         input.removeEventListener('keydown', eventHanlder);
         return;
       }

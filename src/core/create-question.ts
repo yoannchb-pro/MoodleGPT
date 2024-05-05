@@ -16,6 +16,10 @@ function createAndNormalizeQuestion(questionContainer: HTMLElement) {
   for (const useless of accesshideElements) {
     question = question.replace(useless.innerText, '');
   }
+  const attoText = questionContainer.querySelector('.qtype_essay_editor');
+  if (attoText) {
+    question = question.replace((attoText as HTMLElement).innerText, '');
+  }
 
   // Make tables more readable for chat-gpt
   const tables: NodeListOf<HTMLTableElement> = questionContainer.querySelectorAll('.qtext table');

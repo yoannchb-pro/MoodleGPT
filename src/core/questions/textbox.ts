@@ -28,7 +28,7 @@ function handleTextbox(
     const eventHandler = function (event: Event) {
       event.preventDefault();
 
-      if ((<KeyboardEvent>event).key === 'Backspace' || index > gptAnswer.response.length) {
+      if ((<KeyboardEvent>event).key === 'Backspace' || index >= gptAnswer.response.length) {
         input.removeEventListener('keydown', eventHandler);
         return;
       }

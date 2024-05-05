@@ -7,6 +7,7 @@ import handleRadio from '@core/questions/radio';
 import handleCheckbox from '@core/questions/checkbox';
 import handleSelect from '@core/questions/select';
 import handleTextbox from '@core/questions/textbox';
+import handleAtto from '@core/questions/atto';
 
 type Props = {
   config: Config;
@@ -26,6 +27,7 @@ function autoCompleteMode(props: Props) {
   if (!props.config.infinite) props.removeListener();
 
   const handlers = [
+    handleAtto,
     handleContentEditable,
     handleTextbox,
     handleNumber,
