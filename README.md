@@ -32,6 +32,7 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
     - [True or false](#true-or-false)
     - [Number](#number)
     - [Text](#text)
+    - [Atto](#atto)
   - [What about if the question can't be autocompleted ?](#what-about-if-the-question-cant-be-autocompleted-)
   - [Test](#test)
   - [Beta version with advanced features](#beta-version-with-advanced-features)
@@ -145,6 +146,10 @@ Person 2 | Yann  | 19/01/2000 | no
 
 ![Text](./assets/text.gif)
 
+### Atto
+
+![Atto](./assets/atto.gif)
+
 ## What about if the question can't be autocompleted ?
 
 To know if the answer has been copied to the clipboard, you can look at the title of the page which will become <b>"Copied to clipboard"</b> for 3 seconds if `Title indication` is on.
@@ -153,7 +158,7 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 ## Test
 
-- <b>Solution 1</b>: Go on [this moodle test page](https://school.moodledemo.net/login/index.php) (username: `student`, password: `moodle`) and choose any quiz.
+- <b>Solution 1</b>: Go on this [moodle demo page](https://moodle.org/demo).
 - <b>Solution 2</b>: Run the `index.html` file located in the `test/fake-moodle` folder.
 
 ## Beta version with advanced features
