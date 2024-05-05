@@ -1,3 +1,11 @@
+---
+name: Help Request
+about: Use this template to request help or support.
+title: '[HELP]'
+labels: help
+assignees: ''
+---
+
 ## Help Request
 
 **Issue Summary**
