@@ -1,13 +1,13 @@
-import type GPTAnswer from '@typing/gpt-answer';
-import type Config from '@typing/config';
-import handleClipboard from '@core/questions/clipboard';
-import handleContentEditable from '@core/questions/contenteditable';
-import handleNumber from '@core/questions/number';
-import handleRadio from '@core/questions/radio';
-import handleCheckbox from '@core/questions/checkbox';
-import handleSelect from '@core/questions/select';
-import handleTextbox from '@core/questions/textbox';
-import handleAtto from '@core/questions/atto';
+import type GPTAnswer from '../../types/gpt-answer';
+import type Config from '../../types/config';
+import handleClipboard from 'background/core/questions/clipboard';
+import handleContentEditable from 'background/core/questions/contenteditable';
+import handleNumber from 'background/core/questions/number';
+import handleRadio from 'background/core/questions/radio';
+import handleCheckbox from 'background/core/questions/checkbox';
+import handleSelect from 'background/core/questions/select';
+import handleTextbox from 'background/core/questions/textbox';
+import handleAtto from 'background/core/questions/atto';
 
 type Props = {
   config: Config;

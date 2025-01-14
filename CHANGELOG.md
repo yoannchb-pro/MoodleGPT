@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.1.2
+
+- Advanced settings
+- Added OpenAI SDK for better support
+- o1 model support
+
 ## v1.1.1
 
 - Bugs correction

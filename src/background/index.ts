@@ -1,4 +1,4 @@
-import type Config from '@typing/config';
+import type Config from './types/config';
 import { codeListener, setUpMoodleGpt } from './core/code-listener';
 
 chrome.storage.sync.get(['moodleGPT']).then(function (storage) {

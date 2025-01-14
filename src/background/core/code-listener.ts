@@ -1,5 +1,5 @@
-import type Config from '@typing/config';
-import titleIndications from '@utils/title-indications';
+import type Config from '../types/config';
+import titleIndications from 'background/utils/title-indications';
 import reply from './reply';
 
 type Listener = {

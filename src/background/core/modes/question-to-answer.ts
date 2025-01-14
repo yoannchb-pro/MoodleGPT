@@ -1,4 +1,4 @@
-import type GPTAnswer from '@typing/gpt-answer';
+import type GPTAnswer from '../../types/gpt-answer';
 
 type Props = {
   questionElement: HTMLElement;

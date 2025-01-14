@@ -1,14 +1,14 @@
-import type Config from '@typing/config';
-import { ROLE, CONTENT_TYPE, type MessageContent, type Message } from '@typing/message';
-import imageToBase64 from '@utils/image-to-base64';
-import isGPTModelGreaterOrEqualTo4 from '@utils/version-support-images';
+import type Config from '../types/config';
+import imageToBase64 from 'background/utils/image-to-base64';
+import isGPTModelGreaterOrEqualTo4 from 'background/utils/version-support-images';
+import { ChatCompletionMessageParam, ChatCompletionUserMessageParam } from 'openai/resources';
 
 // The attempt and the cmid allow us to identify a quiz
 type History = {
   host: string;
   cmid: string; // The id of the quiz
   attempt: string; // The attempt of the current quiz
-  history: { role: ROLE; content: MessageContent }[];
+  history: ChatCompletionMessageParam[];
 };
 
 const INSTRUCTION: string = `
@@ -26,9 +26,9 @@ Act as a quiz solver for the best notation with the following rules:
 `.trim();
 
 const SYSTEM_INSTRUCTION_MESSAGE = {
-  role: ROLE.SYSTEM,
+  role: 'system',
   content: INSTRUCTION
-} as const satisfies Message;
+} as const satisfies ChatCompletionMessageParam;
 
 /**
  * Get the content to send to ChatGPT API (it allows to includes images if supported)
@@ -38,7 +38,7 @@ async function getContent(
   config: Config,
   questionElement: HTMLElement,
   question: string
-): Promise<MessageContent> {
+): Promise<ChatCompletionUserMessageParam['content']> {
   const imagesElements = questionElement.querySelectorAll('img');
 
   if (
@@ -49,7 +49,7 @@ async function getContent(
     return question;
   }
 
-  const contentWithImages: MessageContent = [];
+  const contentWithImages: ChatCompletionUserMessageParam['content'] = [];
 
   const base64Images = Array.from(imagesElements).map(imgEl => imageToBase64(imgEl));
   const base64ImagesResolved = await Promise.allSettled(base64Images);
@@ -57,7 +57,7 @@ async function getContent(
   for (const result of base64ImagesResolved) {
     if (result.status === 'fulfilled') {
       contentWithImages.push({
-        type: CONTENT_TYPE.IMAGE,
+        type: 'image_url',
         image_url: { url: result.value }
       });
     } else if (config.logs) {
@@ -66,7 +66,7 @@ async function getContent(
   }
 
   contentWithImages.push({
-    type: CONTENT_TYPE.TEXT,
+    type: 'text',
     text: question
   });
 
@@ -124,11 +124,11 @@ async function getContentWithHistory(
   questionElement: HTMLElement,
   question: string
 ): Promise<{
-  messages: [typeof SYSTEM_INSTRUCTION_MESSAGE, ...Message[]];
+  messages: [typeof SYSTEM_INSTRUCTION_MESSAGE, ...ChatCompletionMessageParam[]];
   saveResponse?: (response: string) => void;
 }> {
   const content = await getContent(config, questionElement, question);
-  const message = { role: ROLE.USER, content };
+  const message: ChatCompletionMessageParam = { role: 'user', content };
 
   if (!config.history) return { messages: [SYSTEM_INSTRUCTION_MESSAGE, message] };
 
@@ -149,7 +149,7 @@ async function getContentWithHistory(
       // Register the conversation
       if (config.history) {
         history.history.push(message);
-        history.history.push({ role: ROLE.ASSISTANT, content: response });
+        history.history.push({ role: 'assistant', content: response });
         sessionStorage.moodleGPTHistory = JSON.stringify(history);
       }
     }

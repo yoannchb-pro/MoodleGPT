@@ -1,5 +1,5 @@
-import type Config from '@typing/config';
-import type GPTAnswer from '@typing/gpt-answer';
+import type Config from '../../types/config';
+import type GPTAnswer from '../../types/gpt-answer';
 
 /**
  * Handle textbox

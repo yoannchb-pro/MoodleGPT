@@ -7,13 +7,7 @@
     <title>MoodleGPT</title>
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Should always be at the top -->
-    <script src="./js/utils.js" defer></script>
-
-    <script src="./js/index.js" defer></script>
-    <script src="./js/modeHandler.js" defer></script>
-    <script src="./js/gptVersion.js" defer></script>
-    <script src="./js/version.js" defer></script>
+    <script src="./popup.js" defer></script>
 
     <link rel="icon" type="image/png" href="../icon.png" />
     <link
@@ -41,20 +35,35 @@
           <p id="version"></p>
         </div>
       </div>
-      <div class="line center">
-        <label for="apiKey" class="textLabel">Api Key<span class="required">*</span>:</label>
-        <input id="apiKey" type="text" />
+
+      <!-- SETTINGS -->
+      <div class="settings" id="settings">
+        <div class="line center">
+          <label for="apiKey" class="textLabel">Api Key<span class="required">*</span>:</label>
+          <input id="apiKey" type="text" />
+        </div>
+        <div class="line center">
+          <label for="model" class="textLabel">GPT Model<span class="required">*</span>:</label>
+          <input type="text" id="model" list="models" />
+          <datalist id="models"></datalist>
+          <i id="check-model" title="Test" style="cursor: pointer" class="fa-solid fa-play"></i>
+        </div>
       </div>
-      <div class="line center">
-        <label for="model" class="textLabel">GPT Model<span class="required">*</span>:</label>
-        <input type="text" id="model" list="models" />
-        <datalist id="models"></datalist>
+
+      <!-- ADVANCED SETTINGS -->
+      <div class="settings" id="advanced-settings" style="display: none">
+        <div class="line center">
+          <label for="code" class="textLabel">Code:</label>
+          <input id="code" type="text" />
+        </div>
       </div>
-      <div class="line center">
-        <label for="code" class="textLabel">Code:</label>
-        <input id="code" type="text" />
+
+      <!-- SWITCH SETTINGS MODE -->
+      <div class="line center mt">
+        <a id="switch-settings" href="#">Advanced settings</a>
       </div>
-      <div class="line mt">
+
+      <div class="line center-y mt">
         <i class="fa-solid fa-robot"></i>
         <p>Mode:</p>
       </div>
@@ -69,9 +78,9 @@
           </li>
         </ul>
       </div>
-      <div class="line mt">
+      <div class="line mt center-y">
         <i class="fa-solid fa-gear"></i>
-        <p>Settings:</p>
+        <p>Options:</p>
       </div>
       <div class="line center" style="gap: 2rem">
         <div class="col">
@@ -122,6 +131,7 @@
       </div>
       <div class="line center">
         <a
+          class="donate"
           href="https://www.buymeacoffee.com/yoannchbpro"
           target="_blank"
           rel="noopener noreferrer"

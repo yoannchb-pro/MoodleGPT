@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": "src",
-    "module": "CommonJS",
+    "module": "ESNext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES6",
@@ -13,13 +13,7 @@
     "resolveJsonModule": true,
     "types": ["node", "chrome"],
     "typeRoots": ["node_modules/@types"],
-    "strictBindCallApply": true,
-    "paths": {
-      "@typing/*": ["types/*"],
-      "@utils/*": ["utils/*"],
-      "@core/*": ["core/*"],
-      "@questions/*": ["core/question/*"]
-    }
+    "strictBindCallApply": true
   },
   "include": ["src/**/*"]
 }

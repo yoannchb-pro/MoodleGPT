@@ -1,13 +1,11 @@
-'use strict';
-
-const CURRENT_VERSION = '1.1.1';
-const versionDisplay = document.querySelector('#version');
+const CURRENT_VERSION = '1.1.2';
+const versionDisplay = document.querySelector('#version')!;
 
 /**
  * Get the last version from the github
  * @returns
  */
-async function getLastVersion() {
+export async function getLastVersion(): Promise<string> {
   const req = await fetch(
     'https://raw.githubusercontent.com/yoannchb-pro/MoodleGPT/main/package.json'
   );
@@ -21,7 +19,7 @@ async function getLastVersion() {
  * @param {boolean} isCurrent
  * @returns
  */
-function setVersion(version, isCurrent = true) {
+export function setVersion(version: string, isCurrent = true) {
   if (isCurrent) {
     versionDisplay.textContent = 'v' + version;
     return;
@@ -39,7 +37,7 @@ function setVersion(version, isCurrent = true) {
 /**
  * Check if the extension neeed an update or not
  */
-async function notifyUpdate() {
+export async function notifyUpdate() {
   const lastVersion = await getLastVersion().catch(err => {
     console.error(err);
     return CURRENT_VERSION;
