@@ -9,11 +9,11 @@ import { showMessage } from './utils';
 const saveBtn = document.querySelector('.save')!;
 
 // inputs id
-const inputsText = ['apiKey', 'code', 'model'];
+const inputsText = ['apiKey', 'code', 'model', 'baseURL', 'maxTokens'];
 
 // Save the configuration
 saveBtn.addEventListener('click', function () {
-  const [apiKey, code, model] = inputsText.map(selector =>
+  const [apiKey, code, model, baseURL, maxTokens] = inputsText.map(selector =>
     (document.querySelector('#' + selector) as HTMLInputElement).value.trim()
   );
   const [logs, title, cursor, typing, mouseover, infinite, timeout, history, includeImages] =
@@ -40,6 +40,8 @@ saveBtn.addEventListener('click', function () {
       apiKey,
       code,
       model,
+      baseURL,
+      maxTokens: maxTokens ? parseInt(maxTokens) : undefined,
       logs,
       title,
       cursor,
