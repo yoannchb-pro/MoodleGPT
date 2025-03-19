@@ -1,6 +1,6 @@
-import type Config from '@typing/config';
-import type GPTAnswer from '@typing/gpt-answer';
-import handleClipboard from '@core/questions/clipboard';
+import type Config from '../../types/config';
+import type GPTAnswer from '../../types/gpt-answer';
+import handleClipboard from 'background/core/questions/clipboard';
 
 type Props = {
   config: Config;

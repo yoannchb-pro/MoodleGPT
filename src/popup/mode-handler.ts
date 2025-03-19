@@ -1,15 +1,10 @@
-'use strict';
-
-const mode = document.querySelector('#mode');
-const modes = mode.querySelectorAll('button');
-
-let actualMode = 'autocomplete';
+import { globalData, inputsCheckbox, modes } from './data';
 
 // input to don't take in consideration
 const toExcludes = ['includeImages'];
 
 // inputs id that need to be disabled for a specific mode
-const disabledForThisMode = {
+const disabledForThisMode: Record<string, string[]> = {
   autocomplete: [],
   clipboard: ['typing', 'mouseover'],
   'question-to-answer': ['typing', 'infinite', 'mouseover']
@@ -18,16 +13,16 @@ const disabledForThisMode = {
 /**
  * Handle when a mode change to show specific input or to hide them
  */
-function handleModeChange() {
-  const needDisable = disabledForThisMode[actualMode];
+export function handleModeChange() {
+  const needDisable = disabledForThisMode[globalData.actualMode];
   const dontNeedDisable = inputsCheckbox.filter(
     input => !needDisable.includes(input) && !toExcludes.includes(input)
   );
   for (const id of needDisable) {
-    document.querySelector('#' + id).parentElement.style.display = 'none';
+    document.querySelector('#' + id)!.parentElement!.style.display = 'none';
   }
   for (const id of dontNeedDisable) {
-    document.querySelector('#' + id).parentElement.style.display = null;
+    document.querySelector('#' + id)!.parentElement!.style.display = '';
   }
 }
 
@@ -35,7 +30,7 @@ function handleModeChange() {
 for (const button of modes) {
   button.addEventListener('click', function () {
     const value = button.value;
-    actualMode = value;
+    globalData.actualMode = value;
     for (const mode of modes) {
       if (mode.value !== value) {
         mode.classList.add('not-selected');

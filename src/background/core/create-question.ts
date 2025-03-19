@@ -1,5 +1,5 @@
-import normalizeText from '@utils/normalize-text';
-import htmlTableToString from '@utils/html-table-to-string';
+import normalizeText from 'background/utils/normalize-text';
+import htmlTableToString from 'background/utils/html-table-to-string';
 
 /**
  * Normalize the question as text and add sub informations

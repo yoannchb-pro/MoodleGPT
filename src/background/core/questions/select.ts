@@ -1,8 +1,8 @@
-import type Config from '@typing/config';
-import type GPTAnswer from '@typing/gpt-answer';
-import Logs from '@utils/logs';
-import normalizeText from '@utils/normalize-text';
-import { pickBestReponse } from '@utils/pick-best-response';
+import type Config from '../../types/config';
+import type GPTAnswer from '../../types/gpt-answer';
+import Logs from 'background/utils/logs';
+import normalizeText from 'background/utils/normalize-text';
+import { pickBestReponse } from 'background/utils/pick-best-response';
 
 /**
  * Handle select elements (and put in order select)

@@ -1,5 +1,5 @@
-import type Config from '@typing/config';
-import Logs from '@utils/logs';
+import type Config from '../types/config';
+import Logs from 'background/utils/logs';
 import getChatGPTResponse from './get-response';
 import createAndNormalizeQuestion from './create-question';
 import clipboardMode from './modes/clipboard';

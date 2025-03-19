@@ -1,41 +1,36 @@
-'use strict';
+import { globalData, inputsCheckbox, modes } from './data';
+import { checkCanIncludeImages } from './gpt-version';
+import { handleModeChange } from './mode-handler';
+import './version';
+import './settings';
 
-const saveBtn = document.querySelector('.save');
+import { showMessage } from './utils';
+
+const saveBtn = document.querySelector('.save')!;
 
 // inputs id
 const inputsText = ['apiKey', 'code', 'model'];
-const inputsCheckbox = [
-  'logs',
-  'title',
-  'cursor',
-  'typing',
-  'mouseover',
-  'infinite',
-  'timeout',
-  'history',
-  'includeImages'
-];
 
 // Save the configuration
 saveBtn.addEventListener('click', function () {
   const [apiKey, code, model] = inputsText.map(selector =>
-    document.querySelector('#' + selector).value.trim()
+    (document.querySelector('#' + selector) as HTMLInputElement).value.trim()
   );
   const [logs, title, cursor, typing, mouseover, infinite, timeout, history, includeImages] =
     inputsCheckbox.map(selector => {
-      const element = document.querySelector('#' + selector);
-      return element.checked && element.parentElement.style.display !== 'none';
+      const element: HTMLInputElement = document.querySelector('#' + selector)!;
+      return element.checked && element.parentElement!.style.display !== 'none';
     });
 
   if (!apiKey || !model) {
-    showMessage({ msg: 'Please complete all the form', error: true });
+    showMessage({ msg: 'Please complete all the form', isError: true });
     return;
   }
 
   if (code.length > 0 && code.length < 2) {
     showMessage({
       msg: 'The code should at least contain 2 characters',
-      error: true
+      isError: true
     });
     return;
   }
@@ -54,7 +49,7 @@ saveBtn.addEventListener('click', function () {
       timeout,
       history,
       includeImages,
-      mode: actualMode
+      mode: globalData.actualMode
     }
   });
 
@@ -67,7 +62,7 @@ chrome.storage.sync.get(['moodleGPT']).then(function (storage) {
 
   if (config) {
     if (config.mode) {
-      actualMode = config.mode;
+      globalData.actualMode = config.mode;
       for (const mode of modes) {
         if (mode.value === config.mode) {
           mode.classList.remove('not-selected');
@@ -78,9 +73,13 @@ chrome.storage.sync.get(['moodleGPT']).then(function (storage) {
     }
 
     inputsText.forEach(key =>
-      config[key] ? (document.querySelector('#' + key).value = config[key]) : null
+      config[key]
+        ? ((document.querySelector('#' + key) as HTMLInputElement).value = config[key])
+        : null
     );
-    inputsCheckbox.forEach(key => (document.querySelector('#' + key).checked = config[key] || ''));
+    inputsCheckbox.forEach(
+      key => ((document.querySelector('#' + key) as HTMLInputElement).checked = config[key] || '')
+    );
   }
 
   handleModeChange();

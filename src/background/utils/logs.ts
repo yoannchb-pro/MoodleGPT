@@ -1,4 +1,4 @@
-import GPTAnswer from '@typing/gpt-answer';
+import GPTAnswer from '../types/gpt-answer';
 import { toPourcentage } from './pick-best-response';
 
 class Logs {

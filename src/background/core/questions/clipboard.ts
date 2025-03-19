@@ -1,6 +1,6 @@
-import type Config from '@typing/config';
-import type GPTAnswer from '@typing/gpt-answer';
-import titleIndications from '@utils/title-indications';
+import type Config from '../../types/config';
+import type GPTAnswer from '../../types/gpt-answer';
+import titleIndications from 'background/utils/title-indications';
 
 /**
  * Copy the response in the clipboard if we can automaticaly fill the question
