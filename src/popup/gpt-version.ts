@@ -5,7 +5,7 @@ const apiKeySelector: HTMLInputElement = document.querySelector('#apiKey')!;
 const inputModel: HTMLInputElement = document.querySelector('#model')!;
 const modelsList: HTMLElement = document.querySelector('#models')!;
 const imagesIntegrationLine: HTMLInputElement = document.querySelector('#includeImages-line')!;
-
+const baseURLSelector: HTMLInputElement = document.querySelector('#baseURL')!;
 /**
  * Check if the gpt version is at least 4 to show the option 'Include images'
  */
@@ -23,6 +23,7 @@ inputModel.addEventListener('input', checkCanIncludeImages);
 // We populate the datalist of the chatgpt model
 export async function populateDatalistWithGptVersions() {
   const apiKey = apiKeySelector.value?.trim();
+  const baseURL = baseURLSelector.value?.trim();
 
   if (!apiKey) return;
 
@@ -31,6 +32,7 @@ export async function populateDatalistWithGptVersions() {
   try {
     const client = new OpenAI({
       apiKey,
+      baseURL,
       dangerouslyAllowBrowser: true
     });
 
@@ -61,9 +63,10 @@ inputModel.addEventListener('focus', populateDatalistWithGptVersions);
 export async function checkModel() {
   const model = inputModel.value?.trim();
   const apiKey = apiKeySelector.value?.trim();
+  const baseURL = baseURLSelector.value?.trim();
 
   try {
-    const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
+    const client = new OpenAI({ apiKey, baseURL, dangerouslyAllowBrowser: true });
     await client.chat.completions.create({
       model,
       messages: [{ role: 'user', content: 'reply just pong' }]

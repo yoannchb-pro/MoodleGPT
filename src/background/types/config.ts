@@ -12,6 +12,8 @@ type Config = {
   history?: boolean;
   includeImages?: boolean;
   mode?: 'autocomplete' | 'question-to-answer' | 'clipboard';
+  baseURL?: string;
+  maxTokens?: number;
 };
 
 export default Config;
