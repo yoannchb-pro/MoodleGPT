@@ -66,6 +66,7 @@ export async function checkModel() {
   const baseURL = baseURLSelector.value?.trim();
 
   try {
+    showMessage({ msg: 'Checking GPT version...', isInfinite: true, isError: false });
     const client = new OpenAI({ apiKey, baseURL, dangerouslyAllowBrowser: true });
     await client.chat.completions.create({
       model,
