@@ -82,6 +82,7 @@ a {
 
 .line input[type='text'],
 .line input[type='password'],
+.line input[type='number'],
 .line select {
   flex: 1 1;
   border: thin solid var(--color);
