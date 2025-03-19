@@ -19,8 +19,10 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
   - [Donate](#donate)
   - [Update](#update)
   - [Set up](#set-up)
-  - [Mode](#mode)
   - [Settings](#settings)
+  - [Advanced Settings](#advanced-settings)
+  - [Mode](#mode)
+  - [Options](#options)
   - [Internal other features](#internal-other-features)
     - [Support table](#support-table)
   - [Supported questions type](#supported-questions-type)
@@ -61,6 +63,17 @@ See the [changelog](./CHANGELOG.md) to see every updates !
 
 Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the ApiKey obtained from [openai api](https://platform.openai.com/api-keys). Finally, select a [gpt model](https://platform.openai.com/docs/models) (ensure it work with completion api).
 
+## Settings
+
+- <b>API KEY\*</b>: Your openai [API KEY](https://platform.openai.com/api-keys)
+- <b>GPT MODEL\*</b>: The [gpt model](https://platform.openai.com/docs/models) (you can click on the play button to ensure the model work with the extension)
+
+## Advanced Settings
+
+- <b>CODE</b>: A code you will need to type on your keyboard to inject/remove the extension code from the moodle page. It allow you to be more discret and control the injection so it's recommended.
+- <b>BASE URL</b>: The API endpoint if you need to use your own llm.
+- <b>MAX TOKENS</b>: The max tokens length you want the api to respond with.
+
 ## Mode
 
 <p align="center">
@@ -72,7 +85,7 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 - <b>Question to answer:</b> The question is converted to the answer and you can click on it to show back the question (or show back the answer).
   <br/><img src="./assets/question-to-answer.gif" alt="Question to Answer">
 
-## Settings
+## Options
 
 <p align="center">
 <img src="./assets/settings.png" alt="Popup" width="300">
