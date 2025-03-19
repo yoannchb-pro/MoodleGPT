@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.1.3
+
+- Added `base url` and `max token` in config (by dmunozv04)
+- Code dependencies update
+
 ## v1.1.2
 
 - Advanced settings
