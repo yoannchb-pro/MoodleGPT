@@ -6,6 +6,8 @@ import './settings';
 
 import { showMessage } from './utils';
 
+const ollamaBaseURL = 'http://127.0.0.1:8787/v1';
+
 const saveBtn = document.querySelector('.save')!;
 const providerSelector = document.querySelector('#provider') as HTMLSelectElement;
 const apiKeyInput = document.querySelector('#apiKey') as HTMLInputElement;
@@ -176,14 +178,18 @@ chrome.storage.sync.get(['moodleGPT']).then(function (storage) {
     ragDocumentsLine.style.display = 'flex';
     uploadDocsLine.style.display = 'flex';
     manageDocsLine.style.display = 'flex';
-    baseURLInput.value = baseURLInput.value || (isOllama ? 'http://127.0.0.1:8787/v1' : '');
+    baseURLInput.value = baseURLInput.value || (isOllama ? ollamaBaseURL : '');
     if (isOllama && !ollamaTimeoutInput.value) ollamaTimeoutInput.value = '0';
     const apiKeyRequired = apiKeyInput.parentElement!.querySelector('.required') as HTMLElement;
     apiKeyRequired.style.display = isOllama ? 'none' : 'inline';
     checkCanIncludeImages();
   }
 
-  providerSelector.addEventListener('change', syncProviderUi);
+  providerSelector.addEventListener('change', () => {
+    syncProviderUi();
+    // we reset if we switch from ollama to chatgpt because ollama prefill base url
+    if (baseURLInput.value === ollamaBaseURL) baseURLInput.value = '';
+  });
   syncProviderUi();
 
   docUploadInput.addEventListener('change', async () => {
