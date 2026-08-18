@@ -1,4 +1,4 @@
-const CURRENT_VERSION = '1.1.5';
+const CURRENT_VERSION = '1.1.6';
 const versionDisplay = document.querySelector('#version')!;
 
 /**

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.1.6
+
+- Added support for uploading local text documents in the popup.
+- Stored uploaded documents locally and used them as retrieval context for answers.
+- Added a Web search before answering toggle for Ollama.
+- Implemented a local proxy search route so web search works without browser CORS issues (may happen only on my machine).
+- Added an Ollama timeout setting in the popup.
+- Made 0 mean no automatic timeout for Ollama, with Esc held for 2 seconds used to cancel a request.
+- Improved popup styling for the new document and web search controls.
+
 ## v1.1.5
 
 - Support for gpt-5

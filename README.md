@@ -2,7 +2,7 @@
 href="https://www.flaticon.com/free-icons/mortarboard" target="_blank" rel="noopener noreferrer"
 title="Mortarboard icons created by itim2101 - Flaticon" ><img src="./extension/icon.png" alt="Mortarboard icons created by itim2101 - Flaticon" width="150" style="display:block; margin:auto;"></a></p>
 
-# MoodleGPT 1.1.5
+# MoodleGPT 1.1.6
 
 This extension allows you to hide CHAT-GPT in a Moodle quiz. You just need to click on the question you want to solve, and CHAT-GPT will automatically provide the answer. However, one needs to be careful because as we know, CHAT-GPT can make errors especially in calculations.
 
@@ -12,18 +12,18 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
 
 ## Summary
 
-- [MoodleGPT 1.1.5](#moodlegpt-115)
+- [MoodleGPT 1.1.6](#moodlegpt-116)
   - [Chrome Webstore](#chrome-webstore)
   - [Summary](#summary)
   - [Disclaimer !](#disclaimer-)
   - [Donate](#donate)
   - [Update](#update)
   - [Set up](#set-up)
+  - [Local workflow](#local-workflow)
   - [Settings](#settings)
-- [Advanced Settings](#advanced-settings)
-- [Local workflow](#local-workflow)
-- [Mode](#mode)
-- [Options](#options)
+  - [Advanced Settings](#advanced-settings)
+  - [Mode](#mode)
+  - [Options](#options)
   - [Internal other features](#internal-other-features)
     - [Support table](#support-table)
   - [Supported questions type](#supported-questions-type)
@@ -38,6 +38,8 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
     - [Atto](#atto)
   - [What about if the question can't be autocompleted ?](#what-about-if-the-question-cant-be-autocompleted-)
   - [Test](#test)
+  - [Ollama quick setup](#ollama-quick-setup)
+    - [Suggested Ollama models](#suggested-ollama-models)
   - [Beta version with advanced features](#beta-version-with-advanced-features)
 
 ## Disclaimer !
