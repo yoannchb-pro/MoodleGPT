@@ -14,7 +14,10 @@ export async function runChatCompletion(
         return { ok: false, error: 'Missing Ollama base URL.' };
       }
 
-      const url = new URL('chat/completions', request.baseURL.endsWith('/') ? request.baseURL : `${request.baseURL}/`).toString();
+      const url = new URL(
+        'chat/completions',
+        request.baseURL.endsWith('/') ? request.baseURL : `${request.baseURL}/`
+      ).toString();
       console.debug('[MoodleGPT][Ollama] request', {
         url,
         model: request.model,
@@ -52,7 +55,10 @@ export async function runChatCompletion(
         choices?: Array<{ message?: { content?: string } }>;
       };
 
-      console.debug('[MoodleGPT][Ollama] success', { url, hasContent: !!data.choices?.[0]?.message?.content });
+      console.debug('[MoodleGPT][Ollama] success', {
+        url,
+        hasContent: !!data.choices?.[0]?.message?.content
+      });
 
       return { ok: true, content: data.choices?.[0]?.message?.content ?? '' };
     }

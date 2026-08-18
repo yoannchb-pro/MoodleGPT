@@ -11,7 +11,10 @@ type WebSearchResult = {
   snippet: string;
 };
 
-async function fetchWebSearchResults(query: string, proxyBaseURL: string): Promise<WebSearchResult[]> {
+async function fetchWebSearchResults(
+  query: string,
+  proxyBaseURL: string
+): Promise<WebSearchResult[]> {
   const base = new URL(proxyBaseURL.endsWith('/') ? proxyBaseURL : `${proxyBaseURL}/`);
   const url = new URL('/search', `${base.origin}/`);
   url.searchParams.set('q', query);
@@ -98,8 +101,7 @@ async function getChatGPTResponse(
             return [
               'Web search results:',
               ...results.map(
-                (result, index) =>
-                  `${index + 1}. ${result.title}\n${result.url}\n${result.snippet}`
+                (result, index) => `${index + 1}. ${result.title}\n${result.url}\n${result.snippet}`
               )
             ].join('\n\n');
           })
@@ -142,7 +144,9 @@ async function getChatGPTResponse(
 
       if (!response.ok) {
         const errorText = await response.text().catch(() => '');
-        throw new Error([response.status, response.statusText, errorText].filter(Boolean).join(' '));
+        throw new Error(
+          [response.status, response.statusText, errorText].filter(Boolean).join(' ')
+        );
       }
 
       const data = (await response.json()) as {

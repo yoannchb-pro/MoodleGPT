@@ -31,7 +31,11 @@ function setTextValue(selector: string, value?: string | number) {
 }
 
 function splitChunks(text: string, chunkSize = 1200, overlap = 200) {
-  const clean = text.replace(/\r/g, '\n').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  const clean = text
+    .replace(/\r/g, '\n')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
   const chunks: string[] = [];
   let start = 0;
 
@@ -56,14 +60,16 @@ async function readFileText(file: File): Promise<string> {
 
 async function loadDocs() {
   const data = await chrome.storage.local.get(['moodleGPTDocuments']);
-  return (data.moodleGPTDocuments as Array<{
-    id: string;
-    name: string;
-    size: number;
-    type: string;
-    chunks: string[];
-    createdAt: number;
-  }>) || [];
+  return (
+    (data.moodleGPTDocuments as Array<{
+      id: string;
+      name: string;
+      size: number;
+      type: string;
+      chunks: string[];
+      createdAt: number;
+    }>) || []
+  );
 }
 
 async function refreshDocsCount() {

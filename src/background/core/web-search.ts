@@ -1,5 +1,3 @@
-import type Config from '../types/config';
-
 type WebSearchResult = {
   title: string;
   url: string;
@@ -7,10 +5,13 @@ type WebSearchResult = {
 };
 
 function stripHtml(text: string) {
-  return text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  return text
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
-export async function webSearch(query: string, _config: Config): Promise<WebSearchResult[]> {
+export async function webSearch(query: string): Promise<WebSearchResult[]> {
   const url = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
   const response = await fetch(url, {
     headers: {

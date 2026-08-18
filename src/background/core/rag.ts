@@ -62,8 +62,7 @@ export async function buildRagContext(question: string, config: Config) {
   return [
     'Uploaded document context:',
     ...top.map(
-      (chunk, index) =>
-        `${index + 1}. Source: ${chunk.source}\n${chunk.text.slice(0, 1400)}`
+      (chunk, index) => `${index + 1}. Source: ${chunk.source}\n${chunk.text.slice(0, 1400)}`
     )
   ].join('\n\n');
 }

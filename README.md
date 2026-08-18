@@ -97,16 +97,16 @@ You can also enable:
 - <b>PROVIDER</b>: Switch between OpenAI API and a local Ollama server.
 - <b>MAX TOKENS</b>: The max tokens length you want the api to respond with.
 - <b>OLLAMA TIMEOUT</b>: Ollama-only setting. `0` means no auto timeout, and you can stop the request by holding <b>Esc</b> for 2 seconds.
-<<<<<<< HEAD
+  <<<<<<< HEAD
 - <b>WEB SEARCH</b>: Ollama-only setting. The proxy will look up the question on the web and pass the top results to the model.
 - <b>USE UPLOADED DOCUMENTS</b>: Enables the local document store for lightweight RAG-style context.
 - <b>UPLOAD DOCS</b>: Add text files. Here are the supported file extensions:
-  * `.txt` - Plain text files
-  * `.md` / `.markdown` - Markdown files
-  * `.csv` - Comma-separated values
-  * `.json` - JSON data syntax
-  * `.html` / `.htm` - Web pages
-  * `.log` - System log files
+  - `.txt` - Plain text files
+  - `.md` / `.markdown` - Markdown files
+  - `.csv` - Comma-separated values
+  - `.json` - JSON data syntax
+  - `.html` / `.htm` - Web pages
+  - `.log` - System log files
 - <b>CLEAR UPLOADED DOCS</b>: Removes all stored documents.
 - <b>WEB SEARCH BEFORE ANSWERING</b>: Ollama-only setting. The proxy will look up the question on the web and pass the top results to the model.
 - <b>USE UPLOADED DOCUMENTS</b>: Enables the local document store for lightweight RAG-style context.
@@ -239,7 +239,6 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 6. Enter your model name, for example `qwen2.5:7b`.
 7. Optional:
-
    - turn on <b>Web search before answering</b>
    - turn on <b>Use uploaded documents</b>
    - set <b>Ollama Timeout</b> to `0` if you want only Esc to cancel
