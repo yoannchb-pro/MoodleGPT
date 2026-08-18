@@ -2,6 +2,7 @@ import type Config from '../types/config';
 import imageToBase64 from 'background/utils/image-to-base64';
 import isGPTModelGreaterOrEqualTo4 from 'background/utils/version-support-images';
 import { ChatCompletionMessageParam, ChatCompletionUserMessageParam } from 'openai/resources';
+import { buildRagContext } from './rag';
 
 // The attempt and the cmid allow us to identify a quiz
 type History = {
@@ -128,7 +129,18 @@ async function getContentWithHistory(
   saveResponse?: (response: string) => void;
 }> {
   const content = await getContent(config, questionElement, question);
-  const message: ChatCompletionMessageParam = { role: 'user', content };
+  const ragContext = await buildRagContext(question, config);
+  const message: ChatCompletionMessageParam = ragContext
+    ? {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: `${ragContext}\n\nQuestion:\n${question}`
+          }
+        ]
+      }
+    : { role: 'user', content };
 
   if (!config.history) return { messages: [SYSTEM_INSTRUCTION_MESSAGE, message] };
 

@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm run prettier && npm run lint && npm run fastBuild",
     "fastBuild": "rollup -c",
+    "proxy": "node proxy/ollama-proxy.js",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ."
   },

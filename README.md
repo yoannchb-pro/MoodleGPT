@@ -20,9 +20,10 @@ Find the extension on the Chrome Webstore right [here](https://chrome.google.com
   - [Update](#update)
   - [Set up](#set-up)
   - [Settings](#settings)
-  - [Advanced Settings](#advanced-settings)
-  - [Mode](#mode)
-  - [Options](#options)
+- [Advanced Settings](#advanced-settings)
+- [Local workflow](#local-workflow)
+- [Mode](#mode)
+- [Options](#options)
   - [Internal other features](#internal-other-features)
     - [Support table](#support-table)
   - [Supported questions type](#supported-questions-type)
@@ -63,6 +64,27 @@ See the [changelog](./CHANGELOG.md) to see every updates !
 
 Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpacked extension"</b> and select the <b>"extension"</b> folder. Afterwards, click on the extension icon and enter the ApiKey obtained from [openai api](https://platform.openai.com/api-keys). Finally, select a [gpt model](https://platform.openai.com/docs/models) (ensure it work with completion api).
 
+If you want to use Ollama, the extension now supports a local provider mode. The easiest setup is to run the local proxy included in this repo and point the Ollama `Base URL` to `http://127.0.0.1:8787/v1`.
+
+## Local workflow
+
+The extension can now work in two ways:
+
+- <b>OpenAI API</b>: send the question directly to an OpenAI-compatible endpoint.
+- <b>Ollama local</b>: send the question to your local Ollama server through the bundled proxy.
+
+When Ollama is selected:
+
+- the API key field is hidden
+- the popup shows an Ollama timeout field
+- `0` means no automatic timeout
+- while a request is running, hold <b>Esc</b> for 2 seconds to cancel it
+
+You can also enable:
+
+- <b>Web search before answering</b>: the extension fetches a quick web summary through the local proxy and adds it as extra context before the model answers.
+- <b>Use uploaded documents</b>: upload local text files and the extension will keep them as a lightweight local RAG source.
+
 ## Settings
 
 - <b>API KEY\*</b>: Your openai [API KEY](https://platform.openai.com/api-keys)
@@ -72,7 +94,24 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 
 - <b>CODE</b>: A code you will need to type on your keyboard to inject/remove the extension code from the moodle page. It allow you to be more discret and control the injection so it's recommended.
 - <b>BASE URL</b>: The API endpoint if you need to use your own llm.
+- <b>PROVIDER</b>: Switch between OpenAI API and a local Ollama server.
 - <b>MAX TOKENS</b>: The max tokens length you want the api to respond with.
+- <b>OLLAMA TIMEOUT</b>: Ollama-only setting. `0` means no auto timeout, and you can stop the request by holding <b>Esc</b> for 2 seconds.
+<<<<<<< HEAD
+- <b>WEB SEARCH</b>: Ollama-only setting. The proxy will look up the question on the web and pass the top results to the model.
+- <b>USE UPLOADED DOCUMENTS</b>: Enables the local document store for lightweight RAG-style context.
+- <b>UPLOAD DOCS</b>: Add text files. Here are the supported file extensions:
+  * `.txt` - Plain text files
+  * `.md` / `.markdown` - Markdown files
+  * `.csv` - Comma-separated values
+  * `.json` - JSON data syntax
+  * `.html` / `.htm` - Web pages
+  * `.log` - System log files
+- <b>CLEAR UPLOADED DOCS</b>: Removes all stored documents.
+- <b>WEB SEARCH BEFORE ANSWERING</b>: Ollama-only setting. The proxy will look up the question on the web and pass the top results to the model.
+- <b>USE UPLOADED DOCUMENTS</b>: Enables the local document store for lightweight RAG-style context.
+- <b>UPLOAD DOCS</b>: Add text files to the local document store.
+- <b>CLEAR UPLOADED DOCS</b>: Removes all locally stored documents.
 
 ## Mode
 
@@ -109,6 +148,8 @@ Go to <b>"Manage my extensions"</b> on your browser, then click on <b>"Load unpa
 - <b>Save history</b>: allows you to create a conversation with ChatGPT by saving the previous question with its answer. However, note that it can consume a significant number of tokens.
 - <b>Include images</b> (only work with gpt-4): allows you to include the images from the question to be send to the chatgpt api. The quality is reduced to 75% to use less tokens. However, note that it can consume a significant number of tokens.
   <br/> ![Images](./assets/images.gif)
+- <b>Web search before answering</b>: adds retrieved search snippets to the prompt when using Ollama.
+- <b>Use uploaded documents</b>: lets you upload local text files and reuse them as context for answers.
 
 ## Internal other features
 
@@ -173,6 +214,42 @@ To know if the answer has been copied to the clipboard, you can look at the titl
 
 - <b>Solution 1</b>: Go on this [moodle demo page](https://moodle.org/demo).
 - <b>Solution 2</b>: Run the `index.html` file located in the `test/fake-moodle` folder.
+
+## Ollama quick setup
+
+1. Install and run Ollama locally.
+2. Pull a model, for example:
+
+   ```bash
+   ollama pull qwen2.5:7b
+   ```
+
+3. Start the proxy from the project root:
+
+   ```bash
+   npm run proxy
+   ```
+
+4. Open the extension popup and choose <b>Ollama local</b>.
+5. Set the <b>Base URL</b> to:
+
+   ```text
+   http://127.0.0.1:8787/v1
+   ```
+
+6. Enter your model name, for example `qwen2.5:7b`.
+7. Optional:
+
+   - turn on <b>Web search before answering</b>
+   - turn on <b>Use uploaded documents</b>
+   - set <b>Ollama Timeout</b> to `0` if you want only Esc to cancel
+
+### Suggested Ollama models
+
+- `qwen2.5:7b` for a good speed/quality balance
+- `llama3.1:8b` for a strong general model
+- `gemma3:4b` or a smaller 7B model for faster responses
+- larger models like `qwen3:14b` or `gemma4:26b` when you want stronger reasoning and can accept slower output
 
 ## Beta version with advanced features
 

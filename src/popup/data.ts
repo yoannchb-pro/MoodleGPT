@@ -1,5 +1,7 @@
 export const globalData = { actualMode: 'autocomplete' };
 
+export const globalProvider = { value: 'openai' as 'openai' | 'ollama' };
+
 export const inputsCheckbox = [
   'logs',
   'title',

@@ -39,6 +39,13 @@
       <!-- SETTINGS -->
       <div class="settings" id="settings">
         <div class="line center">
+          <label for="provider" class="textLabel">Provider:</label>
+          <select id="provider">
+            <option value="openai">OpenAI API</option>
+            <option value="ollama">Ollama local</option>
+          </select>
+        </div>
+        <div class="line center">
           <label for="apiKey" class="textLabel">Api Key<span class="required">*</span>:</label>
           <input id="apiKey" type="text" />
         </div>
@@ -63,6 +70,25 @@
         <div class="line center">
           <label for="maxTokens" class="textLabel">Max Tokens:</label>
           <input id="maxTokens" type="number" />
+        </div>
+        <div class="line center" id="ollamaTimeout-line" style="display: none">
+          <label for="ollamaTimeout" class="textLabel">Ollama Timeout (sec, 0 = Esc):</label>
+          <input id="ollamaTimeout" type="number" min="0" />
+        </div>
+        <div class="line center" id="webSearch-line" style="display: none">
+          <input id="webSearch" type="checkbox" />
+          <label for="webSearch">Web search before answering</label>
+        </div>
+        <div class="line center" id="ragDocuments-line" style="display: none">
+          <input id="ragDocuments" type="checkbox" />
+          <label for="ragDocuments">Use uploaded documents</label>
+        </div>
+        <div class="line center" id="uploadDocs-line" style="display: none">
+          <input id="docUpload" type="file" multiple />
+        </div>
+        <div class="line center" id="manageDocs-line" style="display: none">
+          <button id="clearDocs" type="button">Clear uploaded docs</button>
+          <span id="docsCount"></span>
         </div>
       </div>
 

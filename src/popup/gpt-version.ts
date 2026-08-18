@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import { isCurrentVersionSupportingImages, showMessage } from './utils';
+import { globalProvider } from './data';
 
 const apiKeySelector: HTMLInputElement = document.querySelector('#apiKey')!;
 const inputModel: HTMLInputElement = document.querySelector('#model')!;
@@ -10,6 +11,10 @@ const baseURLSelector: HTMLInputElement = document.querySelector('#baseURL')!;
  * Check if the gpt version is at least 4 to show the option 'Include images'
  */
 export function checkCanIncludeImages() {
+  if (globalProvider.value === 'ollama') {
+    imagesIntegrationLine.style.display = 'none';
+    return;
+  }
   const version = inputModel.value;
   if (isCurrentVersionSupportingImages(version)) {
     imagesIntegrationLine.style.display = 'flex';
@@ -24,26 +29,31 @@ inputModel.addEventListener('input', checkCanIncludeImages);
 export async function populateDatalistWithGptVersions() {
   const apiKey = apiKeySelector.value?.trim();
   const baseURL = baseURLSelector.value?.trim();
+  const provider = globalProvider.value;
 
-  if (!apiKey) return;
+  if (provider === 'openai' && !apiKey) return;
 
   inputModel.innerHTML = '';
+  modelsList.innerHTML = '';
 
   try {
     const client = new OpenAI({
-      apiKey,
+      apiKey: provider === 'ollama' ? apiKey || 'ollama' : apiKey,
       baseURL,
       dangerouslyAllowBrowser: true
     });
 
     const rep = await client.models.list();
 
-    const models = rep.data.filter(
-      model =>
-        model.id.startsWith('gpt') ||
-        model.id.search(/^o\d+/gi) !== -1 ||
-        model.id.startsWith('chatgpt')
-    );
+    const models =
+      provider === 'ollama'
+        ? rep.data
+        : rep.data.filter(
+            model =>
+              model.id.startsWith('gpt') ||
+              model.id.search(/^o\d+/gi) !== -1 ||
+              model.id.startsWith('chatgpt')
+          );
     models.sort((a, b) => b.id.localeCompare(a.id)); // we sort the model to get the best chatgpt version first
 
     for (const model of models) {
@@ -66,10 +76,15 @@ export async function checkModel() {
   const model = inputModel.value?.trim();
   const apiKey = apiKeySelector.value?.trim();
   const baseURL = baseURLSelector.value?.trim();
+  const provider = globalProvider.value;
 
   try {
     showMessage({ msg: 'Checking GPT version...', isInfinite: true, isError: false });
-    const client = new OpenAI({ apiKey, baseURL, dangerouslyAllowBrowser: true });
+    const client = new OpenAI({
+      apiKey: provider === 'ollama' ? apiKey || 'ollama' : apiKey,
+      baseURL,
+      dangerouslyAllowBrowser: true
+    });
     await client.chat.completions.create({
       model,
       messages: [{ role: 'user', content: 'reply just pong' }]
